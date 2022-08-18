@@ -1,0 +1,19 @@
+html,
+body,
+body > #root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+#root > main {
+  flex: 1 0 auto;
+}
+
+header,
+footer {
+  flex-shrink: 0;
+}
