@@ -5,8 +5,9 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 
-export const createServer = () => {
-  const app = express();
+import type { Express } from "express";
+
+export const startServer = (app: Express) => {
   app
     .disable("x-powered-by")
     .use(morgan("dev"))
@@ -20,13 +21,7 @@ export const createServer = () => {
         max: 100, // limit each IP to 100 requests per windowMs
       })
     )
-    .enable("trust proxy")
-    .get("/message/:name", (req, res) => {
-      return res.json({ message: `hello ${req.params.name}` });
-    })
-    .get("/healthz", (req, res) => {
-      return res.json({ ok: true });
-    });
+    .enable("trust proxy");
 
   return app;
 };

@@ -1,0 +1,3 @@
+export { default as CivicAPIResolver } from "./CivicAPI.resolver";
+export { default as KnowledgeGraphAPIResolver } from "./KnowledgeGraphAPI.resolver";
+export { default as OpenSecretsAPIResolver } from "./OpenSecretsAPI.resolver";
