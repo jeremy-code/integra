@@ -7,9 +7,11 @@ import {
   CivicAPIResolver,
   KnowledgeGraphAPIResolver,
   OpenSecretsAPIResolver,
+  IntegraResolver,
 } from "./resolvers";
 import dataSources from "./datasources";
 import { startServer } from "./utils";
+import { resolvers, prisma } from "database";
 
 const bootstrap = async () => {
   const schema = await buildSchema({
@@ -17,17 +19,21 @@ const bootstrap = async () => {
       CivicAPIResolver,
       KnowledgeGraphAPIResolver,
       OpenSecretsAPIResolver,
+      ...resolvers,
+      IntegraResolver,
     ],
+    validate: false,
   });
 
   const apolloServer = new ApolloServer({
     schema,
+    context: {
+      prisma,
+    },
     dataSources,
   });
   await apolloServer.start();
-
   const app = startServer();
-
   apolloServer.applyMiddleware({ app });
 
   app.listen(4000, () => {

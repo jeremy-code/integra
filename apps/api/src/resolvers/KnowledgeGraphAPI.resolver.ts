@@ -1,11 +1,11 @@
-import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Ctx, Query, Resolver } from "type-graphql";
 import { KnowledgeGraphAPIResponse } from "../entity/KnowledgeGraphAPI.entity";
 
 import type { Context } from "../types";
 
 @Resolver()
 class KnowledgeGraphAPIResolver {
-  @Mutation(() => KnowledgeGraphAPIResponse)
+  @Query(() => KnowledgeGraphAPIResponse)
   async knowledgeGraphAPI(
     @Arg("google_entity_id") id: string,
     @Ctx() context: Context

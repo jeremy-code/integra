@@ -1,11 +1,11 @@
-import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
+import { Arg, Ctx, Query, Resolver } from "type-graphql";
 
 import { Legislator, MemPFDProfile } from "../entity/OpenSecretsAPI.entity";
 import { Context } from "../types";
 
 @Resolver()
 class OpenSecretsAPIResolver {
-  @Mutation(() => [Legislator])
+  @Query(() => [Legislator])
   async getLegislators(
     @Arg("id", { description: "two character state code or specific CID" })
     id: string,
@@ -14,7 +14,7 @@ class OpenSecretsAPIResolver {
     return await context.dataSources.openSecretsAPI.getLegislators(id);
   }
 
-  @Mutation(() => MemPFDProfile)
+  @Query(() => MemPFDProfile)
   async memPFDprofile(
     @Arg("id", { description: "CID" }) id: string,
     @Ctx() context: Context

@@ -1,5 +1,4 @@
 import { RESTDataSource } from "apollo-datasource-rest";
-import { IsObject } from "class-validator";
 
 class KnowledgeGraphAPI extends RESTDataSource {
   constructor() {

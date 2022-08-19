@@ -1,4 +1,4 @@
-import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Ctx, Query, Resolver } from "type-graphql";
 
 import { CivicAPIResponse, Official } from "../entity/CivicAPI.entity";
 import { Context } from "../types";
@@ -13,7 +13,7 @@ class CivicAPIResolver {
     return res.length > 0;
   }
 
-  @Mutation(() => [Official])
+  @Query(() => [Official])
   async getRepresentatives(
     @Arg("address") address: string,
     @Ctx() context: Context
@@ -22,7 +22,7 @@ class CivicAPIResolver {
     return res;
   }
 
-  @Mutation(() => CivicAPIResponse)
+  @Query(() => CivicAPIResponse)
   async getResponse(
     @Arg("address") address: string,
     @Ctx() context: Context
