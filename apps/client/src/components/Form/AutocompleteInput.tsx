@@ -46,7 +46,7 @@ const AutoCompleteInput = forwardRef((props: ControllerRenderProps, ref) => {
   return (
     <Select
       getOptions={getOptions}
-      placeholder="Enter your location"
+      placeholder="301 E. Cermak Rd. Chicago, IL 60616"
       {...props}
     />
   );

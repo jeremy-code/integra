@@ -21,8 +21,11 @@ const Officials = () => {
     () => `{
     getIntegraOfficialsByAddress(address: "${state.location}") {
       id
+      age
       name
       party
+      title
+      seniority
     }
   }`
   );

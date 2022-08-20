@@ -35,6 +35,8 @@ export class IntegraOfficial {
 
   @Field()
   name: string;
+  @Field(() => Int)
+  age: number;
 
   @Field({ nullable: true })
   at_large?: boolean;

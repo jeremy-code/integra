@@ -7,7 +7,18 @@ import { IntegraOfficial } from "../entity/Integra.entity";
 class IntegraResolver {
   @FieldResolver()
   async name(@Root() parent: IntegraOfficial) {
-    return `${parent.first_name} ${parent.last_name}`;
+    return `${parent.short_title} ${parent.first_name} ${parent.last_name}`;
+  }
+
+  @FieldResolver()
+  async age(@Root() parent: IntegraOfficial) {
+    // Not perfect solution, would use library
+    const getAge = (birthDate: Date) =>
+      Math.floor(
+        (new Date().valueOf() - new Date(birthDate).getTime().valueOf()) /
+          3.15576e10
+      );
+    return getAge(new Date(parent.date_of_birth));
   }
 
   @Query(() => [IntegraOfficial])
@@ -34,7 +45,7 @@ class IntegraResolver {
       })
     );
     const officials = officialsRes.flat().map((official) => {
-      return { ...official, name: "name" };
+      return { ...official, name: "name", age: 0 };
     });
     return officials as IntegraOfficial[];
   }
@@ -58,7 +69,7 @@ class IntegraResolver {
       return [];
     }
     const officials = officialsRes.map((official) => {
-      return { ...official, name: "name" };
+      return { ...official, name: "name", age: 0 };
     });
     return officials as IntegraOfficial[];
   }

@@ -15,6 +15,7 @@ export type IntegraOfficial = {
   party: string;
   state: string;
   name: string;
+  age: number;
   at_large?: boolean;
   contact_form?: string;
   cook_pvi?: string;
