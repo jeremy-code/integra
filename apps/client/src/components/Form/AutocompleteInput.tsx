@@ -1,7 +1,4 @@
 import React, { forwardRef, useCallback, useEffect, useRef } from "react";
-import { AsyncSelect } from "chakra-react-select";
-import type { Options, SelectInstance, GroupBase } from "react-select";
-import type { ChakraStylesConfig, AsyncProps } from "chakra-react-select";
 
 import { useScript } from "@/hooks";
 import { ControllerRenderProps } from "react-hook-form";
@@ -11,7 +8,7 @@ const GOOGLE_MAPS_API_KEY: string = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 type AutocompleteService = google.maps.places.AutocompleteService | null;
 
-const AutoCompleteInput = (props: ControllerRenderProps) => {
+const AutoCompleteInput = forwardRef((props: ControllerRenderProps, ref) => {
   const status = useScript(
     `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=beta&libraries=places`
   );
@@ -53,6 +50,6 @@ const AutoCompleteInput = (props: ControllerRenderProps) => {
       {...props}
     />
   );
-};
+});
 
 export default AutoCompleteInput;

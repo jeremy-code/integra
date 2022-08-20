@@ -10,7 +10,7 @@ import {
   IntegraResolver,
 } from "./resolvers";
 import dataSources from "./datasources";
-import { startServer } from "./utils";
+import { startServer, logger } from "./utils";
 import { resolvers, prisma } from "database";
 
 const bootstrap = async () => {
@@ -30,6 +30,7 @@ const bootstrap = async () => {
     context: {
       prisma,
     },
+    plugins: [logger],
     dataSources,
   });
   await apolloServer.start();
@@ -37,7 +38,9 @@ const bootstrap = async () => {
   apolloServer.applyMiddleware({ app });
 
   app.listen(8080, () => {
-    console.log("server started on http://localhost:8080/graphql");
+    logger.info(
+      "Server is listening on port 8080: http://localhost:8080/graphql"
+    );
   });
 };
 
