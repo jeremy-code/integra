@@ -1,9 +1,9 @@
 {
-  "name": "@integra/api",
+  "name": "api",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "ts-node src/app.ts",
+    "start": "node ./dist/app.js",
     "build": "tsc",
     "dev": "ts-node-dev --respawn src/app.ts",
     "lint": "eslint --ext .ts src/"
