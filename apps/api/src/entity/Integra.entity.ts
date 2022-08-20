@@ -33,6 +33,9 @@ export class IntegraOfficial {
   @Field()
   state: string;
 
+  @Field()
+  name: string;
+
   @Field({ nullable: true })
   at_large?: boolean;
   @Field({ nullable: true })

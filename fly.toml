@@ -10,7 +10,7 @@ processes = []
   dockerfile = "./apps/api/Dockerfile"
 
 [env]
-  PORT = "8080"
+  PORT = "27017"
 
 [experimental]
   allowed_public_ports = []

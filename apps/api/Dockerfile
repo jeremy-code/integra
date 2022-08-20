@@ -15,7 +15,6 @@ COPY --from=builder /app/out/yarn.lock ./yarn.lock
 COPY --from=builder /app/out/full/ .
 COPY .gitignore .gitignore
 COPY turbo.json turbo.json
-COPY .env .env
 
 RUN yarn install
 RUN yarn turbo run build --filter=api...

@@ -1,12 +1,14 @@
+import { gql } from "@apollo/client";
+import { apolloClient } from "@/utils";
 import type { Fetcher } from "swr";
 
-const fetcher: Fetcher = async (url: string, init?: RequestInit) => {
+const fetcher: Fetcher = async (query: string) => {
   try {
-    const data = await fetch(url, init);
-    if (!data.ok) {
-      throw new Error("Network response was not OK");
-    }
-    return await data.json();
+    const { data, errors } = await apolloClient.query({
+      query: gql(query),
+    });
+    if (errors) throw new Error("Network response was not OK");
+    return data;
   } catch (err) {
     console.error(err);
   }

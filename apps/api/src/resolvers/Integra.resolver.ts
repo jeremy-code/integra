@@ -1,12 +1,17 @@
 import { Context } from "./../types";
-import { Arg, Ctx, Query, Resolver } from "type-graphql";
+import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from "type-graphql";
 
 import { IntegraOfficial } from "../entity/Integra.entity";
 
-@Resolver()
+@Resolver(() => IntegraOfficial)
 class IntegraResolver {
+  @FieldResolver()
+  async name(@Root() parent: IntegraOfficial) {
+    return `${parent.first_name} ${parent.last_name}`;
+  }
+
   @Query(() => [IntegraOfficial])
-  async getIntegraOfficials(
+  async getIntegraOfficialsByAddress(
     @Arg("address") address: string,
     @Ctx() ctx: Context
   ): Promise<IntegraOfficial[]> {
@@ -17,7 +22,7 @@ class IntegraResolver {
         office.name === "U.S. Senator" || office.name === "U.S. Representative"
     );
     // search for the officials in that given office in the database
-    const officials = await Promise.all(
+    const officialsRes = await Promise.all(
       congressOffices.map((office) => {
         const official = ctx.prisma.officials.findMany({
           where: {
@@ -28,9 +33,34 @@ class IntegraResolver {
         return official;
       })
     );
-    // type assertion as prisma may return undefined for some properties that are nullable
-    // flattened as some offices may have multiple officials
-    return officials.flat() as IntegraOfficial[];
+    const officials = officialsRes.flat().map((official) => {
+      return { ...official, name: "name" };
+    });
+    return officials as IntegraOfficial[];
+  }
+
+  @Query(() => [IntegraOfficial])
+  async getIntegraOfficialsByName(
+    @Arg("name") name: string,
+    @Ctx() ctx: Context
+  ): Promise<IntegraOfficial[]> {
+    const nameArr = name.split(" ");
+    const officialsRes = await ctx.prisma.officials.findMany({
+      take: 5,
+      where: {
+        AND: [
+          { first_name: { startsWith: nameArr[0], mode: "insensitive" } },
+          { last_name: { startsWith: nameArr[1], mode: "insensitive" } },
+        ],
+      },
+    });
+    if (officialsRes.length === 0) {
+      return [];
+    }
+    const officials = officialsRes.map((official) => {
+      return { ...official, name: "name" };
+    });
+    return officials as IntegraOfficial[];
   }
 }
 

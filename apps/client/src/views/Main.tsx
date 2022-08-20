@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Text, Select, Flex } from "@chakra-ui/react";
 
 import { Layout } from "@/components/Layout";
-import { LocationInput } from "@/components/Form";
+import { LocationInput, OfficialInput } from "@/components/Form";
 import { Icon } from "@/components/Misc";
 
 const Main = () => {
+  const [option, setOption] = useState("Location");
   const navigate = useNavigate();
-  const onSubmit = async (data: { location: { value: string } }) => {
+
+  const onLocationSubmit = async (data: { location: { value: string } }) => {
     navigate("/officials", {
       state: {
         location: data.location.value,
@@ -16,12 +18,21 @@ const Main = () => {
     });
   };
 
+  const onOfficialSubmit = async (data: { official: { value: string } }) => {
+    navigate(`/officials/${data.official.value}`);
+  };
+
   return (
     <Layout display="grid" placeItems="center">
-      <Box minW="lg" minH="md">
+      <Box minW={["sm", null, "md"]} minH="md">
         <Flex align="center" gap={4} mb={4}>
           <Icon icon="SearchIcon" />
-          <Select variant="filled" maxW="10rem" defaultValue="Location">
+          <Select
+            variant="filled"
+            maxW="10rem"
+            defaultValue="Location"
+            onChange={(e) => setOption(e.target.value)}
+          >
             <option>Location</option>
             <option>Official</option>
           </Select>
@@ -29,7 +40,8 @@ const Main = () => {
         <Text fontSize="xl" mb={4}>
           Find your members of Congress
         </Text>
-        <LocationInput onSubmit={onSubmit} />
+        {option === "Location" && <LocationInput onSubmit={onLocationSubmit} />}
+        {option === "Official" && <OfficialInput onSubmit={onOfficialSubmit} />}
       </Box>
     </Layout>
   );
