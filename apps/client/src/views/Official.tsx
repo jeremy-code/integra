@@ -5,11 +5,11 @@ import useSWR from "swr";
 
 import { Layout, Tabs } from "@/components/Layout";
 import { Overview, Legislation } from "@/views/OfficialViews";
-import type { OfficialType } from "@/types";
+import type { IntegraOfficial } from "@/types";
 
 const Official = () => {
   const { official_name } = useParams();
-  const state = useLocation().state as { official: OfficialType | null };
+  const state = useLocation().state as { official: IntegraOfficial | null };
   // Get the official from the navigation state if it exists, otherwise use the URL
   const init: RequestInit = {
     method: "post",
