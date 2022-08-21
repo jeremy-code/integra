@@ -26,7 +26,7 @@ const Official = () => {
       breadcrumbs={[
         { title: "Home", href: "/" },
         { title: "Officials", href: "/officials" },
-        { title: "Official", href: `/officials/${officialId}` },
+        { title: "Official", href: `/officials/${slug}` },
       ]}
     >
       <OfficialHeader id={officialId} />

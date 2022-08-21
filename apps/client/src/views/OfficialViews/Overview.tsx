@@ -33,11 +33,7 @@ const Overview = ({ id }: OverviewProps) => {
 
   const official = data?.getIntegraOfficialById;
 
-  return (
-    <>
-      <Box>weed</Box>
-    </>
-  );
+  return <>Overview</>;
 };
 
 export default Overview;

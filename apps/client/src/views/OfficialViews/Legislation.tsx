@@ -31,7 +31,7 @@ const Legislation = ({ id }: LegislationProps) => {
 
   const official = data?.getIntegraOfficialById;
 
-  return <div>{official?.name}</div>;
+  return <div>Legislation</div>;
 };
 
 export default Legislation;
