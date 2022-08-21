@@ -21,6 +21,16 @@ class IntegraResolver {
     return getAge(new Date(parent.date_of_birth));
   }
 
+  @FieldResolver()
+  async google_knowledge_graph(
+    @Root() parent: IntegraOfficial,
+    @Ctx() ctx: Context
+  ) {
+    return ctx.dataSources.knowledgeGraphAPI.getResponse(
+      parent.google_entity_id!
+    );
+  }
+
   @Query(() => [IntegraOfficial])
   async getIntegraOfficialsByAddress(
     @Arg("address") address: string,
@@ -45,7 +55,12 @@ class IntegraResolver {
       })
     );
     const officials = officialsRes.flat().map((official) => {
-      return { ...official, name: "name", age: 0 };
+      return {
+        ...official,
+        name: "name",
+        age: 0,
+        google_knowledge_graph: undefined,
+      };
     });
     return officials as IntegraOfficial[];
   }
@@ -69,9 +84,33 @@ class IntegraResolver {
       return [];
     }
     const officials = officialsRes.map((official) => {
-      return { ...official, name: "name", age: 0 };
+      return {
+        ...official,
+        name: "name",
+        age: 0,
+        google_knowledge_graph: undefined,
+      };
     });
     return officials as IntegraOfficial[];
+  }
+
+  @Query(() => IntegraOfficial)
+  async getIntegraOfficialById(
+    @Arg("id") id: string,
+    @Ctx() ctx: Context
+  ): Promise<IntegraOfficial> {
+    const official = await ctx.prisma.officials.findUnique({
+      where: { id },
+    });
+    if (!official) {
+      throw new Error("No official found");
+    }
+    return {
+      ...official,
+      name: "name",
+      age: 0,
+      google_knowledge_graph: undefined,
+    } as IntegraOfficial;
   }
 }
 

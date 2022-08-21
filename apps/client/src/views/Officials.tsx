@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { SimpleGrid, ScaleFade } from "@chakra-ui/react";
+import { SimpleGrid, ScaleFade, Skeleton } from "@chakra-ui/react";
 
 import { Layout } from "@/components/Layout";
 import { OfficialCard } from "@/components/Card";
@@ -26,6 +26,16 @@ const Officials = () => {
       party
       title
       seniority
+      google_knowledge_graph {
+        itemListElement {
+          result {
+            name
+            image {
+              contentUrl
+            }
+          }
+        }
+      }
     }
   }`
   );

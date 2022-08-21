@@ -15,13 +15,13 @@ class DetailedDescription {
 @ObjectType()
 class Image {
   @Field({ nullable: true })
-  contentUrl: string;
+  contentUrl?: string;
 
   @Field()
   url: string;
 
   @Field({ nullable: true })
-  license: string;
+  license?: string;
 }
 
 @ObjectType()
@@ -37,7 +37,7 @@ class Result {
   @Field(() => Image)
   image: Image;
   @Field(() => DetailedDescription, { nullable: true })
-  detailedDescription: DetailedDescription;
+  detailedDescription?: DetailedDescription;
   @Field(() => String)
   url: string;
 }

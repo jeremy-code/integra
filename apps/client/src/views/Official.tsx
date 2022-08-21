@@ -8,33 +8,18 @@ import { Overview, Legislation } from "@/views/OfficialViews";
 import type { IntegraOfficial } from "@/types";
 
 const Official = () => {
-  const { official_name } = useParams();
-  const state = useLocation().state as { official: IntegraOfficial | null };
-  // Get the official from the navigation state if it exists, otherwise use the URL
-  const init: RequestInit = {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(
-      state !== null
-        ? state.official
-        : { name: official_name!.replace(/_/g, " ") }
-    ),
-  };
-  const { data, error } = useSWR(() => ["/api/official", init]);
+  const { official_id } = useParams();
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  if (!official_id) {
+    return <Text>Invalid official id</Text>;
+  }
 
   return (
     <Layout>
       <Tabs
         content={[
-          { title: "Overview", body: <Overview data={data} /> },
-          { title: "Legislation", body: <Legislation data={data} /> },
+          { title: "Overview", body: <Overview id={official_id} /> },
+          { title: "Legislation", body: <Legislation id={official_id} /> },
           { title: "Fundraising", body: <Text>Fundraising</Text> },
         ]}
       />

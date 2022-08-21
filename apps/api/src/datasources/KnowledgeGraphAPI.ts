@@ -1,12 +1,14 @@
 import { RESTDataSource } from "apollo-datasource-rest";
 
+import { KnowledgeGraphAPIResponse } from "../entity/KnowledgeGraphAPI.entity";
+
 class KnowledgeGraphAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = "https://kgsearch.googleapis.com/v1/entities:search";
   }
 
-  async getResponse(id: string): Promise<any> {
+  async getResponse(id: string): Promise<KnowledgeGraphAPIResponse> {
     const res = await this.get("", {
       key: process.env.GOOGLE_KNOWLEDGE_GRAPH_API_KEY,
       ids: id,

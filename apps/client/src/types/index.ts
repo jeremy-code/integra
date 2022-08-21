@@ -49,4 +49,49 @@ export type IntegraOfficial = {
   votes_with_party_pct?: number;
   votesmart_id?: string;
   youtube_account?: string;
+
+  google_knowledge_graph: KnowledgeGraphAPIResponse;
+};
+
+type KnowledgeGraphAPIResponse = {
+  context: Context;
+  type: string;
+  itemListElement: ItemListElement[];
+};
+
+type Context = {
+  vocab: string;
+  goog: string;
+  resultScore: string;
+  detailedDescription: string;
+  entitySearchResult: string;
+  kg: string;
+};
+
+type ItemListElement = {
+  result: Result;
+  type: string;
+  resultScore: string;
+};
+
+type Result = {
+  name: string;
+  id: string;
+  type: string[];
+  description: string;
+  image: Image;
+  detailedDescription: DetailedDescription;
+  url: string;
+};
+
+type Image = {
+  contentUrl?: string;
+  url: string;
+  license?: string;
+};
+
+type DetailedDescription = {
+  articleBody: string;
+  url: string;
+  license?: string;
 };

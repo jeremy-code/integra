@@ -1,5 +1,7 @@
 import { Field, Float, ID, Int, ObjectType } from "type-graphql";
 
+import { KnowledgeGraphAPIResponse } from "./KnowledgeGraphAPI.entity";
+
 @ObjectType()
 export class IntegraOfficial {
   @Field(() => ID)
@@ -37,6 +39,9 @@ export class IntegraOfficial {
   name: string;
   @Field(() => Int)
   age: number;
+
+  @Field(() => KnowledgeGraphAPIResponse, { nullable: true })
+  google_knowledge_graph?: KnowledgeGraphAPIResponse;
 
   @Field({ nullable: true })
   at_large?: boolean;

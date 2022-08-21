@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { apolloClient } from "@/utils";
 import type { Fetcher } from "swr";
 
-const fetcher: Fetcher = async (query: string) => {
+const fetcher: Fetcher = async (query: string | readonly string[]) => {
   try {
     const { data, errors } = await apolloClient.query({
       query: gql(query),
