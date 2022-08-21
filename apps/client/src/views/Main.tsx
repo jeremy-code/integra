@@ -18,8 +18,14 @@ const Main = () => {
     });
   };
 
-  const onOfficialSubmit = async (data: { official: { value: string } }) => {
-    navigate(`/officials/${data.official.value}`);
+  const onOfficialSubmit = async (data: {
+    official: { value: string; id: string };
+  }) => {
+    navigate(`/officials/${data.official.value}-${data.official.id}`, {
+      state: {
+        official_id: data.official.id,
+      },
+    });
   };
 
   return (

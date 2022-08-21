@@ -39,6 +39,8 @@ export class IntegraOfficial {
   name: string;
   @Field(() => Int)
   age: number;
+  @Field()
+  slug: string;
 
   @Field(() => KnowledgeGraphAPIResponse, { nullable: true })
   google_knowledge_graph?: KnowledgeGraphAPIResponse;

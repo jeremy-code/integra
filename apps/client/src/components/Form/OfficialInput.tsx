@@ -14,6 +14,7 @@ import Select from "@/components/Form/Select";
 type FormData = {
   official: {
     label: string;
+    id: string;
     value: string;
   };
 };
@@ -37,15 +38,17 @@ const OfficialInput = ({ onSubmit }: OfficialInputProps) => {
           getIntegraOfficialsByName(name: "${input}") {
             name
             id
+            slug
           }
         }
       `,
     });
     if (errors) throw new Error(errors[0].message);
     return data.getIntegraOfficialsByName.map(
-      (official: { name: string; id: string }) => ({
+      (official: { name: string; id: string; slug: string }) => ({
         label: official.name,
-        value: official.id,
+        id: official.id,
+        value: official.slug,
       })
     );
   };

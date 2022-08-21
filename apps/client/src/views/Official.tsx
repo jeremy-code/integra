@@ -1,33 +1,40 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { Avatar, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
 
 import { Layout, Tabs } from "@/components/Layout";
 import { Overview, Legislation } from "@/views/OfficialViews";
+import { Error } from "@/views";
 import { OfficialHeader } from "@/components/Official";
 import OfficialDetails from "@/components/Official/OfficialDetails";
 
-const Official = () => {
-  const { official_id } = useParams();
+import { apolloClient } from "@/utils";
+import { gql } from "@apollo/client";
 
-  if (!official_id) {
-    return <Text>Invalid official id</Text>;
-  }
+const Official = () => {
+  const { slug } = useParams();
+  const { state } = useLocation() as { state?: { official_id: string } };
+  // get the official id from the location state, otherwise take it from the slug
+  const [officialId] = useState<string | undefined>(
+    state?.official_id ?? slug?.split("-").pop()
+  );
+
+  if (!officialId) return <Error />;
 
   return (
     <Layout
       breadcrumbs={[
         { title: "Home", href: "/" },
         { title: "Officials", href: "/officials" },
-        { title: "Official", href: `/officials/${official_id}` },
+        { title: "Official", href: `/officials/${officialId}` },
       ]}
     >
-      <OfficialHeader id={official_id} />
-      <OfficialDetails id={official_id} />
+      <OfficialHeader id={officialId} />
+      <OfficialDetails id={officialId} />
       <Tabs
         content={[
-          { title: "Overview", body: <Overview id={official_id} /> },
-          { title: "Legislation", body: <Legislation id={official_id} /> },
+          { title: "Overview", body: <Overview id={officialId} /> },
+          { title: "Legislation", body: <Legislation id={officialId} /> },
           { title: "Fundraising", body: <Text>Fundraising</Text> },
         ]}
       />

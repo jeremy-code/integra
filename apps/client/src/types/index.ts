@@ -50,6 +50,7 @@ export type IntegraOfficial = {
   votesmart_id?: string;
   youtube_account?: string;
 
+  slug: string;
   google_knowledge_graph: KnowledgeGraphAPIResponse;
 };
 

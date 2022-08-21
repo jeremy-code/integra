@@ -1,7 +1,15 @@
 {
   "name": "integra",
-  "version": "0.0.0",
+  "description": "Web application for displaying political data",
   "private": true,
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": "Jeremy Nguyen <hi@jeremynguyen.dev> (https://jeremynguyen.dev)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeremynguyencs/integra.git"
+  },
+  "homepage": "https://github.com/jeremynguyencs/integra#readme",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -13,7 +21,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,md,json}\""
   },
   "devDependencies": {
     "eslint-config-custom": "*",

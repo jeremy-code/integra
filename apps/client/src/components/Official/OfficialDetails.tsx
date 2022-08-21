@@ -11,6 +11,7 @@ const OfficialDetails = ({ id }: OfficialDetailsProps) => {
   const { data, error } = useSWR(
     () => `{
     getIntegraOfficialById(id: "${id}") {
+      id
       age
       party
       seniority

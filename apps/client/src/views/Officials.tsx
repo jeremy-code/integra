@@ -34,6 +34,7 @@ const Officials = () => {
       party
       title
       seniority
+      slug
       google_knowledge_graph {
         itemListElement {
           result {

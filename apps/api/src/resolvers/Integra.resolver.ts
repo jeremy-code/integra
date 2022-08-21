@@ -23,6 +23,11 @@ class IntegraResolver {
   }
 
   @FieldResolver()
+  async slug(@Root() parent: IntegraOfficial) {
+    return `${parent.first_name}-${parent.last_name}`.toLowerCase();
+  }
+
+  @FieldResolver()
   async google_knowledge_graph(
     @Root() parent: IntegraOfficial,
     @Ctx() ctx: Context
@@ -60,6 +65,7 @@ class IntegraResolver {
         ...official,
         name: "name",
         age: 0,
+        slug: "slug",
         google_knowledge_graph: undefined,
       };
     });
@@ -71,7 +77,7 @@ class IntegraResolver {
     @Arg("name") name: string,
     @Ctx() ctx: Context
   ): Promise<IntegraOfficial[]> {
-    const nameArr = name.split(" ");
+    const nameArr = name.split("-");
     const officialsRes = await ctx.prisma.officials.findMany({
       take: 5,
       where: {
@@ -89,6 +95,7 @@ class IntegraResolver {
         ...official,
         name: "name",
         age: 0,
+        slug: "slug",
         google_knowledge_graph: undefined,
       };
     });
@@ -110,6 +117,7 @@ class IntegraResolver {
       ...official,
       name: "name",
       age: 0,
+      slug: "slug",
       google_knowledge_graph: undefined,
     } as IntegraOfficial;
   }

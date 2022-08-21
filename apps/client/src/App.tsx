@@ -22,7 +22,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/officials" element={<Officials />} />
-              <Route path="/officials/:official_id" element={<Official />} />
+              <Route path="/officials/:slug" element={<Official />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

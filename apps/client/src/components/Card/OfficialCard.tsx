@@ -52,7 +52,11 @@ const OfficialCard = ({ official }: OfficalCardProps) => {
         bg="primary.500"
         size="sm"
         ml="auto"
-        onClick={() => navigate(official.id)}
+        onClick={() =>
+          navigate(`${official.slug}-${official.id}`, {
+            state: { official_id: official.id },
+          })
+        }
       >
         Learn More
       </Button>

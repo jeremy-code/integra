@@ -18,6 +18,7 @@ const OfficialHeader = ({ id }: OfficialHeaderProps) => {
   const { data } = useSWR(
     () => `{
     getIntegraOfficialById(id: "${id}") {
+      id
       name
       party
       title
