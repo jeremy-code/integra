@@ -1,8 +1,6 @@
 import { RESTDataSource } from "apollo-datasource-rest";
 import { CivicAPIResponse, Official } from "../entity/CivicAPI.entity";
 
-import { URLSearchParamsInit } from "apollo-server-env";
-
 class CivicAPI extends RESTDataSource {
   constructor() {
     super();
