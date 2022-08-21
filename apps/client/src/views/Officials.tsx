@@ -1,25 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { SimpleGrid, ScaleFade, Skeleton } from "@chakra-ui/react";
+import { SimpleGrid, ScaleFade } from "@chakra-ui/react";
+import useSWR from "swr";
 
 import { Layout } from "@/components/Layout";
 import { OfficialCard } from "@/components/Card";
 import { Loading, Error } from "@/views";
+import { useLocalStorage } from "@/hooks";
 import type { IntegraOfficial } from "@/types";
-import useSWR from "swr";
 
-type AddressStateLocation = {
-  state: {
+type LocationState = {
+  state?: {
     location: string;
   };
 };
 
 const Officials = () => {
-  const location = useLocation();
-  const { state } = location as AddressStateLocation;
+  const location = useLocation() as LocationState;
+
+  const [savedLocation, setSavedLocation] = useLocalStorage<string | undefined>(
+    "officials_location",
+    location.state?.location
+  );
+
   const { data, error } = useSWR(
     () => `{
-    getIntegraOfficialsByAddress(address: "${state.location}") {
+    getIntegraOfficialsByAddress(address: "${
+      location.state?.location ?? savedLocation
+    }") {
       id
       age
       name
@@ -40,11 +48,35 @@ const Officials = () => {
   }`
   );
 
-  if (!data) return <Loading />;
-  if (error) return <Error />;
+  // if there is an error, or nothing in localstorage or location state, show error
+  if (error || (!savedLocation && !location.state?.location)) return <Error />;
+
+  // Store the location in local storage
+  // Ideally, should not change often, and allows users to go back to see their previous search
+  useEffect(() => {
+    if (!location.state?.location) return;
+    setSavedLocation(location.state?.location);
+  }, [location.state?.location]);
+
+  if (!data)
+    return (
+      <Loading
+        breadcrumbs={[
+          { title: "Home", href: "/" },
+          { title: "Officials", href: "/officials" },
+        ]}
+      />
+    );
 
   return (
-    <Layout display="grid" placeItems="center">
+    <Layout
+      display="grid"
+      placeItems="center"
+      breadcrumbs={[
+        { title: "Home", href: "/" },
+        { title: "Officials", href: "/officials" },
+      ]}
+    >
       <SimpleGrid
         columns={[1, null, data?.getIntegraOfficialsByAddress.length]}
         gap={4}

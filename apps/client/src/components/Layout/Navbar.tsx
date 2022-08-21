@@ -16,7 +16,7 @@ const Navbar = () => {
       as="header"
       height={20}
       borderBottom="1px solid"
-      borderColor={useColorModeValue("gray.200", "gray.600")}
+      borderColor={useColorModeValue("gray.200", "gray.800")}
     >
       <Container
         as="nav"

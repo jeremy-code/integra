@@ -48,38 +48,38 @@ export class Legislator {
 
 @ObjectType()
 class MemberProfile {
-  @Field()
-  name: string;
+  @Field({ nullable: true })
+  name?: string;
 
-  @Field()
-  member_id: string;
+  @Field({ nullable: true })
+  member_id?: string;
 
-  @Field(() => Int)
-  net_low: number;
+  @Field(() => Int, { nullable: true })
+  net_low?: number;
 
-  @Field(() => Int)
-  net_high: number;
+  @Field(() => Int, { nullable: true })
+  net_high?: number;
 
-  @Field(() => Int)
-  positions_held_count: number;
+  @Field(() => Int, { nullable: true })
+  positions_held_count?: number;
 
-  @Field(() => Int)
-  asset_count: number;
+  @Field(() => Int, { nullable: true })
+  asset_count?: number;
 
-  @Field(() => Int)
-  asset_low: number;
+  @Field(() => Int, { nullable: true })
+  asset_low?: number;
 
-  @Field(() => Int)
-  asset_high: number;
+  @Field(() => Int, { nullable: true })
+  asset_high?: number;
 
-  @Field(() => Int)
-  transaction_count: number;
+  @Field(() => Int, { nullable: true })
+  transaction_count?: number;
 
-  @Field(() => Int)
-  tx_low: number;
+  @Field(() => Int, { nullable: true })
+  tx_low?: number;
 
-  @Field(() => Int)
-  tx_high: number;
+  @Field(() => Int, { nullable: true })
+  tx_high?: number;
 
   @Field()
   source: string;
@@ -94,22 +94,22 @@ class MemberProfile {
 @ObjectType()
 class Asset {
   @Field({ nullable: true })
-  name: string;
+  name?: string;
 
   @Field(() => Int, { nullable: true })
-  holdings_low: number;
+  holdings_low?: number;
 
   @Field(() => Int, { nullable: true })
-  holdings_high: number;
+  holdings_high?: number;
 
   @Field({ nullable: true })
-  industry: string;
+  industry?: string;
 
   @Field({ nullable: true })
-  sector: string;
+  sector?: string;
 
   @Field({ nullable: true })
-  subsidiary_of: string;
+  subsidiary_of?: string;
 }
 
 @ObjectType()
@@ -118,11 +118,38 @@ export class MemPFDProfile {
   member_profile: MemberProfile;
 
   @Field(() => [Asset], { nullable: true })
-  asset: Asset[];
+  asset?: Asset[];
 
-  // @Field()
-  // transaction: Transaction[];
+  @Field(() => [Transaction], { nullable: true })
+  transaction?: Transaction[];
 
-  // @Field()
-  // position: Position[];
+  @Field(() => [Position], { nullable: true })
+  position?: Position[];
+}
+
+@ObjectType()
+class Transaction {
+  @Field()
+  asset_name: string;
+
+  @Field()
+  tx_date: string;
+
+  @Field()
+  tx_action: string;
+
+  @Field(() => Int)
+  value_low: number;
+
+  @Field(() => Int)
+  value_high: number;
+}
+
+@ObjectType()
+class Position {
+  @Field()
+  title: string;
+
+  @Field({ nullable: true })
+  organization?: string;
 }

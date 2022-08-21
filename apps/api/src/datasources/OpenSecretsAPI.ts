@@ -34,17 +34,22 @@ class OpenSecretsAPI extends RESTDataSource {
         cid: id,
       })
     );
-    const assets = res.response.member_profile.assets.asset;
+    const assets = res.response.member_profile.assets?.asset;
+    const transactions = res.response.member_profile.transactions?.transaction;
+    const positions = res.response.member_profile.positions?.position;
 
     return {
       member_profile: res.response.member_profile["@attributes"],
       asset: flatten(assets),
+      transaction: flatten(transactions),
+      position: flatten(positions),
     };
   }
 }
 
 // given an array of objects with a '@attributes' property, return an object with the keys/values of the '@attributes' property
 const flatten = (obj: { "@attributes": any }[]): any => {
+  if (!obj) return obj;
   return obj.map((item: { "@attributes": any }) => item["@attributes"]);
 };
 

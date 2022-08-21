@@ -16,6 +16,7 @@ class IntegraResolver {
     const getAge = (birthDate: Date) =>
       Math.floor(
         (new Date().valueOf() - new Date(birthDate).getTime().valueOf()) /
+          // 1000 * 60 * 60 * 24 * 365
           3.15576e10
       );
     return getAge(new Date(parent.date_of_birth));

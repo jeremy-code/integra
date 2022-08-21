@@ -1,8 +1,18 @@
 import React, { useEffect } from "react";
-import { useToast, Heading, Text } from "@chakra-ui/react";
+import {
+  useToast,
+  Heading,
+  Text,
+  SimpleGrid,
+  Box,
+  Image,
+  Flex,
+  Stack,
+} from "@chakra-ui/react";
 
 import { Layout } from "@/components/Layout";
 import { Link } from "@/components/Misc";
+import { NotFoundImage } from "@/assets";
 
 const Error = () => {
   const toast = useToast();
@@ -17,13 +27,18 @@ const Error = () => {
 
   return (
     <Layout>
-      <Heading>Something went wrong.</Heading>
-      <Text>
-        An error occured.{" "}
-        <Link to="/" color="primary.600">
-          Click here to return to the homepage.
-        </Link>
-      </Text>
+      <SimpleGrid columns={[1, null, 2]} h="full" alignItems="center">
+        <Image src={NotFoundImage} />
+        <Stack>
+          <Heading mb={4}>Something went wrong.</Heading>
+          <Text fontSize="lg">
+            An error occured.{" "}
+            <Link to="/" color="primary.600">
+              Click here to return to the homepage.
+            </Link>
+          </Text>
+        </Stack>
+      </SimpleGrid>
     </Layout>
   );
 };

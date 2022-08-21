@@ -1,24 +1,30 @@
 import React from "react";
-import { Heading, Text } from "@chakra-ui/react";
+import { Heading, SimpleGrid, Stack, Text, Image } from "@chakra-ui/react";
 
 import { Layout } from "@/components/Layout";
 import { Link } from "@/components/Misc";
+import { NotFoundImage } from "@/assets";
 
 const NotFound = () => {
   return (
     <Layout>
-      <Heading as="span" fontSize="6xl" color="red.600">
-        404
-      </Heading>
-      <Text mb={4} fontSize="2xl">
-        Resource Not Found
-      </Text>
-      <Text>
-        Route was not found.{" "}
-        <Link to="/" color="primary.600">
-          Click here to return to the homepage.
-        </Link>
-      </Text>
+      <SimpleGrid columns={[1, null, 2]} h="full" alignItems="center">
+        <Image src={NotFoundImage} />
+        <Stack>
+          <Heading as="span" fontSize="6xl" color="primary.600">
+            404
+          </Heading>
+          <Text fontSize="xx-large" mb={4}>
+            Resource not found.
+          </Text>
+          <Text fontSize="lg">
+            Route was not found.{" "}
+            <Link to="/" color="primary.600">
+              Click here to return to the homepage.
+            </Link>
+          </Text>
+        </Stack>
+      </SimpleGrid>
     </Layout>
   );
 };

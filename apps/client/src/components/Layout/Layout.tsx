@@ -2,16 +2,21 @@ import React from "react";
 import { Container } from "@chakra-ui/react";
 import type { ContainerProps } from "@chakra-ui/react";
 
-import { Navbar, Footer } from "@/components/Layout";
+import { Navbar, Breadcrumbs, Footer } from "@/components/Layout";
 
 type LayoutProps = {
   children: React.ReactNode;
+  breadcrumbs?: {
+    title: string;
+    href: string;
+  }[];
 } & ContainerProps;
 
-const Layout = ({ children, ...rest }: LayoutProps) => {
+const Layout = ({ children, breadcrumbs, ...rest }: LayoutProps) => {
   return (
     <>
       <Navbar />
+      {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
       <Container as="main" my={4} {...rest}>
         {children}
       </Container>

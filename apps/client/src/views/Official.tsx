@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { Text } from "@chakra-ui/react";
-import useSWR from "swr";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { Avatar, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
 
 import { Layout, Tabs } from "@/components/Layout";
 import { Overview, Legislation } from "@/views/OfficialViews";
-import type { IntegraOfficial } from "@/types";
+import { OfficialHeader } from "@/components/Official";
+import OfficialDetails from "@/components/Official/OfficialDetails";
 
 const Official = () => {
   const { official_id } = useParams();
@@ -15,7 +15,15 @@ const Official = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      breadcrumbs={[
+        { title: "Home", href: "/" },
+        { title: "Officials", href: "/officials" },
+        { title: "Official", href: `/officials/${official_id}` },
+      ]}
+    >
+      <OfficialHeader id={official_id} />
+      <OfficialDetails id={official_id} />
       <Tabs
         content={[
           { title: "Overview", body: <Overview id={official_id} /> },

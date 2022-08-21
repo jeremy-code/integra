@@ -1,10 +1,11 @@
-import React, { useReducer } from "react";
+import React from "react";
 import {
   Tabs as ChakraTabs,
   TabList,
   TabPanels,
   Tab,
   TabPanel,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 type TabProps = {
@@ -16,18 +17,18 @@ type TabProps = {
 
 const Tabs = ({ content }: TabProps) => {
   return (
-    <ChakraTabs colorScheme="primary" variant="soft-rounded" isLazy>
+    <ChakraTabs colorScheme="primary" variant="enclosed-colored" isLazy>
       <TabList>
         {content.map((tab) => (
-          <Tab key={tab.title}>{tab.title}</Tab>
+          <Tab key={`${tab.title} label`}>{tab.title}</Tab>
         ))}
       </TabList>
-
-      <TabPanels>
+      <TabPanels
+        border="1px solid"
+        borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
+      >
         {content.map((tab) => (
-          <TabPanel key={tab.title + "body"} px={0}>
-            {tab.body}
-          </TabPanel>
+          <TabPanel key={`${tab.title} body`}>{tab.body}</TabPanel>
         ))}
       </TabPanels>
     </ChakraTabs>
