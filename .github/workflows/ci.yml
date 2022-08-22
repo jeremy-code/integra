@@ -59,3 +59,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
+      - name: Invoke deployment hook on Cloudflare Pages
+        uses: joelwmale/webhook-action@master
+        with:
+        url: ${{ secrets.CLOUDFLARE_WEBHOOK_URL }}
