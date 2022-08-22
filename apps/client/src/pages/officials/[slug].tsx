@@ -73,7 +73,7 @@ export async function getStaticPaths() {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
     return {
       paths: [],
-      fallback: "true",
+      fallback: true,
     };
   }
 
@@ -94,7 +94,7 @@ export async function getStaticPaths() {
     },
   }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 }
 
 export default OfficialPage;
