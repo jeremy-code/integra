@@ -4,7 +4,7 @@ import { Box, Text, Select, Flex } from "@chakra-ui/react";
 
 import { Layout } from "@/components/Layout";
 import { LocationInput, OfficialInput } from "@/components/Form";
-import { Icon } from "@/components/Misc";
+import { Icon, Head } from "@/components/Misc";
 
 const Main = () => {
   const [option, setOption] = useState("Location");
@@ -30,6 +30,7 @@ const Main = () => {
 
   return (
     <Layout display="grid" placeItems="center">
+      <Head />
       <Box minW={["sm", null, "md"]} minH="md">
         <Flex align="center" gap={4} mb={4}>
           <Icon icon="SearchIcon" />

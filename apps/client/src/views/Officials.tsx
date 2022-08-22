@@ -7,6 +7,7 @@ import { Layout } from "@/components/Layout";
 import { OfficialCard } from "@/components/Card";
 import { Loading, Error } from "@/views";
 import { useLocalStorage } from "@/hooks";
+import { Head } from "@/components/Misc";
 import type { IntegraOfficial } from "@/types";
 
 type LocationState = {
@@ -78,6 +79,7 @@ const Officials = () => {
         { title: "Officials", href: "/officials" },
       ]}
     >
+      <Head title="Officials" />
       <SimpleGrid
         columns={[1, null, data?.getIntegraOfficialsByAddress.length]}
         gap={4}

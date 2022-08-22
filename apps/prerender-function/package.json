@@ -1,0 +1,20 @@
+{
+  "name": "prerender-function",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "wrangler publish --dry-run --outdir=dist",
+    "publish": "wrangler publish",
+    "lint": "eslint '**/*.{ts,js}'"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.14.1",
+    "eslint": "^8.21.0",
+    "eslint-config-custom": "*",
+    "tsconfig": "*",
+    "typescript": "^4.6.4",
+    "wrangler": "^2.0.26"
+  }
+}

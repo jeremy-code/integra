@@ -50,7 +50,7 @@ const OfficialHeader = ({ id }: OfficialHeaderProps) => {
             size="2xl"
             border="3px solid"
             mt={8}
-            background={useColorModeValue("white", "gray.800")}
+            bg={useColorModeValue("white", "gray.800")}
             color={useColorModeValue("white", "gray.800")}
           />
         </GridItem>
@@ -59,7 +59,7 @@ const OfficialHeader = ({ id }: OfficialHeaderProps) => {
           h="full"
           w="full"
           border="1px solid"
-          borderColor={useColorModeValue("gray.200", "gray.800")}
+          borderColor={useColorModeValue("gray.200", "gray.700")}
           bg={useColorModeValue("gray.50", "gray.900")}
           borderRadius="md"
         />

@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { Avatar, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 
 import { Layout, Tabs } from "@/components/Layout";
-import { Overview, Legislation } from "@/views/OfficialViews";
 import { Error } from "@/views";
-import { OfficialHeader } from "@/components/Official";
-import OfficialDetails from "@/components/Official/OfficialDetails";
-
-import { apolloClient } from "@/utils";
-import { gql } from "@apollo/client";
+import { Overview, Legislation } from "@/views/OfficialViews";
+import { OfficialHeader, OfficialDetails } from "@/components/Official";
+import { Head } from "@/components/Misc";
 
 const Official = () => {
   const { slug } = useParams();
@@ -29,6 +26,14 @@ const Official = () => {
         { title: "Official", href: `/officials/${slug}` },
       ]}
     >
+      <Head
+        // a very unfortunate way to get the name from the URL and save another query
+        title={slug
+          ?.split("-")
+          .map((name) => name[0].toUpperCase() + name.slice(1))
+          .slice(0, -1)
+          .join(" ")}
+      />
       <OfficialHeader id={officialId} />
       <OfficialDetails id={officialId} />
       <Tabs
