@@ -47,7 +47,7 @@ jobs:
       - name: Build
         run: npm run build
   deploy-server:
-    name: Deploy server
+    name: Deploy server and client
     timeout-minutes: 15
     env:
       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
@@ -62,4 +62,4 @@ jobs:
       - name: Invoke deployment hook on Cloudflare Pages
         uses: joelwmale/webhook-action@master
         with:
-        url: ${{ secrets.CLOUDFLARE_WEBHOOK_URL }}
+          url: ${{ secrets.CLOUDFLARE_WEBHOOK_URL }}
