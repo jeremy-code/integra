@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 type ScriptStatus = "idle" | "loading" | "ready" | "error";
 type ScriptType = HTMLScriptElement | null;
 
+// I wrote this hook to load a script tag in the DOM
+// before I was using Next.js, but next/script is a better solution
 function useScript(src: string): ScriptStatus {
   const [status, setStatus] = useState<ScriptStatus>(src ? "loading" : "idle");
 

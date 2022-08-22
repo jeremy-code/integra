@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Text } from "@chakra-ui/react";
 
+import { Head } from "@/components/Misc";
 import { Layout, Tabs } from "@/components/Layout";
 import {
   OfficialHeader,
   OfficialDetails,
   Overview,
   Legislation,
+  Fundraising,
 } from "@/components/Official";
-import { Head } from "@/components/Misc";
 
 const OfficialPage = () => {
   const { query } = useRouter();
@@ -31,12 +31,12 @@ const OfficialPage = () => {
       breadcrumbs={[
         { title: "Home", href: "/" },
         { title: "Officials", href: "/officials" },
-        { title: "Official", href: `/officials/${slug}` },
+        { title: "Official", href: `/officials/${query?.slug}` },
       ]}
     >
       <Head
         // a very unfortunate way to get the name from the URL and save another query
-        title={slug
+        title={(query?.slug as string)
           ?.split("-")
           .map((name) => name[0].toUpperCase() + name.slice(1))
           .slice(0, -1)
@@ -48,7 +48,7 @@ const OfficialPage = () => {
         content={[
           { title: "Overview", body: <Overview id={officialId} /> },
           { title: "Legislation", body: <Legislation id={officialId} /> },
-          { title: "Fundraising", body: <Text>Fundraising</Text> },
+          { title: "Fundraising", body: <Fundraising id={officialId} /> },
         ]}
       />
     </Layout>

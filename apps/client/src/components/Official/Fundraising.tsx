@@ -1,11 +1,11 @@
 import React from "react";
 import useSWR from "swr";
 
-type OverviewProps = {
+type FundraisingProps = {
   id: string;
 };
 
-const Overview = ({ id }: OverviewProps) => {
+const Fundraising = ({ id }: FundraisingProps) => {
   const { data, error } = useSWR(
     () => `{
     getIntegraOfficialById(id: "${id}") {
@@ -22,7 +22,7 @@ const Overview = ({ id }: OverviewProps) => {
 
   const official = data?.getIntegraOfficialById;
 
-  return <>Overview</>;
+  return <>Fundraising</>;
 };
 
-export default Overview;
+export default Fundraising;

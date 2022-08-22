@@ -14,7 +14,7 @@
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
-    "dev": "tsup --watch",
+    "dev": "tsup",
     "format": "prisma format",
     "generate": "prisma generate",
     "lint": "eslint src --ext .ts",

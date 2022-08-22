@@ -4,7 +4,6 @@ import {
   theme as base,
 } from "@chakra-ui/react";
 import type { CustomThemeTypings } from "@chakra-ui/react";
-import "@fontsource/work-sans/variable.css";
 
 const colors: CustomThemeTypings = {
   primary: {
@@ -35,8 +34,8 @@ const components: CustomThemeTypings = {
 };
 
 const fonts: CustomThemeTypings = {
-  heading: `'Work SansVariable', ${base.fonts.heading}`,
-  body: `'Work SansVariable', ${base.fonts.body}`,
+  heading: `'Work Sans', ${base.fonts.heading}`,
+  body: `'Work Sans', ${base.fonts.body}`,
 };
 
 const colorScheme = withDefaultColorScheme({ colorScheme: "primary" });

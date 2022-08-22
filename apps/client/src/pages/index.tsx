@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
-import { Box, Text, Select, Flex, Avatar } from "@chakra-ui/react";
+import { logger } from "@/utils";
+import { Box, Text, Select, Flex } from "@chakra-ui/react";
 
 import { Layout } from "@/components/Layout";
 import { LocationInput, OfficialInput } from "@/components/Form";
@@ -13,6 +13,7 @@ const IndexPage = () => {
   const router = useRouter();
 
   const onLocationSubmit = async (data: { location: { value: string } }) => {
+    logger.info("Location submitted", data);
     router.push(
       {
         pathname: "/officials",
@@ -25,6 +26,7 @@ const IndexPage = () => {
   const onOfficialSubmit = async (data: {
     official: { value: string; id: string };
   }) => {
+    logger.info("Official submitted", data);
     router.push(
       {
         pathname: `/officials/${data.official.value}-${data.official.id}`,
