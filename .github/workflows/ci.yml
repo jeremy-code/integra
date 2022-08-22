@@ -66,6 +66,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v3
+        id: docker_build
         with:
           push: false
           tags: jeremynguyencs/integra:latest
