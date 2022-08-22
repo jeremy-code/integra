@@ -66,10 +66,10 @@ const OfficialCard = ({ official }: OfficalCardProps) => {
           setIsLoading.on();
           await router.push(
             {
-              pathname: `/officials/${official.slug}-${official.id}`,
+              pathname: `/officials/${official.slug}`,
               query: { official_id: official.id },
             },
-            `/officials/${official.slug}-${official.id}`
+            `/officials/${official.slug}`
           );
           // not necessarry since it redirects, but just in case
           setIsLoading.off();
