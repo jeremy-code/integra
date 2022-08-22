@@ -1,6 +1,6 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 
-import { Error } from "@/views";
+import { Error } from "@/components/Misc";
 
 type Props = {
   children?: ReactNode;

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   Box,
   Button,
@@ -8,7 +9,6 @@ import {
   Tag,
   Avatar,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 
 import { Card } from "@/components/Card";
 import type { IntegraOfficial } from "@/types";
@@ -18,7 +18,7 @@ type OfficalCardProps = {
 };
 
 const OfficialCard = ({ official }: OfficalCardProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <Card as={Flex} w="full" h="full" flexDir="column" gap={4} maxW="md">
@@ -53,9 +53,13 @@ const OfficialCard = ({ official }: OfficalCardProps) => {
         size="sm"
         ml="auto"
         onClick={() =>
-          navigate(`${official.slug}-${official.id}`, {
-            state: { official_id: official.id },
-          })
+          router.push(
+            {
+              pathname: `/officials/${official.slug}-${official.id}`,
+              query: { official_id: official.id },
+            },
+            `/officials/${official.slug}-${official.id}`
+          )
         }
       >
         Learn More

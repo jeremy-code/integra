@@ -1,15 +1,16 @@
-import Helmet from "react-helmet";
-import type { HelmetProps } from "react-helmet";
+import NextHead from "next/head";
 
 type HeadProps = {
   title?: string;
-} & HelmetProps;
+};
 
-const Head = ({ title, ...rest }: HeadProps) => {
+const Head = ({ title }: HeadProps) => {
   return (
-    <Helmet titleTemplate="%s | Integra" defaultTitle="Integra" {...rest}>
-      <html lang="en" />
-      <meta property="og:title" content={title ?? "Integra"} />
+    <NextHead>
+      <meta
+        property="og:title"
+        content={title ? `${title} | Integra` : "Integra"}
+      />
       <meta
         name="description"
         content="Web application to learn about your polticial representatives"
@@ -26,8 +27,8 @@ const Head = ({ title, ...rest }: HeadProps) => {
         name="twitter:description"
         content="Web application to learn about your polticial representatives"
       />
-      {title && <title>{title}</title>}
-    </Helmet>
+      <title>{title ? `${title} | Integra` : "Integra"}</title>
+    </NextHead>
   );
 };
 

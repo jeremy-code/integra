@@ -33,27 +33,31 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
   const [storedValue, setStoredValue] = useState<T>(readValue);
 
   // Return a wrapped version of useState's setter function
-  const setValue: SetValue<T> = useCallback((value) => {
-    if (typeof window == "undefined") {
-      console.warn(
-        `Tried setting localStorage key “${key}” even though environment is not a client`
-      );
-    }
-    try {
-      const newValue = value instanceof Function ? value(storedValue) : value;
-      // Save to local storage
-      window.localStorage.setItem(key, JSON.stringify(newValue));
-      // Save state
-      setStoredValue(newValue);
-      // We dispatch a custom event so every useLocalStorage hook are notified
-      window.dispatchEvent(new Event("local-storage"));
-    } catch (error) {
-      console.warn(`Error setting localStorage key “${key}”:`, error);
-    }
-  }, []);
+  const setValue: SetValue<T> = useCallback(
+    (value) => {
+      if (typeof window == "undefined") {
+        console.warn(
+          `Tried setting localStorage key “${key}” even though environment is not a client`
+        );
+      }
+      try {
+        const newValue = value instanceof Function ? value(storedValue) : value;
+        // Save to local storage
+        window.localStorage.setItem(key, JSON.stringify(newValue));
+        // Save state
+        setStoredValue(newValue);
+        // We dispatch a custom event so every useLocalStorage hook are notified
+        window.dispatchEvent(new Event("local-storage"));
+      } catch (error) {
+        console.warn(`Error setting localStorage key “${key}”:`, error);
+      }
+    },
+    [key, storedValue]
+  );
 
   useEffect(() => {
     setStoredValue(readValue());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleStorageChange = useCallback(

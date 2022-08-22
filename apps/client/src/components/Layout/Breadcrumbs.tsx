@@ -7,7 +7,8 @@ import {
   Container,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+
+import Link from "next/link";
 
 type BreadcrumbsProps = {
   breadcrumbs: {
@@ -34,9 +35,9 @@ const Breadcrumbs = ({ breadcrumbs }: BreadcrumbsProps) => {
               key={`${title} ${href}`}
               isCurrentPage={index === breadcrumbs.length - 1}
             >
-              <BreadcrumbLink as={Link} to={href}>
-                {title}
-              </BreadcrumbLink>
+              <Link href={href} passHref>
+                <BreadcrumbLink>{title}</BreadcrumbLink>
+              </Link>
             </BreadcrumbItem>
           ))}
         </Breadcrumb>

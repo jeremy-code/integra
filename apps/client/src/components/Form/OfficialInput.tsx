@@ -32,6 +32,7 @@ const OfficialInput = ({ onSubmit }: OfficialInputProps) => {
   const client = useApolloClient();
 
   const getOptions = async (input: string) => {
+    console.log(input);
     const { data, errors } = await client.query({
       query: gql`
         query {

@@ -1,13 +1,12 @@
 import {
   Flex,
   Heading,
-  Image,
   Box,
   Container,
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { ToggleDarkMode, Link } from "@/components/Misc";
+import { ToggleDarkMode, Link, Image } from "@/components/Misc";
 import { Icon } from "@/assets";
 
 const Navbar = () => {
@@ -27,8 +26,8 @@ const Navbar = () => {
         {/* Filler element to keep branding centered */}
         <Box aria-hidden />
         <Flex align="center" gap={2}>
-          <Link to="/">
-            <Image src={Icon} alt="favicon" boxSize="20px" />
+          <Link to="/" display="contents">
+            <Image src={Icon} alt="favicon" width="20px" height="20px" />
           </Link>
           <Link to="/" _hover={{ textDecor: "none" }}>
             <Heading size="md">Integra</Heading>

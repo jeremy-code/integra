@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ["turbo", "prettier"],
+  extends: ["next", "turbo", "prettier"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",

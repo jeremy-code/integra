@@ -77,7 +77,7 @@ class IntegraResolver {
     @Arg("name") name: string,
     @Ctx() ctx: Context
   ): Promise<IntegraOfficial[]> {
-    const nameArr = name.split("-");
+    const nameArr = name.split(" ");
     const officialsRes = await ctx.prisma.officials.findMany({
       take: 5,
       where: {
@@ -106,7 +106,7 @@ class IntegraResolver {
   async getIntegraOfficialById(
     @Arg("id") id: string,
     @Ctx() ctx: Context
-  ): Promise<IntegraOfficial> {
+  ): Promise<IntegraOfficial | null> {
     const official = await ctx.prisma.officials.findUnique({
       where: { id },
     });

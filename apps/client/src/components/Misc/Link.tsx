@@ -1,5 +1,5 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import NextLink from "next/link";
 import {
   Link as ChakraLink,
   LinkProps as ChakraLinkProps,
@@ -12,9 +12,9 @@ type LinkProps = {
 
 const Link = ({ children, to, ...rest }: LinkProps) => {
   return (
-    <ChakraLink as={RouterLink} to={to} {...rest}>
-      {children}
-    </ChakraLink>
+    <NextLink href={to} passHref>
+      <ChakraLink {...rest}>{children}</ChakraLink>
+    </NextLink>
   );
 };
 

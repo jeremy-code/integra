@@ -64,4 +64,6 @@ const Select = forwardRef<SelectRef, SelectProps>((props, ref) => {
   );
 });
 
+Select.displayName = "Select";
+
 export default Select;

@@ -1,22 +1,30 @@
-import React, { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { Text } from "@chakra-ui/react";
 
 import { Layout, Tabs } from "@/components/Layout";
-import { Error } from "@/views";
-import { Overview, Legislation } from "@/views/OfficialViews";
-import { OfficialHeader, OfficialDetails } from "@/components/Official";
+import {
+  OfficialHeader,
+  OfficialDetails,
+  Overview,
+  Legislation,
+} from "@/components/Official";
 import { Head } from "@/components/Misc";
 
-const Official = () => {
-  const { slug } = useParams();
-  const { state } = useLocation() as { state?: { official_id: string } };
+const OfficialPage = () => {
+  const { query } = useRouter();
+  const official_id = query?.official_id as string;
+  const slug = query?.slug as string;
+
   // get the official id from the location state, otherwise take it from the slug
-  const [officialId] = useState<string | undefined>(
-    state?.official_id ?? slug?.split("-").pop()
+  const [officialId, setOfficialId] = useState<string>(
+    official_id ?? slug?.split("-").pop()
   );
 
-  if (!officialId) return <Error />;
+  useEffect(() => {
+    if (!official_id && !slug) return;
+    setOfficialId(official_id ?? slug?.split("-").pop());
+  }, [official_id, slug]);
 
   return (
     <Layout
@@ -47,4 +55,4 @@ const Official = () => {
   );
 };
 
-export default Official;
+export default OfficialPage;

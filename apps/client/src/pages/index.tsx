@@ -1,31 +1,36 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
+
 import { Box, Text, Select, Flex } from "@chakra-ui/react";
 
 import { Layout } from "@/components/Layout";
 import { LocationInput, OfficialInput } from "@/components/Form";
 import { Icon, Head } from "@/components/Misc";
 
-const Main = () => {
+const IndexPage = () => {
   const [option, setOption] = useState("Location");
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const onLocationSubmit = async (data: { location: { value: string } }) => {
-    navigate("/officials", {
-      state: {
-        location: data.location.value,
+    router.push(
+      {
+        pathname: "/officials",
+        query: { location: data.location.value },
       },
-    });
+      "/officials"
+    );
   };
 
   const onOfficialSubmit = async (data: {
     official: { value: string; id: string };
   }) => {
-    navigate(`/officials/${data.official.value}-${data.official.id}`, {
-      state: {
-        official_id: data.official.id,
+    router.push(
+      {
+        pathname: `/officials/${data.official.value}-${data.official.id}`,
+        query: { official_id: data.official.id },
       },
-    });
+      `/officials/${data.official.value}-${data.official.id}`
+    );
   };
 
   return (
@@ -54,4 +59,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default IndexPage;

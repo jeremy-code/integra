@@ -1,6 +1,10 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "globalDependencies": ["$NODE_ENV"],
+  "globalDependencies": [
+    "$NODE_ENV",
+    "$NEXT_PUBLIC_GOOGLE_MAPS_API_KEY",
+    "$NEXT_PUBLIC_GRAPHQL_SERVER_URL"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],

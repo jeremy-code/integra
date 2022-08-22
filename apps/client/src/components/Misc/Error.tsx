@@ -4,9 +4,7 @@ import {
   Heading,
   Text,
   SimpleGrid,
-  Box,
   Image,
-  Flex,
   Stack,
 } from "@chakra-ui/react";
 
@@ -28,7 +26,7 @@ const Error = () => {
   return (
     <Layout>
       <SimpleGrid columns={[1, null, 2]} h="full" alignItems="center">
-        <Image src={NotFoundImage} />
+        <Image src={NotFoundImage.src} alt="An error has occured" />
         <Stack>
           <Heading mb={4}>Something went wrong.</Heading>
           <Text fontSize="lg">

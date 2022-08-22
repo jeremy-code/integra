@@ -1,33 +1,26 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useRouter } from "next/router";
 import { SimpleGrid, ScaleFade } from "@chakra-ui/react";
 import useSWR from "swr";
 
 import { Layout } from "@/components/Layout";
 import { OfficialCard } from "@/components/Card";
-import { Loading, Error } from "@/views";
 import { useLocalStorage } from "@/hooks";
-import { Head } from "@/components/Misc";
+import { Loading, Error, Head } from "@/components/Misc";
 import type { IntegraOfficial } from "@/types";
 
-type LocationState = {
-  state?: {
-    location: string;
-  };
-};
-
-const Officials = () => {
-  const location = useLocation() as LocationState;
+const OfficialsPage = () => {
+  const { query } = useRouter();
 
   const [savedLocation, setSavedLocation] = useLocalStorage<string | undefined>(
     "officials_location",
-    location.state?.location
+    query?.location as string
   );
 
   const { data, error } = useSWR(
     () => `{
     getIntegraOfficialsByAddress(address: "${
-      location.state?.location ?? savedLocation
+      query?.location ?? savedLocation
     }") {
       id
       age
@@ -50,15 +43,15 @@ const Officials = () => {
   }`
   );
 
-  // if there is an error, or nothing in localstorage or location state, show error
-  if (error || (!savedLocation && !location.state?.location)) return <Error />;
-
   // Store the location in local storage
   // Ideally, should not change often, and allows users to go back to see their previous search
   useEffect(() => {
-    if (!location.state?.location) return;
-    setSavedLocation(location.state?.location);
-  }, [location.state?.location]);
+    if (query?.location) return;
+    setSavedLocation(query?.location as string);
+  }, [query?.location, setSavedLocation]);
+
+  // if there is an error, or nothing in localstorage or location state, show error
+  if (error || (!savedLocation && !query?.location)) return <Error />;
 
   if (!data)
     return (
@@ -95,4 +88,4 @@ const Officials = () => {
   );
 };
 
-export default Officials;
+export default OfficialsPage;

@@ -1,15 +1,15 @@
 html,
 body,
-body > #root {
+body > #__next {
   height: 100%;
 }
 
-#root {
+#__next {
   display: flex;
   flex-direction: column;
 }
 
-#root > main {
+#__next > main {
   flex: 1 0 auto;
 }
 
