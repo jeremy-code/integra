@@ -46,7 +46,7 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
   deploy-serverless-functions:
-    name: Deploy
+    name: Deploy functions
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
