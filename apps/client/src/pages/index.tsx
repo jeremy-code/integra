@@ -26,10 +26,10 @@ const IndexPage = () => {
   }) => {
     router.push(
       {
-        pathname: `/officials/${data.official.value}-${data.official.id}`,
+        pathname: `/officials/${data.official.value}`,
         query: { official_id: data.official.id },
       },
-      `/officials/${data.official.value}-${data.official.id}`
+      `/officials/${data.official.value}`
     );
   };
 
