@@ -24,7 +24,7 @@ class IntegraResolver {
 
   @FieldResolver()
   async slug(@Root() parent: IntegraOfficial) {
-    return `${parent.first_name}-${parent.last_name}`.toLowerCase();
+    return `${parent.first_name}-${parent.last_name}-${parent.id}`.toLowerCase();
   }
 
   @FieldResolver()
