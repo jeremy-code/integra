@@ -8,6 +8,7 @@ import {
   Text,
   Tag,
   Avatar,
+  useBoolean,
 } from "@chakra-ui/react";
 
 import { Card } from "@/components/Card";
@@ -19,6 +20,7 @@ type OfficalCardProps = {
 
 const OfficialCard = ({ official }: OfficalCardProps) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useBoolean();
 
   return (
     <Card as={Flex} w="full" h="full" flexDir="column" gap={4} maxW="md">
@@ -59,15 +61,19 @@ const OfficialCard = ({ official }: OfficalCardProps) => {
         bg="primary.500"
         size="sm"
         ml="auto"
-        onClick={() =>
-          router.push(
+        isLoading={isLoading}
+        onClick={async () => {
+          setIsLoading.on();
+          await router.push(
             {
               pathname: `/officials/${official.slug}-${official.id}`,
               query: { official_id: official.id },
             },
             `/officials/${official.slug}-${official.id}`
-          )
-        }
+          );
+          // not necessarry since it redirects, but just in case
+          setIsLoading.off();
+        }}
       >
         Learn More
       </Button>

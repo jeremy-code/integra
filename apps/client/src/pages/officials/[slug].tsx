@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { gql } from "@apollo/client";
 
 import { Head } from "@/components/Misc";
 import { Layout, Tabs } from "@/components/Layout";
@@ -10,10 +11,11 @@ import {
   Legislation,
   Fundraising,
 } from "@/components/Official";
+import { apolloClient } from "@/utils";
 
-const OfficialPage = () => {
+const OfficialPage = ({ id }) => {
   const { query } = useRouter();
-  const official_id = query?.official_id as string;
+  const official_id = (query?.official_id as string) ?? id;
   const slug = query?.slug as string;
 
   // get the official id from the location state, otherwise take it from the slug
@@ -54,5 +56,53 @@ const OfficialPage = () => {
     </Layout>
   );
 };
+
+export async function getStaticProps(context) {
+  const { slug } = context.params;
+
+  const { data } = await apolloClient.query({
+    query: gql`
+      query {
+        getIntegraOfficialById(id: "${slug?.split("-").pop()}") {
+          id
+        }
+      }
+    `,
+  });
+
+  return {
+    props: {
+      official_id: data.getIntegraOfficialById.id,
+    },
+  };
+}
+
+export async function getStaticPaths() {
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: "true",
+    };
+  }
+
+  const { data } = await apolloClient.query({
+    query: gql`
+      query {
+        getAllIntegraOfficials {
+          id
+          slug
+        }
+      }
+    `,
+  });
+
+  const paths = data?.getAllIntegraOfficials.map(({ slug }) => ({
+    params: {
+      slug,
+    },
+  }));
+
+  return { paths, fallback: true };
+}
 
 export default OfficialPage;

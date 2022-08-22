@@ -121,6 +121,25 @@ class IntegraResolver {
       google_knowledge_graph: undefined,
     } as IntegraOfficial;
   }
+
+  @Query(() => [IntegraOfficial])
+  async getAllIntegraOfficials(
+    @Ctx() ctx: Context
+  ): Promise<IntegraOfficial[]> {
+    const officials = await ctx.prisma.officials.findMany({
+      where: { in_office: true },
+    });
+    const officialsRes = officials.map((official) => {
+      return {
+        ...official,
+        name: "name",
+        age: 0,
+        slug: "slug",
+        google_knowledge_graph: undefined,
+      };
+    });
+    return officialsRes as IntegraOfficial[];
+  }
 }
 
 export default IntegraResolver;
