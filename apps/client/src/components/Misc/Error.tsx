@@ -1,15 +1,8 @@
 import React, { useEffect } from "react";
-import {
-  useToast,
-  Heading,
-  Text,
-  SimpleGrid,
-  Image,
-  Stack,
-} from "@chakra-ui/react";
+import { useToast, Heading, Text, SimpleGrid, Stack } from "@chakra-ui/react";
 
 import { Layout } from "@/components/Layout";
-import { Link } from "@/components/Misc";
+import { Link, Image } from "@/components/Misc";
 import { NotFoundImage } from "@/assets";
 
 const Error = () => {
@@ -26,7 +19,11 @@ const Error = () => {
   return (
     <Layout>
       <SimpleGrid columns={[1, null, 2]} h="full" alignItems="center">
-        <Image src={NotFoundImage.src} alt="An error has occured" />
+        <Image
+          src={NotFoundImage}
+          alt="An error has occured"
+          layout="responsive"
+        />
         <Stack>
           <Heading mb={4}>Something went wrong.</Heading>
           <Text fontSize="lg">

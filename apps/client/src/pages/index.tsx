@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
-import { Box, Text, Select, Flex } from "@chakra-ui/react";
+import { Box, Text, Select, Flex, Avatar } from "@chakra-ui/react";
 
 import { Layout } from "@/components/Layout";
 import { LocationInput, OfficialInput } from "@/components/Form";

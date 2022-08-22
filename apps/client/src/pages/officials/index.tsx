@@ -46,12 +46,12 @@ const OfficialsPage = () => {
   // Store the location in local storage
   // Ideally, should not change often, and allows users to go back to see their previous search
   useEffect(() => {
-    if (query?.location) return;
+    if (!query?.location) return;
     setSavedLocation(query?.location as string);
   }, [query?.location, setSavedLocation]);
 
   // if there is an error, or nothing in localstorage or location state, show error
-  if (error || (!savedLocation && !query?.location)) return <Error />;
+  // if (error || (!savedLocation && !query?.location)) return <Error />;
 
   if (!data)
     return (

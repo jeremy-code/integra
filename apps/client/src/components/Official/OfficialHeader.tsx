@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useSWR from "swr";
 import {
   Grid,
@@ -43,14 +43,20 @@ const OfficialHeader = ({ id }: OfficialHeaderProps) => {
         <GridItem rowStart={1} rowSpan={2} colStart={1} placeSelf="center">
           <Avatar
             name={official?.name}
+            getInitials={(name) =>
+              name
+                .split(" ")
+                .slice(1)
+                .map((n) => n[0])
+                .join("")
+            }
             src={
-              official?.google_knowledge_graph.itemListElement[0].result.image
-                .contentUrl
+              official?.google_knowledge_graph?.itemListElement[0]?.result
+                ?.image?.contentUrl
             }
             size="2xl"
             border="3px solid"
             mt={8}
-            bg={useColorModeValue("white", "gray.800")}
             color={useColorModeValue("white", "gray.800")}
           />
         </GridItem>

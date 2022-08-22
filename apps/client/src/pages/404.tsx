@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { Heading, SimpleGrid, Stack, Text, Box } from "@chakra-ui/react";
 
 import { Layout } from "@/components/Layout";
 import { Link, Image } from "@/components/Misc";
@@ -9,7 +9,11 @@ const NotFound = () => {
   return (
     <Layout>
       <SimpleGrid columns={[1, null, 2]} h="full" alignItems="center">
-        <Image src={NotFoundImage.src} alt="Route was not found" />
+        <Image
+          src={NotFoundImage}
+          alt="Route was not found"
+          layout="responsive"
+        />
         <Stack>
           <Heading as="span" fontSize="6xl" color="primary.600">
             404

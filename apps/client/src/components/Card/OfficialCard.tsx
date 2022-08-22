@@ -24,10 +24,17 @@ const OfficialCard = ({ official }: OfficalCardProps) => {
     <Card as={Flex} w="full" h="full" flexDir="column" gap={4} maxW="md">
       <Flex gap={4} flexGrow={1}>
         <Avatar
-          name={official.name}
+          name={official?.name}
+          getInitials={(name) =>
+            name
+              .split(" ")
+              .slice(1)
+              .map((n) => n[0])
+              .join("")
+          }
           src={
-            official.google_knowledge_graph.itemListElement[0]?.result.image
-              .contentUrl
+            official?.google_knowledge_graph?.itemListElement[0]?.result?.image
+              ?.contentUrl
           }
         />
         <Box gap={4}>
