@@ -23,7 +23,7 @@ const App = () => {
               <Route path="/" element={<Main />} />
               <Route path="/officials" element={<Officials />} />
               <Route path="/officials/:slug" element={<Official />} />
-              <Route path="*" element={<NotFound />} />
+              {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
           </BrowserRouter>
         </ChakraProvider>
