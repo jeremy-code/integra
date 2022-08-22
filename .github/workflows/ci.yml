@@ -8,10 +8,10 @@ on:
 
 jobs:
   log:
+    name: Log CI/CD to Logflare
     runs-on: ubuntu-latest
     steps:
       - uses: logflare/action@v1
-        id: stats
         with:
           api_key: ${{ secrets.LOGFLARE_API_KEY }}
           source_id: ${{ secrets.LOGFLARE_SOURCE_ID }}
