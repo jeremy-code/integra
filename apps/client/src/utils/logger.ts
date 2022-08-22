@@ -2,9 +2,9 @@ import pino from "pino";
 import { createPinoBrowserSend, createWriteStream } from "pino-logflare";
 
 const pinoConfig = {
-  apiKey: process.env.NEXT_PUBLIC_LOGFLARE_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_LOGFLARE_API_KEY ?? "",
   sourceToken:
-    process.env.NEXT_PUBLIC_LOGFLARE_SOURCE_ID ||
+    process.env.NEXT_PUBLIC_LOGFLARE_SOURCE_ID ??
     "b6af012a-ac27-4dfa-b7bb-543e091e2e5a",
 };
 
