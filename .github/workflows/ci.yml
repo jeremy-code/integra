@@ -67,7 +67,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          push: true
+          push: false
           tags: jeremynguyencs/integra:latest
           context: .
           file: ./apps/api/Dockerfile
