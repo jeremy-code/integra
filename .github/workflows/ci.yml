@@ -28,7 +28,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
       TURBO_REMOTE_ONLY: true
-      NEXT_PUBLIC_GRAPHQL_SERVER_URL: ${{ secrets.NEXT_PUBLIC_GRAPHQL_SERVER_URL }}
+      SKIP_BUILD_STATIC_GENERATION: true
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]

@@ -60,19 +60,11 @@ const OfficialPage = ({ id }) => {
 export async function getStaticProps(context) {
   const { slug } = context.params;
 
-  const { data } = await apolloClient.query({
-    query: gql`
-      query {
-        getIntegraOfficialById(id: "${slug?.split("-").pop()}") {
-          id
-        }
-      }
-    `,
-  });
+  const official_id = slug?.split("-").pop() as string;
 
   return {
     props: {
-      official_id: data.getIntegraOfficialById.id,
+      official_id,
     },
   };
 }
