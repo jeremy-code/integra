@@ -49,12 +49,7 @@ const OfficialPage = ({
         { title: "Official", href: `/officials/${query?.slug}` },
       ]}
     >
-      <Head
-        // a very unfortunate way to get the name from the URL and save another query
-        title={title}
-        image={photoUrl}
-        description={description}
-      />
+      <Head title={title} image={photoUrl} description={description} />
       <OfficialHeader id={officialId} photoUrl={photoUrl} />
       <OfficialDetails id={officialId} />
       <Tabs

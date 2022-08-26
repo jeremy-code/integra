@@ -12,19 +12,7 @@ interface AvatarProps extends Partial<ChakraAvatarProps> {
 }
 
 const Avatar = ({ name, src, alt, size, ...props }: AvatarProps) => {
-  if (src === null && name) {
-    return (
-      <ChakraAvatar
-        name={name}
-        size="lg"
-        height={`${size}px`}
-        width={`${size}px`}
-        {...props}
-      />
-    );
-  }
-
-  return (
+  if (src !== null) {
     <Circle {...props}>
       <Image
         borderRadius="full"
@@ -34,7 +22,17 @@ const Avatar = ({ name, src, alt, size, ...props }: AvatarProps) => {
         alt={alt}
         objectFit="cover"
       />
-    </Circle>
+    </Circle>;
+  }
+
+  return (
+    <ChakraAvatar
+      name={name ?? "Joe Biden"}
+      size="lg"
+      height={`${size}px`}
+      width={`${size}px`}
+      {...props}
+    />
   );
 };
 
