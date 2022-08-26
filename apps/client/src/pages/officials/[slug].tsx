@@ -69,6 +69,12 @@ const OfficialPage = ({
   );
 };
 
+async function checkImage(url: string) {
+  const res = await fetch(url);
+  const buff = await res.blob();
+  return buff.type.startsWith("image/");
+}
+
 export async function getStaticProps(context) {
   const { slug } = context.params;
 
@@ -81,10 +87,12 @@ export async function getStaticProps(context) {
       },
     });
 
+  const photoUrl = `https://theunitedstates.io/images/congress/450x550/${id_}.jpg`;
+
   return {
     props: {
       official_id,
-      photoUrl: `https://theunitedstates.io/images/congress/450x550/${id_}.jpg`,
+      photoUrl: checkImage(photoUrl) ? photoUrl : undefined,
       title: `${short_title} ${first_name} ${last_name}`,
       description: `${short_title} ${first_name} ${last_name} • ${title} | ${state}`,
     },

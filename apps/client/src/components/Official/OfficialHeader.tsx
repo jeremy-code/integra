@@ -15,7 +15,7 @@ import { Avatar } from "@/components/Misc";
 
 type OfficialHeaderProps = {
   id: string;
-  photoUrl: string;
+  photoUrl?: string;
 };
 
 const OfficialHeader = ({ id, photoUrl }: OfficialHeaderProps) => {

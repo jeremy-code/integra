@@ -31,6 +31,7 @@ class IntegraResolver {
 
   @FieldResolver()
   async photo_url(@Root() parent: IntegraOfficial) {
+    if (!parent.id_) return null;
     return `https://theunitedstates.io/images/congress/450x550/${parent.id_}.jpg`;
   }
 

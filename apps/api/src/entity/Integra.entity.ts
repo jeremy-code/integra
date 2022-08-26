@@ -43,8 +43,8 @@ export class IntegraOfficial {
   age: number;
   @Field()
   slug: string;
-  @Field()
-  photo_url: string;
+  @Field({ nullable: true })
+  photo_url?: string;
 
   @Field(() => KnowledgeGraphAPIResponse, { nullable: true })
   google_knowledge_graph?: KnowledgeGraphAPIResponse;
