@@ -7,11 +7,11 @@ import {
   Heading,
   Text,
   Tag,
-  Avatar,
   useBoolean,
 } from "@chakra-ui/react";
 
 import { Card } from "@/components/Card";
+import { Avatar } from "@/components/Misc";
 import type { IntegraOfficial } from "@/types";
 
 type OfficalCardProps = {
@@ -25,20 +25,7 @@ const OfficialCard = ({ official }: OfficalCardProps) => {
   return (
     <Card as={Flex} w="full" h="full" flexDir="column" gap={4} maxW="md">
       <Flex gap={4} flexGrow={1}>
-        <Avatar
-          name={official?.name}
-          getInitials={(name) =>
-            name
-              .split(" ")
-              .slice(1)
-              .map((n) => n[0])
-              .join("")
-          }
-          src={
-            official?.google_knowledge_graph?.itemListElement[0]?.result?.image
-              ?.contentUrl
-          }
-        />
+        <Avatar name={official.name} src={official.photo_url} size="100" />
         <Box gap={4}>
           <Heading size="md">{official.name}</Heading>
           <Text>{official.title}</Text>

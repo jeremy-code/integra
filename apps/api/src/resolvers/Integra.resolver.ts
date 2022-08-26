@@ -30,6 +30,11 @@ class IntegraResolver {
   }
 
   @FieldResolver()
+  async photo_url(@Root() parent: IntegraOfficial) {
+    return `https://theunitedstates.io/images/congress/450x550/${parent.id_}.jpg`;
+  }
+
+  @FieldResolver()
   async google_knowledge_graph(
     @Root() parent: IntegraOfficial,
     @Ctx() ctx: Context
@@ -95,10 +100,6 @@ class IntegraResolver {
     const officials = officialsRes.map((official) => {
       return {
         ...official,
-        name: "name",
-        age: 0,
-        slug: "slug",
-        google_knowledge_graph: undefined,
       };
     });
     return officials as IntegraOfficial[];
@@ -117,10 +118,6 @@ class IntegraResolver {
     }
     return {
       ...official,
-      name: "name",
-      age: 0,
-      slug: "slug",
-      google_knowledge_graph: undefined,
     } as IntegraOfficial;
   }
 
@@ -134,10 +131,6 @@ class IntegraResolver {
     const officialsRes = officials.map((official) => {
       return {
         ...official,
-        name: "name",
-        age: 0,
-        slug: "slug",
-        google_knowledge_graph: undefined,
       };
     });
     return officialsRes as IntegraOfficial[];

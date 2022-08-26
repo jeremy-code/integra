@@ -27,7 +27,7 @@ const Navbar = () => {
         <Box aria-hidden />
         <Flex align="center" gap={2}>
           <Link to="/" display="contents">
-            <Image src={Icon} alt="favicon" width="20px" height="20px" />
+            <Image src={Icon} alt="favicon" width={20} height={20} />
           </Link>
           <Link to="/" _hover={{ textDecor: "none" }}>
             <Heading size="md">Integra</Heading>

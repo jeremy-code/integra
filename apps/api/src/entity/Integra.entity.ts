@@ -6,6 +6,8 @@ import { KnowledgeGraphAPIResponse } from "./KnowledgeGraphAPI.entity";
 export class IntegraOfficial {
   @Field(() => ID)
   id: string;
+  @Field(() => ID)
+  id_: string;
   @Field()
   api_uri: string;
   @Field()
@@ -41,6 +43,8 @@ export class IntegraOfficial {
   age: number;
   @Field()
   slug: string;
+  @Field()
+  photo_url: string;
 
   @Field(() => KnowledgeGraphAPIResponse, { nullable: true })
   google_knowledge_graph?: KnowledgeGraphAPIResponse;

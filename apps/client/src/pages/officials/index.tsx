@@ -29,16 +29,7 @@ const OfficialsPage = () => {
       title
       seniority
       slug
-      google_knowledge_graph {
-        itemListElement {
-          result {
-            name
-            image {
-              contentUrl
-            }
-          }
-        }
-      }
+      photo_url
     }
   }`
   );

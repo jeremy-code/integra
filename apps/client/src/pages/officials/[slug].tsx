@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { gql } from "@apollo/client";
+import { prisma } from "database";
 
-import { Head } from "@/components/Misc";
+import { Head, Avatar } from "@/components/Misc";
 import { Layout, Tabs } from "@/components/Layout";
 import {
   OfficialHeader,
@@ -13,7 +15,19 @@ import {
 } from "@/components/Official";
 import { apolloClient } from "@/utils";
 
-const OfficialPage = ({ id }) => {
+type OfficialPageProps = {
+  id: string;
+  photoUrl?: string;
+  title: string;
+  description?: string;
+};
+
+const OfficialPage = ({
+  id,
+  photoUrl,
+  title,
+  description,
+}: OfficialPageProps) => {
   const { query } = useRouter();
   const official_id = (query?.official_id as string) ?? id;
   const slug = query?.slug as string;
@@ -38,13 +52,11 @@ const OfficialPage = ({ id }) => {
     >
       <Head
         // a very unfortunate way to get the name from the URL and save another query
-        title={(query?.slug as string)
-          ?.split("-")
-          .map((name) => name[0].toUpperCase() + name.slice(1))
-          .slice(0, -1)
-          .join(" ")}
+        title={title}
+        image={photoUrl}
+        description={description}
       />
-      <OfficialHeader id={officialId} />
+      <OfficialHeader id={officialId} photoUrl={photoUrl} />
       <OfficialDetails id={officialId} />
       <Tabs
         content={[
@@ -62,9 +74,19 @@ export async function getStaticProps(context) {
 
   const official_id = slug?.split("-").pop() as string;
 
+  const { id_, short_title, first_name, last_name, state, title } =
+    await prisma.officials.findFirst({
+      where: {
+        id: official_id,
+      },
+    });
+
   return {
     props: {
       official_id,
+      photoUrl: `https://theunitedstates.io/images/congress/450x550/${id_}.jpg`,
+      title: `${short_title} ${first_name} ${last_name}`,
+      description: `${short_title} ${first_name} ${last_name} • ${title} | ${state}`,
     },
   };
 }

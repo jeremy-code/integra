@@ -4,7 +4,9 @@ import { AppProps } from "next/app";
 import { SWRConfig } from "swr";
 
 import { apolloClient, fetcher, theme } from "@/utils";
+
 import "@/main.css";
+import "reflect-metadata";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

@@ -51,6 +51,7 @@ export type IntegraOfficial = {
   youtube_account?: string;
 
   slug: string;
+  photo_url: string;
   google_knowledge_graph: KnowledgeGraphAPIResponse;
 };
 

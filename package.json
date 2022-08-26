@@ -24,6 +24,7 @@
     "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,md,json}\""
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^3.14.1",
     "eslint-config-custom": "*",
     "prettier": "latest",
     "turbo": "latest",

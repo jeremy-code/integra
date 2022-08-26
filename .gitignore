@@ -12,6 +12,7 @@ dist
 tsconfig.tsbuildinfo
 .next
 out
+target
 
 # misc
 .DS_Store
