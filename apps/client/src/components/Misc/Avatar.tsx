@@ -12,7 +12,7 @@ interface AvatarProps extends Partial<ChakraAvatarProps> {
 }
 
 const Avatar = ({ name, src, alt, size, ...props }: AvatarProps) => {
-  if (src !== null) {
+  if (!src) {
     <Circle {...props}>
       <Image
         borderRadius="full"
@@ -31,6 +31,13 @@ const Avatar = ({ name, src, alt, size, ...props }: AvatarProps) => {
       size="lg"
       height={`${size}px`}
       width={`${size}px`}
+      getInitials={(name) =>
+        name
+          .split(" ")
+          .slice(1)
+          .map((n) => n[0])
+          .join("")
+      }
       {...props}
     />
   );
