@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import { gql } from "@apollo/client";
 import { prisma } from "database";
 
-import { Head, Avatar } from "@/components/Misc";
+import { Head } from "@/components/Misc";
 import { Layout, Tabs } from "@/components/Layout";
 import {
   OfficialHeader,

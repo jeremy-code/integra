@@ -7,8 +7,6 @@ import {
   Text,
   Skeleton,
   useColorModeValue,
-  Box,
-  Circle,
 } from "@chakra-ui/react";
 
 import { Avatar } from "@/components/Misc";

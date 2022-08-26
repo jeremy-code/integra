@@ -12,7 +12,7 @@ interface AvatarProps extends Partial<ChakraAvatarProps> {
 }
 
 const Avatar = ({ name, src, alt, size, ...props }: AvatarProps) => {
-  if (!src && name) {
+  if (src === null && name) {
     return (
       <ChakraAvatar
         name={name}
