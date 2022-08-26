@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar as ChakraAvatar, Circle } from "@chakra-ui/react";
 import type { AvatarProps as ChakraAvatarProps } from "@chakra-ui/react";
 
@@ -12,7 +12,7 @@ interface AvatarProps extends Partial<ChakraAvatarProps> {
 }
 
 const Avatar = ({ name, src, alt, size, ...props }: AvatarProps) => {
-  if (!src) {
+  return src ? (
     <Circle {...props}>
       <Image
         borderRadius="full"
@@ -22,10 +22,8 @@ const Avatar = ({ name, src, alt, size, ...props }: AvatarProps) => {
         alt={alt}
         objectFit="cover"
       />
-    </Circle>;
-  }
-
-  return (
+    </Circle>
+  ) : (
     <ChakraAvatar
       name={name ?? "Joe Biden"}
       size="lg"

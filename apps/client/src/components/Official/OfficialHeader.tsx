@@ -40,7 +40,7 @@ const OfficialHeader = ({ id, photoUrl }: OfficialHeaderProps) => {
           mt={8}
           borderRadius="full"
           border="3px solid"
-          borderColor={useColorModeValue("white", "gray.800")}
+          borderColor={useColorModeValue("white", "gray.800") ?? "white"}
         />
       </GridItem>
       <GridItem
