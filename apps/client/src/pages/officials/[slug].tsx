@@ -42,6 +42,10 @@ const OfficialPage = ({
     setOfficialId(official_id ?? slug?.split("-").pop());
   }, [official_id, slug]);
 
+  useEffect(() => {
+    console.log(checkImage(photoUrl));
+  }, [photoUrl]);
+
   return (
     <Layout
       breadcrumbs={[
@@ -69,7 +73,7 @@ const OfficialPage = ({
   );
 };
 
-async function checkImage(url: string) {
+async function checkImage(url: string): Promise<boolean> {
   const res = await fetch(url);
   const buff = await res.blob();
   return buff.type.startsWith("image/");
@@ -92,7 +96,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       official_id,
-      photoUrl: checkImage(photoUrl) ? photoUrl : undefined,
+      photoUrl: (await checkImage(photoUrl)) ? photoUrl : undefined,
       title: `${short_title} ${first_name} ${last_name}`,
       description: `${short_title} ${first_name} ${last_name} • ${title} | ${state}`,
     },
