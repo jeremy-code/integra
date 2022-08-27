@@ -11,6 +11,7 @@ const fetcher: Fetcher = async (query: string | readonly string[]) => {
     return data;
   } catch (err) {
     console.error(err);
+    throw err;
   }
 };
 

@@ -3,6 +3,7 @@ import { RESTDataSource, RequestOptions } from "apollo-datasource-rest";
 import type {
   Legislator,
   MemPFDProfile,
+  candIndustry,
 } from "../entity/OpenSecretsAPI.entity";
 
 class OpenSecretsAPI extends RESTDataSource {
@@ -33,16 +34,44 @@ class OpenSecretsAPI extends RESTDataSource {
         method: "memPFDprofile",
         cid: id,
       })
-    );
-    const assets = res.response.member_profile.assets?.asset;
-    const transactions = res.response.member_profile.transactions?.transaction;
-    const positions = res.response.member_profile.positions?.position;
+    ).response.member_profile;
 
-    return {
-      member_profile: res.response.member_profile["@attributes"],
+    const assets = res.assets?.asset;
+    const transactions = res.transactions?.transaction;
+    const positions = res.positions?.position;
+
+    // API returns empty string instead of undefined for null values
+    // instead of empty string "", return undefined
+    const member_profile = Object.fromEntries(
+      // eslint-disable-next-line no-unused-vars
+      Object.entries(res["@attributes"]).filter(([_key, value]) => value !== "")
+    );
+
+    const profile = {
+      member_profile,
       asset: flatten(assets),
       transaction: flatten(transactions),
       position: flatten(positions),
+    } as unknown as MemPFDProfile;
+
+    return profile;
+  }
+
+  async candIndustry(id: string): Promise<candIndustry> {
+    const res = JSON.parse(
+      await this.get("", {
+        method: "candIndustry",
+        cid: id,
+      })
+    ).response.industries;
+    return {
+      cand_name: res["@attributes"].cand_name,
+      cid: res["@attributes"].cid,
+      cycle: res["@attributes"].cycle,
+      origin: res["@attributes"].origin,
+      source: res["@attributes"].source,
+      last_updated: res["@attributes"].last_updated,
+      industries: flatten(res.industry),
     };
   }
 }

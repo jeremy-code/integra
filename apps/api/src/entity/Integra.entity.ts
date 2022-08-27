@@ -1,3 +1,4 @@
+import { candIndustry, MemPFDProfile } from "./OpenSecretsAPI.entity";
 import { Field, Float, ID, Int, ObjectType } from "type-graphql";
 
 import { KnowledgeGraphAPIResponse } from "./KnowledgeGraphAPI.entity";
@@ -48,6 +49,10 @@ export class IntegraOfficial {
 
   @Field(() => KnowledgeGraphAPIResponse, { nullable: true })
   google_knowledge_graph?: KnowledgeGraphAPIResponse;
+  @Field(() => MemPFDProfile, { nullable: true })
+  memPFDProfile?: MemPFDProfile;
+  @Field(() => candIndustry, { nullable: true })
+  candIndustry?: candIndustry;
 
   @Field({ nullable: true })
   at_large?: boolean;

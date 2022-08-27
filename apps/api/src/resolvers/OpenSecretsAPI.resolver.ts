@@ -1,6 +1,10 @@
 import { Arg, Ctx, Query, Resolver } from "type-graphql";
 
-import { Legislator, MemPFDProfile } from "../entity/OpenSecretsAPI.entity";
+import {
+  Legislator,
+  MemPFDProfile,
+  candIndustry,
+} from "../entity/OpenSecretsAPI.entity";
 import { Context } from "../types";
 
 @Resolver()
@@ -20,6 +24,27 @@ class OpenSecretsAPIResolver {
     @Ctx() context: Context
   ): Promise<MemPFDProfile> {
     return await context.dataSources.openSecretsAPI.memPFDprofile(id);
+  }
+
+  @Query(() => candIndustry)
+  async candIndustry(
+    @Arg("id", { description: "CID" }) id: string,
+    @Arg("first", {
+      description: "number of industries to return",
+      nullable: true,
+    })
+    first: number,
+    @Ctx() context: Context
+  ): Promise<candIndustry> {
+    const data = await context.dataSources.openSecretsAPI.candIndustry(id);
+    if (first) {
+      return {
+        ...data,
+        industries: data.industries.slice(0, first),
+      };
+    } else {
+      return data;
+    }
   }
 }
 

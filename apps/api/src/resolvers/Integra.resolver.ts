@@ -1,3 +1,4 @@
+import { MemPFDProfile } from "./../entity/OpenSecretsAPI.entity";
 import { Context } from "./../types";
 import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from "type-graphql";
 
@@ -43,6 +44,36 @@ class IntegraResolver {
     return ctx.dataSources.knowledgeGraphAPI.getResponse(
       parent.google_entity_id!
     );
+  }
+
+  @FieldResolver(() => MemPFDProfile)
+  async memPFDProfile(
+    @Root() parent: IntegraOfficial,
+    @Ctx() ctx: Context
+  ): Promise<MemPFDProfile> {
+    const data = await ctx.dataSources.openSecretsAPI.memPFDprofile(
+      parent.crp_id || ""
+    );
+    return data;
+  }
+
+  @FieldResolver()
+  async candIndustry(
+    @Root() parent: IntegraOfficial,
+    @Ctx() ctx: Context,
+    @Arg("first", { defaultValue: 10 }) first: number
+  ) {
+    const data = await ctx.dataSources.openSecretsAPI.candIndustry(
+      parent.crp_id || ""
+    );
+    if (first) {
+      return {
+        ...data,
+        industries: data.industries.slice(0, first),
+      };
+    } else {
+      return data;
+    }
   }
 
   @Query(() => [IntegraOfficial])

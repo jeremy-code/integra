@@ -47,7 +47,7 @@ export class Legislator {
 }
 
 @ObjectType()
-class MemberProfile {
+export class MemberProfile {
   @Field({ nullable: true })
   name?: string;
 
@@ -114,8 +114,8 @@ class Asset {
 
 @ObjectType()
 export class MemPFDProfile {
-  @Field(() => MemberProfile)
-  member_profile: MemberProfile;
+  @Field(() => MemberProfile, { nullable: true })
+  member_profile?: MemberProfile;
 
   @Field(() => [Asset], { nullable: true })
   asset?: Asset[];
@@ -147,9 +147,51 @@ class Transaction {
 
 @ObjectType()
 class Position {
-  @Field()
-  title: string;
+  @Field({ nullable: true })
+  title?: string;
 
   @Field({ nullable: true })
   organization?: string;
+}
+
+@ObjectType()
+export class candIndustry {
+  @Field()
+  cand_name: string;
+
+  @Field()
+  cid: string;
+
+  @Field()
+  cycle: string;
+
+  @Field()
+  origin: string;
+
+  @Field()
+  source: string;
+
+  @Field()
+  last_updated: string;
+
+  @Field(() => [Industry])
+  industries: Industry[];
+}
+
+@ObjectType()
+class Industry {
+  @Field()
+  industry_name: string;
+
+  @Field()
+  industry_code: string;
+
+  @Field()
+  indivs: number;
+
+  @Field()
+  pacs: number;
+
+  @Field()
+  total: number;
 }
