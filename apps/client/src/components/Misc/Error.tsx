@@ -23,6 +23,7 @@ const Error = () => {
           src={NotFoundImage}
           alt="An error has occured"
           layout="responsive"
+          placeholder="blur"
         />
         <Stack>
           <Heading mb={4}>Something went wrong.</Heading>

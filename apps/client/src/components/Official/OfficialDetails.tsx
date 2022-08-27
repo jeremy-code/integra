@@ -1,7 +1,8 @@
-import { Card } from "@/components/Card";
-import { Heading, SimpleGrid, Skeleton, Text } from "@chakra-ui/react";
 import React from "react";
+import { Heading, SimpleGrid, Skeleton, Text } from "@chakra-ui/react";
 import useSWR from "swr";
+
+import { Card } from "@/components/Card";
 
 type OfficialDetailsProps = {
   id: string;

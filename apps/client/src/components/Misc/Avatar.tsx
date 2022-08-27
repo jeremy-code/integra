@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Avatar as ChakraAvatar, Circle } from "@chakra-ui/react";
 import type { AvatarProps as ChakraAvatarProps } from "@chakra-ui/react";
 
@@ -12,6 +12,8 @@ interface AvatarProps extends Partial<ChakraAvatarProps> {
 }
 
 const Avatar = ({ name, src, alt, size, ...props }: AvatarProps) => {
+  // Basically, if there's an src, use the Next.js optimized image component, otherwise use
+  // the Avatar component to get a placeholder with the initials
   return src ? (
     <Circle {...props}>
       <Image
@@ -20,6 +22,7 @@ const Avatar = ({ name, src, alt, size, ...props }: AvatarProps) => {
         width={size}
         height={size}
         alt={alt}
+        placeholder="blur"
         objectFit="cover"
       />
     </Circle>

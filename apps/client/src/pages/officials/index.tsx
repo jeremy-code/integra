@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { SimpleGrid, ScaleFade } from "@chakra-ui/react";
 import useSWR from "swr";
+import type { NextPage } from "next";
 
 import { Layout } from "@/components/Layout";
 import { OfficialCard } from "@/components/Card";
@@ -9,7 +10,7 @@ import { useLocalStorage } from "@/hooks";
 import { Loading, Error, Head } from "@/components/Misc";
 import type { IntegraOfficial } from "@/types";
 
-const OfficialsPage = () => {
+const OfficialsPage: NextPage = () => {
   const { query } = useRouter();
 
   const [savedLocation, setSavedLocation] = useLocalStorage<string | undefined>(

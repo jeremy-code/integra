@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from "@chakra-ui/icons";
+import React from "react";
 import {
   Box,
   Breadcrumb,
@@ -7,6 +7,7 @@ import {
   Container,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 import Link from "next/link";
 

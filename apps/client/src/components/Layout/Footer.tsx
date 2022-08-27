@@ -1,3 +1,4 @@
+import React from "react";
 import { Center, Text, Link, useColorModeValue } from "@chakra-ui/react";
 
 const Footer = () => {

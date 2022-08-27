@@ -1,6 +1,7 @@
-import { Layout } from "@/components/Layout";
+import React, { useEffect } from "react";
 import { Text, useToast } from "@chakra-ui/react";
-import { useEffect } from "react";
+
+import { Layout } from "@/components/Layout";
 
 const Error = ({ statusCode }) => {
   const toast = useToast();

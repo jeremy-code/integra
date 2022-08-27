@@ -1,3 +1,4 @@
+import React from "react";
 import NextImage from "next/image";
 import { chakra } from "@chakra-ui/react";
 
@@ -40,7 +41,6 @@ const Image = (props: React.ComponentProps<typeof ChakraNextImage>) => {
   return (
     <ChakraNextImage
       {...props}
-      placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
       transition="all 0.2s"
     />

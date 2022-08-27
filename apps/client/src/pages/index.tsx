@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-
 import { Box, Text, Select, Flex } from "@chakra-ui/react";
+import type { NextPage } from "next";
 
 import { Layout } from "@/components/Layout";
 import { LocationInput, OfficialInput } from "@/components/Form";
 import { Icon, Head } from "@/components/Misc";
 
-const IndexPage = () => {
+const IndexPage: NextPage = () => {
   const [option, setOption] = useState("Location");
   const router = useRouter();
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { Icon as ChakraIcon } from "@chakra-ui/react";
 // conflicted about this, bundle size becomes signficantly larger if we import all icons
 // however, I did not want to dynamically import icons

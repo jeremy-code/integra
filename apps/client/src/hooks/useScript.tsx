@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type ScriptStatus = "idle" | "loading" | "ready" | "error";
 type ScriptType = HTMLScriptElement | null;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { gql } from "@apollo/client";
-import { prisma } from "database";
+import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
 
 import { Head } from "@/components/Misc";
 import { Layout, Tabs } from "@/components/Layout";
@@ -13,6 +13,7 @@ import {
   Fundraising,
 } from "@/components/Official";
 import { apolloClient } from "@/utils";
+import { prisma } from "database";
 
 type OfficialPageProps = {
   id: string;
@@ -21,12 +22,12 @@ type OfficialPageProps = {
   description?: string;
 };
 
-const OfficialPage = ({
+const OfficialPage: NextPage<OfficialPageProps> = ({
   id,
   photoUrl,
   title,
   description,
-}: OfficialPageProps) => {
+}) => {
   const { query } = useRouter();
   const official_id = (query?.official_id as string) ?? id;
   const slug = query?.slug as string;
@@ -63,17 +64,19 @@ const OfficialPage = ({
   );
 };
 
+// Verify that the image url is valid
 async function checkImage(url: string): Promise<boolean> {
-  const res = await fetch(url);
-  const buff = await res.blob();
+  const buff = await (await fetch(url)).blob();
   return buff.type.startsWith("image/");
 }
 
-export async function getStaticProps(context) {
-  const { slug } = context.params;
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { slug } = context.params as { slug: string };
 
   const official_id = slug?.split("-").pop() as string;
 
+  // Directly getting the data from DB rather than GraphQL query
+  // Still secure as this is only run server-side
   const { id_, short_title, first_name, last_name, state, title } =
     await prisma.officials.findFirst({
       where: {
@@ -88,12 +91,12 @@ export async function getStaticProps(context) {
       official_id,
       photoUrl: (await checkImage(photoUrl)) ? photoUrl : null,
       title: `${short_title} ${first_name} ${last_name}`,
-      description: `${short_title} ${first_name} ${last_name} • ${title} | ${state}`,
+      description: `${short_title} ${first_name} ${last_name} • ${title} • ${state}`,
     },
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
     return {
       paths: [],
@@ -119,6 +122,6 @@ export async function getStaticPaths() {
   }));
 
   return { paths, fallback: false };
-}
+};
 
 export default OfficialPage;

@@ -1,6 +1,7 @@
-import { Layout } from "@/components/Layout";
-import { Spinner } from "@chakra-ui/react";
 import React from "react";
+import { Spinner } from "@chakra-ui/react";
+
+import { Layout } from "@/components/Layout";
 
 type LoadingProps = {
   breadcrumbs: {

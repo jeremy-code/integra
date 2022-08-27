@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from "react";
+import React, { RefObject, useEffect, useRef } from "react";
 
 // Window Event based useEventListener interface
 function useEventListener<K extends keyof WindowEventMap>(

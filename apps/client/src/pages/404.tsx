@@ -1,11 +1,12 @@
 import React from "react";
-import { Heading, SimpleGrid, Stack, Text, Box } from "@chakra-ui/react";
+import { Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import type { NextPage } from "next";
 
 import { Layout } from "@/components/Layout";
 import { Link, Image } from "@/components/Misc";
 import { NotFoundImage } from "@/assets";
 
-const NotFound = () => {
+const NotFound: NextPage = () => {
   return (
     <Layout>
       <SimpleGrid columns={[1, null, 2]} h="full" alignItems="center">
@@ -13,6 +14,7 @@ const NotFound = () => {
           src={NotFoundImage}
           alt="Route was not found"
           layout="responsive"
+          placeholder="blur"
         />
         <Stack>
           <Heading as="span" fontSize="6xl" color="primary.600">
