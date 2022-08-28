@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from "type-graphql";
+import { Field, Float, Int, ObjectType } from "type-graphql";
 
 @ObjectType()
 export class Legislator {
@@ -194,4 +194,38 @@ class Industry {
 
   @Field()
   total: number;
+}
+
+@ObjectType()
+export class candSummary {
+  @Field()
+  cand_name: string;
+  @Field()
+  cid: string;
+  @Field()
+  cycle: string;
+  @Field()
+  state: string;
+  @Field()
+  party: string;
+  @Field()
+  chamber: string;
+  @Field()
+  first_elected: string;
+  @Field()
+  next_election: string;
+  @Field(() => Float)
+  total: number;
+  @Field(() => Float)
+  spent: number;
+  @Field(() => Float)
+  cash_on_hand: number;
+  @Field(() => Float)
+  debt: number;
+  @Field()
+  origin: string;
+  @Field()
+  source: string;
+  @Field()
+  last_updated: string;
 }

@@ -1,4 +1,8 @@
-import { candIndustry, MemPFDProfile } from "./OpenSecretsAPI.entity";
+import {
+  candIndustry,
+  candSummary,
+  MemPFDProfile,
+} from "./OpenSecretsAPI.entity";
 import { Field, Float, ID, Int, ObjectType } from "type-graphql";
 
 import { KnowledgeGraphAPIResponse } from "./KnowledgeGraphAPI.entity";
@@ -53,6 +57,8 @@ export class IntegraOfficial {
   memPFDProfile?: MemPFDProfile;
   @Field(() => candIndustry, { nullable: true })
   candIndustry?: candIndustry;
+  @Field(() => candSummary, { nullable: true })
+  candSummary?: candSummary;
 
   @Field({ nullable: true })
   at_large?: boolean;

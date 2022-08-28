@@ -4,6 +4,7 @@ import type {
   Legislator,
   MemPFDProfile,
   candIndustry,
+  candSummary,
 } from "../entity/OpenSecretsAPI.entity";
 
 class OpenSecretsAPI extends RESTDataSource {
@@ -55,6 +56,17 @@ class OpenSecretsAPI extends RESTDataSource {
     } as unknown as MemPFDProfile;
 
     return profile;
+  }
+
+  async candSummary(id: string): Promise<candSummary> {
+    const res = JSON.parse(
+      await this.get("", {
+        method: "candSummary",
+        cid: id,
+      })
+    ).response.summary["@attributes"];
+
+    return res;
   }
 
   async candIndustry(id: string): Promise<candIndustry> {

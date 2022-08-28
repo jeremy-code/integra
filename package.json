@@ -21,11 +21,20 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,md,json}\""
+    "format": "prettier --write --ignore-path .gitignore  \"**/*.{ts,tsx,md,json}\"",
+    "format:check": "prettier --check --ignore-path .gitignore \"**/*.{ts,tsx,md,json}\"",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "yarn format",
+      "yarn lint"
+    ]
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^3.14.1",
     "eslint-config-custom": "*",
+    "husky": "^7.0.0",
+    "lint-staged": "^13.0.3",
     "prettier": "latest",
     "turbo": "latest",
     "typescript": "^4.7.4"

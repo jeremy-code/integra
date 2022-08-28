@@ -1,11 +1,122 @@
 import React from "react";
 import useSWR from "swr";
-import { Grid, GridItem } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  SimpleGrid,
+  Skeleton,
+} from "@chakra-ui/react";
 
-import { BarChart } from "@/components/Chart";
+import { BarChart, Stat } from "@/components/Chart";
+import { convertToUSD } from "@/utils";
 
 type FundraisingProps = {
   id: string;
+};
+
+const NetWorth = ({ id }: FundraisingProps) => {
+  const { data, error } = useSWR(
+    () => `{
+    getIntegraOfficialById(id: "${id}") {
+      id
+      memPFDProfile {
+        member_profile {
+          net_low
+          net_high
+          asset_count
+          asset_low
+          asset_high
+        }
+      }
+    }
+  }`
+  );
+
+  const member_profile =
+    data?.getIntegraOfficialById?.memPFDProfile?.member_profile;
+
+  const netWorthLow = convertToUSD(member_profile?.net_low);
+  const netWorthHigh = convertToUSD(member_profile?.net_high);
+
+  if (error) {
+    return <>Failed to load</>;
+  }
+
+  return (
+    <Stat
+      label="Estimated Net Worth"
+      data={
+        netWorthLow === netWorthHigh && !netWorthLow
+          ? "Net worth was not found"
+          : `${netWorthLow} - ${netWorthHigh}`
+      }
+    />
+  );
+};
+
+const FinancialInfo = ({ id }: FundraisingProps) => {
+  const { data, error } = useSWR(
+    () => `{
+    getIntegraOfficialById(id: "${id}") {
+      id
+      candSummary {
+        cand_name
+        cid
+        cycle
+        party
+        state
+        chamber
+        first_elected
+        spent
+        next_election
+        total
+        cash_on_hand
+        debt
+        origin
+        last_updated
+        source
+      }
+    }
+  }`
+  );
+
+  const candSummary = data?.getIntegraOfficialById?.candSummary;
+
+  if (error) return <div>failed to load</div>;
+
+  return (
+    <Box p={4}>
+      <Heading size="md" mb={4}>
+        Financial Info
+      </Heading>
+      <SimpleGrid columns={[1, null, 3]} spacing={4}>
+        <Stat
+          label="Total Spent"
+          data={candSummary?.spent ? convertToUSD(candSummary?.spent) : "N/A"}
+        />
+        <Stat
+          label="Total Cash on Hand"
+          data={
+            candSummary?.cash_on_hand
+              ? convertToUSD(candSummary?.cash_on_hand)
+              : "N/A"
+          }
+        />
+        <Stat
+          label="Total Debt"
+          data={candSummary?.debt ? convertToUSD(candSummary?.debt) : "N/A"}
+        />
+      </SimpleGrid>
+      <Box mt={4}>
+        <Heading size="md" mb={4}>
+          Net Worth
+        </Heading>
+        <NetWorth id={id} />
+      </Box>
+    </Box>
+  );
 };
 
 const IndustryDonationsChart = ({ id }: FundraisingProps) => {
@@ -40,16 +151,10 @@ const IndustryDonationsChart = ({ id }: FundraisingProps) => {
 
 const Fundraising = ({ id }: FundraisingProps) => {
   return (
-    <Grid
-      minH="lg"
-      templateRows="repeat(2, 1fr)"
-      templateColumns={["1fr", null, "repeat(2, 1fr)"]}
-      gap={4}
-    >
-      <GridItem>
-        <IndustryDonationsChart id={id} />
-      </GridItem>
-    </Grid>
+    <SimpleGrid columns={[1, null, 2]} gap={8}>
+      <IndustryDonationsChart id={id} />
+      <FinancialInfo id={id} />
+    </SimpleGrid>
   );
 };
 

@@ -5,6 +5,9 @@ import {
   Skeleton,
   ListItem,
   UnorderedList,
+  Box,
+  Flex,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import useSWR from "swr";
@@ -89,34 +92,25 @@ const NetWorth = ({ id }: OverviewProps) => {
   }
 
   return (
-    <Skeleton isLoaded={!!data}>
-      <Stat
-        label="Estimated Net Worth"
-        data={
-          netWorthLow === netWorthHigh && !netWorthLow
-            ? "Net worth was not found"
-            : `${netWorthLow} - ${netWorthHigh}`
-        }
-      />
-    </Skeleton>
+    <Stat
+      label="Estimated Net Worth"
+      data={
+        netWorthLow === netWorthHigh && !netWorthLow
+          ? "Net worth was not found"
+          : `${netWorthLow} - ${netWorthHigh}`
+      }
+    />
   );
 };
 
 const Overview = ({ id }: OverviewProps) => {
   return (
-    <Grid
-      minH="lg"
-      templateRows="repeat(2, 1fr)"
-      templateColumns={["1fr", null, "repeat(2, 1fr)"]}
-      gap={4}
-    >
-      <GridItem>
-        <NetWorth id={id} />
-      </GridItem>
-      <GridItem>
+    <SimpleGrid columns={[1, null, 2]} gap={8}>
+      <NetWorth id={id} />
+      <Box border="1px solid" borderColor="gray.200" p={4}>
         <Positions id={id} />
-      </GridItem>
-    </Grid>
+      </Box>
+    </SimpleGrid>
   );
 };
 

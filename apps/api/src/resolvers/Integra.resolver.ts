@@ -1,4 +1,4 @@
-import { MemPFDProfile } from "./../entity/OpenSecretsAPI.entity";
+import { candSummary, MemPFDProfile } from "./../entity/OpenSecretsAPI.entity";
 import { Context } from "./../types";
 import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from "type-graphql";
 
@@ -74,6 +74,16 @@ class IntegraResolver {
     } else {
       return data;
     }
+  }
+
+  @FieldResolver()
+  async candSummary(
+    @Root() parent: IntegraOfficial,
+    @Ctx() ctx: Context
+  ): Promise<candSummary> {
+    return await ctx.dataSources.openSecretsAPI.candSummary(
+      parent.crp_id || ""
+    );
   }
 
   @Query(() => [IntegraOfficial])

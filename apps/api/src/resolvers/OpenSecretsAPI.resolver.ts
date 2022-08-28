@@ -1,3 +1,4 @@
+import { candSummary } from "./../entity/OpenSecretsAPI.entity";
 import { Arg, Ctx, Query, Resolver } from "type-graphql";
 
 import {
@@ -45,6 +46,14 @@ class OpenSecretsAPIResolver {
     } else {
       return data;
     }
+  }
+
+  @Query(() => candSummary)
+  async candSummary(
+    @Arg("id", { description: "CID" }) id: string,
+    @Ctx() context: Context
+  ): Promise<candSummary> {
+    return await context.dataSources.openSecretsAPI.candSummary(id);
   }
 }
 

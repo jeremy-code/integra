@@ -2,9 +2,9 @@
 
 ![GitHub Actions status](https://github.com/jeremynguyencs/integra/actions/workflows/ci.yml/badge.svg)
 
-Integra is a web application for learning about your local political system. It is built with a [React](https://reactjs.org/) front-end, an [Express](https://expressjs.com/) Node.js [GraphQL](https://graphql.org/) backend API with a [MongoDB](https://mongodb.com/) database. The project is currently in development.
+Integra is a web application for learning about your local politicians. It is built with a [React](https://reactjs.org/) and [Next.js](https://nextjs.org/) front-end, an [Express](https://expressjs.com/) Node.js [GraphQL](https://graphql.org/) backend API, and a [MongoDB](https://mongodb.com/) database with a [Prisma](https://www.prisma.io). The project is currently in development.
 
-For an in-progress demo of the application, look at [integra.pages.dev](https://integra.pages.dev/). The GraphQL Express API server is hosted on [integra.fly.dev](https://integra.fly.dev/).
+The web application is located on [integra.pages.dev](https://integra.pages.dev/). The GraphQL Express API server is hosted on [integra.fly.dev](https://integra.fly.dev/) with [fly.io](https://fly.io/).
 
 ## Installation
 
@@ -17,7 +17,7 @@ yarn
 ## Usage
 
 ```bash
-# Run the server locally
+# Run the development server locally
 yarn dev
 
 # Lint and format code
