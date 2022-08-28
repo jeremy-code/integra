@@ -47,6 +47,7 @@ const NetWorth = ({ id }: FundraisingProps) => {
   return (
     <Stat
       label="Estimated Net Worth"
+      isLoaded={!!data}
       data={
         netWorthLow === netWorthHigh && !netWorthLow
           ? "Net worth was not found"
@@ -94,10 +95,12 @@ const FinancialInfo = ({ id }: FundraisingProps) => {
       <SimpleGrid columns={[1, null, 3]} spacing={4}>
         <Stat
           label="Total Spent"
+          isLoaded={!!data}
           data={candSummary?.spent ? convertToUSD(candSummary?.spent) : "N/A"}
         />
         <Stat
           label="Total Cash on Hand"
+          isLoaded={!!data}
           data={
             candSummary?.cash_on_hand
               ? convertToUSD(candSummary?.cash_on_hand)
@@ -106,6 +109,7 @@ const FinancialInfo = ({ id }: FundraisingProps) => {
         />
         <Stat
           label="Total Debt"
+          isLoaded={!!data}
           data={candSummary?.debt ? convertToUSD(candSummary?.debt) : "N/A"}
         />
       </SimpleGrid>

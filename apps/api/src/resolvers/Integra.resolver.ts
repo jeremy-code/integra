@@ -16,11 +16,11 @@ class IntegraResolver {
     // Not perfect solution, would use library
     const getAge = (birthDate: Date) =>
       Math.floor(
-        (new Date().valueOf() - new Date(birthDate).getTime().valueOf()) /
+        (new Date().valueOf() - birthDate.getTime().valueOf()) /
           // 1000 * 60 * 60 * 24 * 365
           3.15576e10
       );
-    return getAge(new Date(parent.date_of_birth));
+    return getAge(parent.date_of_birth);
   }
 
   @FieldResolver()
@@ -32,8 +32,8 @@ class IntegraResolver {
 
   @FieldResolver()
   async photo_url(@Root() parent: IntegraOfficial) {
-    if (!parent.id_) return null;
-    return `https://theunitedstates.io/images/congress/450x550/${parent.id_}.jpg`;
+    if (!parent.bioguide_id) return null;
+    return `https://theunitedstates.io/images/congress/450x550/${parent.bioguide_id}.jpg`;
   }
 
   @FieldResolver()
@@ -127,23 +127,49 @@ class IntegraResolver {
     @Ctx() ctx: Context
   ): Promise<IntegraOfficial[]> {
     const nameArr = name.split(" ");
-    const officialsRes = await ctx.prisma.officials.findMany({
-      take: 5,
+
+    // If there is an exact match, return that
+    if (nameArr.length >= 2) {
+      const official = await ctx.prisma.officials.findFirst({
+        where: {
+          first_name: nameArr[0],
+          last_name: nameArr[1],
+        },
+      });
+      if (official) return [official] as IntegraOfficial[];
+    }
+
+    // Return where first name or last name starts with respective query
+    // or if last name contains the query
+    const officials = await ctx.prisma.officials.findMany({
       where: {
-        AND: [
-          { first_name: { startsWith: nameArr[0], mode: "insensitive" } },
-          { last_name: { startsWith: nameArr[1], mode: "insensitive" } },
+        OR: [
+          {
+            AND: [
+              {
+                first_name: {
+                  startsWith: nameArr[0],
+                  mode: "insensitive",
+                },
+              },
+              {
+                last_name: {
+                  startsWith: nameArr[1],
+                  mode: "insensitive",
+                },
+              },
+            ],
+          },
+          {
+            last_name: {
+              contains: nameArr[0],
+              mode: "insensitive",
+            },
+          },
         ],
       },
     });
-    if (officialsRes.length === 0) {
-      return [];
-    }
-    const officials = officialsRes.map((official) => {
-      return {
-        ...official,
-      };
-    });
+
     return officials as IntegraOfficial[];
   }
 

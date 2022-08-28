@@ -32,13 +32,13 @@ const OfficialInput = ({ onSubmit }: OfficialInputProps) => {
   const client = useApolloClient();
 
   const getOptions = async (input: string) => {
-    console.log(input);
     const { data, errors } = await client.query({
       query: gql`
         query {
           getIntegraOfficialsByName(name: "${input}") {
-            name
             id
+            first_name
+            last_name
             slug
           }
         }
@@ -46,8 +46,13 @@ const OfficialInput = ({ onSubmit }: OfficialInputProps) => {
     });
     if (errors) throw new Error(errors[0].message);
     return data.getIntegraOfficialsByName.map(
-      (official: { name: string; id: string; slug: string }) => ({
-        label: official.name,
+      (official: {
+        first_name: string;
+        last_name;
+        id: string;
+        slug: string;
+      }) => ({
+        label: `${official.first_name} ${official.last_name}`,
         id: official.id,
         value: official.slug,
       })
@@ -58,7 +63,7 @@ const OfficialInput = ({ onSubmit }: OfficialInputProps) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={!!errors.official}>
         <FormLabel>Enter your Member of Congress</FormLabel>
-        {/* Control React select component */}
+        {/* Control React Select component */}
         <Controller
           name="official"
           control={control}

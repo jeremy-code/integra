@@ -36,7 +36,7 @@ const Positions = ({ id }: OverviewProps) => {
 
   const member_profile = data?.getIntegraOfficialById?.memPFDProfile;
 
-  if (error) return <div>failed to load</div>;
+  if (error) return <div>Failed to load</div>;
 
   return (
     <Skeleton isLoaded={!!data}>
@@ -80,10 +80,6 @@ const NetWorth = ({ id }: OverviewProps) => {
   const member_profile =
     data?.getIntegraOfficialById?.memPFDProfile?.member_profile;
 
-  useEffect(() => {
-    console.log(member_profile);
-  }, [member_profile]);
-
   const netWorthLow = convertToUSD(member_profile?.net_low);
   const netWorthHigh = convertToUSD(member_profile?.net_high);
 
@@ -94,6 +90,7 @@ const NetWorth = ({ id }: OverviewProps) => {
   return (
     <Stat
       label="Estimated Net Worth"
+      isLoaded={!!data}
       data={
         netWorthLow === netWorthHigh && !netWorthLow
           ? "Net worth was not found"

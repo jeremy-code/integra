@@ -23,6 +23,7 @@ const AutoCompleteInput = forwardRef((props: ControllerRenderProps, ref) => {
       {
         input,
         region: "us",
+        componentRestrictions: { country: "us" },
       },
       async (_prediction, status) => {
         if (status !== "OK") throw new Error(status);

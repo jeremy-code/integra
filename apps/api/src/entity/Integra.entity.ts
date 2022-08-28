@@ -11,12 +11,8 @@ import { KnowledgeGraphAPIResponse } from "./KnowledgeGraphAPI.entity";
 export class IntegraOfficial {
   @Field(() => ID)
   id: string;
-  @Field(() => ID)
-  id_: string;
   @Field()
-  api_uri: string;
-  @Field()
-  date_of_birth: string;
+  date_of_birth: Date;
   @Field()
   fec_candidate_id: string;
   @Field()
@@ -27,8 +23,8 @@ export class IntegraOfficial {
   in_office: boolean;
   @Field()
   last_name: string;
-  @Field()
-  last_updated: string;
+  @Field(() => Float)
+  last_updated: bigint;
   @Field()
   ocd_id: string;
   @Field()
@@ -60,6 +56,8 @@ export class IntegraOfficial {
   @Field(() => candSummary, { nullable: true })
   candSummary?: candSummary;
 
+  @Field()
+  bioguide_id: string;
   @Field({ nullable: true })
   at_large?: boolean;
   @Field({ nullable: true })

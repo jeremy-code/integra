@@ -13,14 +13,28 @@ import type { StatProps as ChakraStatProps } from "@chakra-ui/react";
 type StatProps = {
   label: string;
   data: string;
+  isLoaded: boolean;
   helpText?: string;
   type?: "increase" | "decrease";
 } & ChakraStatProps;
 
-const Stat = ({ label, data, helpText, type, ...rest }: StatProps) => {
+const Stat = ({
+  label,
+  data,
+  isLoaded,
+  helpText,
+  type,
+  ...rest
+}: StatProps) => {
   return (
-    <Skeleton isLoaded={!!data}>
-      <ChakraStat p={2} border="1px solid" borderColor="gray.200" {...rest}>
+    <Skeleton isLoaded={isLoaded}>
+      <ChakraStat
+        p={4}
+        border="1px solid"
+        borderColor="gray.200"
+        h="full"
+        {...rest}
+      >
         <StatLabel>{label}</StatLabel>
         <StatNumber>{data}</StatNumber>
         {helpText && (

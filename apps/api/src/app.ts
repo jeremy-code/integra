@@ -32,6 +32,7 @@ const bootstrap = async () => {
     },
     plugins: [logger],
     dataSources,
+    cache: "bounded",
   });
   await apolloServer.start();
   const app = startServer();

@@ -77,14 +77,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // Directly getting the data from DB rather than GraphQL query
   // Still secure as this is only run server-side
-  const { id_, short_title, first_name, last_name, state, title } =
+  const { bioguide_id, short_title, first_name, last_name, state, title } =
     await prisma.officials.findFirst({
       where: {
         id: official_id,
       },
     });
 
-  const photoUrl = `https://theunitedstates.io/images/congress/450x550/${id_}.jpg`;
+  const photoUrl = `https://theunitedstates.io/images/congress/450x550/${bioguide_id}.jpg`;
 
   return {
     props: {

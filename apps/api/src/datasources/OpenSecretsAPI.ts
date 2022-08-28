@@ -91,6 +91,7 @@ class OpenSecretsAPI extends RESTDataSource {
 // given an array of objects with a '@attributes' property, return an object with the keys/values of the '@attributes' property
 const flatten = (obj: { "@attributes": any }[]): any => {
   if (!obj) return obj;
+  if (!Array.isArray(obj)) return [obj["@attributes"]];
   return obj.map((item: { "@attributes": any }) => item["@attributes"]);
 };
 
