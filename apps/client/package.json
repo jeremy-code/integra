@@ -20,7 +20,7 @@
     "chakra-react-select": "^4.1.4",
     "chart.js": "^3.9.1",
     "database": "*",
-    "framer-motion": "^7.1.0",
+    "framer-motion": "^7.2.1",
     "next": "12.2.2",
     "pino": "^8.4.2",
     "pino-pretty": "^9.1.0",
