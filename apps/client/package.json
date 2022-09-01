@@ -14,7 +14,7 @@
     "@builder.io/partytown": "^0.6.4",
     "@chakra-ui/icons": "^2.0.8",
     "@chakra-ui/react": "2.0.0-next.5",
-    "@emotion/react": "^11.10.0",
+    "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.0",
     "@heroicons/react": "^2.0.10",
     "chakra-react-select": "^4.1.5",
