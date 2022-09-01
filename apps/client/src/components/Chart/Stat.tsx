@@ -6,6 +6,7 @@ import {
   StatHelpText,
   StatArrow,
   Skeleton,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import type { StatProps as ChakraStatProps } from "@chakra-ui/react";
@@ -31,7 +32,7 @@ const Stat = ({
       <ChakraStat
         p={4}
         border="1px solid"
-        borderColor="gray.200"
+        borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
         h="full"
         {...rest}
       >

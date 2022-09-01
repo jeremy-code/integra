@@ -24,7 +24,7 @@ const Breadcrumbs = ({ breadcrumbs }: BreadcrumbsProps) => {
       py={3}
       bg={useColorModeValue("gray.50", "gray.900")}
       borderBottom="1px solid"
-      borderColor={useColorModeValue("gray.200", "gray.800")}
+      borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
     >
       <Container>
         <Breadcrumb

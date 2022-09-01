@@ -1,13 +1,13 @@
 export type IntegraOfficial = {
   id: string;
   api_uri: string;
-  date_of_birth: string;
+  date_of_birth: Date;
   fec_candidate_id: string;
   first_name: string;
   gender: string;
   in_office: boolean;
   last_name: string;
-  last_updated: string;
+  last_updated: bigint;
   ocd_id: string;
   seniority: string;
   short_title: string;

@@ -21,7 +21,7 @@ type SelectRef = SelectInstance<Option, boolean, GroupBase<Option>>;
 
 const Select = forwardRef<SelectRef, SelectProps>((props, ref) => {
   // Custom debounce function that given a function and a delay that debounces the given function
-  const debounce = (fn: (...args: any[]) => void, delay = 250) => {
+  const debounce = (fn: (...args: any[]) => void, delay = 300) => {
     let timeout: ReturnType<typeof setTimeout>;
 
     return (...args: any) => {

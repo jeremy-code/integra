@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { Box, Text, Select, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Heading,
+  SimpleGrid,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import type { NextPage } from "next";
 
 import { Layout } from "@/components/Layout";
@@ -34,27 +45,45 @@ const IndexPage: NextPage = () => {
   };
 
   return (
-    <Layout display="grid" placeItems="center">
+    <Layout>
       <Head />
-      <Box minW={["sm", null, "md"]} minH="md">
-        <Flex align="center" gap={4} mb={4}>
-          <Icon icon="SearchIcon" />
-          <Select
-            variant="filled"
-            maxW="10rem"
-            defaultValue="Location"
-            onChange={(e) => setOption(e.target.value)}
+      <SimpleGrid columns={[1, null, 2]} h="full" alignContent="center">
+        <Box>
+          <Heading maxW="md" size="xl" mb={4}>
+            Learn more about your politicians
+          </Heading>
+          <Text maxW="lg" fontSize="lg" mb={8}>
+            Enter your location or local politician and receive information
+            about their policies, finances, and positions
+          </Text>
+        </Box>
+        <Tabs variant="enclosed" maxW="lg">
+          <TabList>
+            <Tab>
+              <Icon icon="MapPinIcon" mr={2} />
+              Location
+            </Tab>
+            <Tab>
+              <Icon icon="UserIcon" mr={2} />
+              Official
+            </Tab>
+          </TabList>
+          <TabPanels
+            borderWidth="1px"
+            // border everywhere except top
+            borderStyle="none solid solid solid"
+            borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
+            p={2}
           >
-            <option>Location</option>
-            <option>Official</option>
-          </Select>
-        </Flex>
-        <Text fontSize="xl" mb={4}>
-          Find your members of Congress
-        </Text>
-        {option === "Location" && <LocationInput onSubmit={onLocationSubmit} />}
-        {option === "Official" && <OfficialInput onSubmit={onOfficialSubmit} />}
-      </Box>
+            <TabPanel>
+              <LocationInput onSubmit={onLocationSubmit} />
+            </TabPanel>
+            <TabPanel>
+              <OfficialInput onSubmit={onOfficialSubmit} />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </SimpleGrid>
     </Layout>
   );
 };

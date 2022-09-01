@@ -7,7 +7,7 @@ const Footer = () => {
       as="footer"
       h={16}
       borderTop="1px solid"
-      borderColor={useColorModeValue("gray.200", "gray.600")}
+      borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
     >
       <Text>
         Made with ❤️ by{" "}

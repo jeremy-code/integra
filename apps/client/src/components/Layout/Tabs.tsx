@@ -17,7 +17,7 @@ type TabProps = {
 
 const Tabs = ({ content }: TabProps) => {
   return (
-    <ChakraTabs colorScheme="primary" variant="enclosed-colored" isLazy>
+    <ChakraTabs variant="enclosed-colored" isLazy>
       <TabList>
         {content.map((tab) => (
           <Tab key={`${tab.title} label`}>{tab.title}</Tab>

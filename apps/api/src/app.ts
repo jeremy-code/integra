@@ -45,4 +45,4 @@ const bootstrap = async () => {
   });
 };
 
-bootstrap().catch((err) => console.error(err));
+bootstrap().catch((err) => logger.error(err));

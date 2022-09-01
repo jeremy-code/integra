@@ -2,8 +2,8 @@ import React from "react";
 import { Icon as ChakraIcon } from "@chakra-ui/react";
 // conflicted about this, bundle size becomes signficantly larger if we import all icons
 // however, I did not want to dynamically import icons
-import * as outlineIcons from "@heroicons/react/outline";
-import * as solidIcons from "@heroicons/react/solid";
+import * as outlineIcons from "@heroicons/react/24/outline";
+import * as solidIcons from "@heroicons/react/24/solid";
 import type { IconProps as ChakraIconProps } from "@chakra-ui/react";
 
 type IconType = keyof typeof outlineIcons | keyof typeof solidIcons;

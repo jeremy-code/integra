@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
-import { apolloClient } from "@/utils";
 import type { Fetcher } from "swr";
+
+import { apolloClient, logger } from "@/utils";
 
 const fetcher: Fetcher = async (query: string | readonly string[]) => {
   try {
@@ -10,7 +11,7 @@ const fetcher: Fetcher = async (query: string | readonly string[]) => {
     if (errors) throw new Error("Network response was not OK");
     return data;
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     throw err;
   }
 };

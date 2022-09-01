@@ -1,15 +1,14 @@
+import React from "react";
 import {
-  Grid,
-  GridItem,
   Heading,
   Skeleton,
   ListItem,
   UnorderedList,
   Box,
-  Flex,
   SimpleGrid,
+  Flex,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
 import useSWR from "swr";
 
 import { Stat } from "@/components/Chart";
@@ -17,6 +16,40 @@ import { convertToUSD } from "@/utils";
 
 type OverviewProps = {
   id: string;
+};
+
+const Phone = ({ id }: OverviewProps) => {
+  const { data, error } = useSWR(
+    () => `{
+    getIntegraOfficialById(id: "${id}") {
+      id
+      phone
+    }
+  }`
+  );
+
+  const official = data?.getIntegraOfficialById;
+
+  if (error) return <>Failed to load</>;
+
+  return <Stat label="Phone" data={official?.phone} isLoaded={!!official} />;
+};
+
+const Office = ({ id }: OverviewProps) => {
+  const { data, error } = useSWR(
+    () => `{
+    getIntegraOfficialById(id: "${id}") {
+      id
+      office
+    }
+  }`
+  );
+
+  const official = data?.getIntegraOfficialById;
+
+  if (error) return <>Failed to load</>;
+
+  return <Stat label="Office" data={official?.office} isLoaded={!!official} />;
 };
 
 const Positions = ({ id }: OverviewProps) => {
@@ -36,25 +69,32 @@ const Positions = ({ id }: OverviewProps) => {
 
   const member_profile = data?.getIntegraOfficialById?.memPFDProfile;
 
-  if (error) return <div>Failed to load</div>;
+  if (error) return <>Failed to load</>;
 
   return (
     <Skeleton isLoaded={!!data}>
-      <Heading size="md" mb={4}>
-        Leadership Positions
-      </Heading>
+      <Box
+        border="1px solid"
+        p={4}
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
+      >
+        <Heading size="md" mb={4}>
+          Leadership Positions
+        </Heading>
 
-      {member_profile?.position ? (
-        <UnorderedList>
-          {member_profile?.position?.map((position, index) => (
-            <ListItem>
-              {position.title} at {position.organization}
-            </ListItem>
-          ))}
-        </UnorderedList>
-      ) : (
-        "None found"
-      )}
+        {member_profile?.position ? (
+          <UnorderedList>
+            {member_profile?.position?.map((position, index) => (
+              <ListItem>
+                {position.title} at {position.organization}
+              </ListItem>
+            ))}
+          </UnorderedList>
+        ) : (
+          "None found"
+        )}
+      </Box>
     </Skeleton>
   );
 };
@@ -83,9 +123,7 @@ const NetWorth = ({ id }: OverviewProps) => {
   const netWorthLow = convertToUSD(member_profile?.net_low);
   const netWorthHigh = convertToUSD(member_profile?.net_high);
 
-  if (error) {
-    return <>Failed to load</>;
-  }
+  if (error) return <>Failed to load</>;
 
   return (
     <Stat
@@ -104,9 +142,11 @@ const Overview = ({ id }: OverviewProps) => {
   return (
     <SimpleGrid columns={[1, null, 2]} gap={8}>
       <NetWorth id={id} />
-      <Box border="1px solid" borderColor="gray.200" p={4}>
-        <Positions id={id} />
-      </Box>
+      <Positions id={id} />
+      <Flex gap={2}>
+        <Office id={id} />
+        <Phone id={id} />
+      </Flex>
     </SimpleGrid>
   );
 };
