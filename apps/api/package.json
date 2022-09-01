@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "apollo-datasource-rest": "^3.6.1",
-    "apollo-server-express": "^3.10.1",
+    "apollo-server-express": "^3.10.2",
     "class-validator": "^0.13.2",
     "cors": "^2.8.5",
     "database": "*",
