@@ -35,7 +35,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^12.2.5",
     "@types/google.maps": "^3.49.2",
-    "@types/react": "^18.0.17",
+    "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
     "eslint": "^8.21.0",
     "eslint-config-custom": "*",
