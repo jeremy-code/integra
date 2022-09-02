@@ -2341,9 +2341,9 @@ apollo-server-types@^3.6.2:
     apollo-reporting-protobuf "^3.3.2"
     apollo-server-env "^4.2.1"
 
-app-root-path@^3.0.0:
+app-root-path@^3.1.0:
   version "3.1.0"
-  resolved "https://registry.npmjs.org/app-root-path/-/app-root-path-3.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-3.1.0.tgz#5971a2fc12ba170369a7a1ef018c71e6e47c2e86"
   integrity sha512-biN3PwB2gUtjaYy/isrU3aNWI5w+fAfvHkSvCKeQGxhmYpwKFUxudR3Yya+KqVRHBmEDYh+/lTozYCFbmzX4nA==
 
 archiver-utils@^2.1.0:
@@ -5110,13 +5110,13 @@ new-github-issue-url@0.2.1:
   resolved "https://registry.npmjs.org/new-github-issue-url/-/new-github-issue-url-0.2.1.tgz"
   integrity sha512-md4cGoxuT4T4d/HDOXbrUHkTKrp/vp+m3aOA7XXVYwNsUNMK49g3SQicTSeV5GIz/5QVGAeYRAOlyp9OvlgsYA==
 
-next-export-optimize-images@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.npmjs.org/next-export-optimize-images/-/next-export-optimize-images-1.6.0.tgz"
-  integrity sha512-qx3w3dCnTHJxf72vpfm/sdcvSNd7Ru2C8qYIftHkrwt/Sf2OghYxSdsHtTqwJE2p62Y0sC63y1Xx/lfnVljhNQ==
+next-export-optimize-images@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/next-export-optimize-images/-/next-export-optimize-images-1.7.0.tgz#386a7a62a3c488aa3adf1e458629b7b8e82d2e68"
+  integrity sha512-dkUbMq0cB2E4dGfKWGyY7c5ptXrUG+iPXC/JiBFJX6DQGdS9FgrXBW0dCpQW7ZJaJk2iXDOzVvyVRNC5uA4eow==
   dependencies:
     ansi-colors "^4.1.3"
-    app-root-path "^3.0.0"
+    app-root-path "^3.1.0"
     cli-progress "^3.11.2"
     fs-extra "^10.1.0"
     got "^11.8.5"
