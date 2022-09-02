@@ -29,7 +29,7 @@
     "@types/node": "^18.7.6",
     "apollo-server-plugin-base": "^3.6.2",
     "database": "*",
-    "eslint": "^8.22.0",
+    "eslint": "^8.23.0",
     "eslint-config-custom-server": "*",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
