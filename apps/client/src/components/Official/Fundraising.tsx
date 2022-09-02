@@ -41,7 +41,7 @@ const NetWorth = ({ id }: FundraisingProps) => {
   const netWorthHigh = convertToUSD(member_profile?.net_high);
 
   if (error) {
-    return <>Failed to load</>;
+    return <>&quot;Net Worth&quot; failed to load</>;
   }
 
   return (
@@ -85,7 +85,7 @@ const FinancialInfo = ({ id }: FundraisingProps) => {
 
   const candSummary = data?.getIntegraOfficialById?.candSummary;
 
-  if (error) return <div>failed to load</div>;
+  if (error) return <>&quot;Financial Info&quot; failed to load</>;
 
   return (
     <Box p={4}>
@@ -140,7 +140,8 @@ const IndustryDonationsChart = ({ id }: FundraisingProps) => {
 
   const industries = data?.getIntegraOfficialById?.candIndustry?.industries;
 
-  if (error) return <>Total Amount Donated by Industry failed to load</>;
+  if (error)
+    return <>&quot;Total Amount Donated by Industry&quot; failed to load</>;
 
   return (
     <BarChart
