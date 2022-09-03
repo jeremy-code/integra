@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export -o dist && next-export-optimize-images",
+    "build": "next build && next export -o dist && yarn postbuild",
+    "postbuild": "next-export-optimize-images && next-sitemap",
     "analyze": "ANALYZE=true yarn build",
     "start": "next start",
     "lint": "next lint"
@@ -15,13 +16,14 @@
     "@chakra-ui/icons": "^2.0.8",
     "@chakra-ui/react": "^2.3.1",
     "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.0",
+    "@emotion/styled": "^11.10.4",
     "@heroicons/react": "^2.0.10",
     "chakra-react-select": "^4.1.5",
     "chart.js": "^3.9.1",
     "database": "*",
     "framer-motion": "^7.2.1",
     "next": "^12.2.5",
+    "next-sitemap": "^3.1.21",
     "pino": "^8.4.2",
     "pino-pretty": "^9.1.0",
     "react": "^18.2.0",
@@ -37,9 +39,9 @@
     "@types/google.maps": "^3.49.2",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
-    "eslint": "^8.21.0",
+    "eslint": "^8.23.0",
     "eslint-config-custom": "*",
-    "next-export-optimize-images": "^1.6.0",
+    "next-export-optimize-images": "^1.7.0",
     "tsconfig": "*",
     "typescript": "^4.6.4"
   }

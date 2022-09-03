@@ -1,2 +1,9 @@
-User-Agent: *
-Disallow:
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://integra.vote
+
+# Sitemaps
+Sitemap: https://integra.vote/sitemap.xml

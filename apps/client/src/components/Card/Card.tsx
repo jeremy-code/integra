@@ -12,7 +12,7 @@ const Card = ({ children, ...rest }: CardProps) => {
       w="fit-content"
       bg={useColorModeValue("white", "gray.700")}
       border="1px solid"
-      borderColor={useColorModeValue("gray.200", "gray.700")}
+      borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
       borderRadius="sm"
       p={4}
       maxW="100%"
