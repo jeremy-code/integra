@@ -2206,10 +2206,10 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-apollo-datasource-rest@^3.6.1:
-  version "3.6.1"
-  resolved "https://registry.npmjs.org/apollo-datasource-rest/-/apollo-datasource-rest-3.6.1.tgz"
-  integrity sha512-3RMM48DKva01YrmPYpiBdtva7r9pJkgrMz7BuwAdhF2RXU9WhgOwZvUUZHqi+8ARNGRjVZA5BdCcEt8lIbYhOA==
+apollo-datasource-rest@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/apollo-datasource-rest/-/apollo-datasource-rest-3.7.0.tgz#ee81a72a14731227420ee285d6443e3099b5620d"
+  integrity sha512-MeORtXZtc9drAvsarAGAUI4GZKoYFVc1OXIvehIZ/6pJrOdKGziGbraos2s/A+u8mpNPfbpk7W6f7uKtmwV0AA==
   dependencies:
     "@apollo/utils.keyvaluecache" "^1.0.1"
     apollo-datasource "^3.3.2"
