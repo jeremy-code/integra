@@ -2592,10 +2592,10 @@ caniuse-lite@^1.0.30001332:
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001380.tgz"
   integrity sha512-OO+pPubxx16lkI7TVrbFpde8XHz66SMwstl1YWpg6uMGw56XnhYVwtPIjvX4kYpzwMwQKr4DDce394E03dQPGg==
 
-chakra-react-select@^4.1.5:
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/chakra-react-select/-/chakra-react-select-4.1.5.tgz#ef99c9ddb9b2dbf65383e11fc88d03be4472b19a"
-  integrity sha512-a1HarCQ7aNpJ0T/AFIvvnlXA5iWGLYfeXE07QSga11YGfzbA49Jyx7OQwnhQKthT/jIgmhhbez0gsCrvlgM7Gw==
+chakra-react-select@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/chakra-react-select/-/chakra-react-select-4.2.1.tgz#0e770c7ba0921a1b0923af490aac29ce7ce063b4"
+  integrity sha512-N9F83ev+6+9sicHko48nAgeyMJ4AZaKLvuHOYEOoj3v+ZXTW9EChUbdrlwdtC/PQ6Eww2FAm7yIs/GuAKTubJQ==
   dependencies:
     react-select "^5.4.0"
 
