@@ -146,8 +146,11 @@ const IndustryDonationsChart = ({ id }: FundraisingProps) => {
   return (
     <BarChart
       title="Total Amount Donated by Industry"
-      labels={industries?.map(
-        (industry) => industry.industry_name.split("/")[0]
+      labels={industries?.map(({ industry_name }) =>
+        // somewhat ugly but marginally faster than using .split()
+        industry_name.lastIndexOf("/") === -1
+          ? industry_name
+          : industry_name.slice(0, industry_name.lastIndexOf("/"))
       )}
       datasets={industries?.map((industry) => industry.total)}
     />

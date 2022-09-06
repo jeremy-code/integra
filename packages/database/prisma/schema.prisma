@@ -13,18 +13,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+type OfficialsSocialMedia {
+  facebook String?
+  twitter  String?
+  youtube  String?
+}
+
 model officials {
-  id                      String   @id @default(auto()) @map("_id") @db.ObjectId
+  id                      String               @id @default(auto()) @map("_id") @db.ObjectId
   at_large                Boolean?
   bioguide_id             String
   contact_form            String?
   cook_pvi                String?
   crp_id                  String?
   cspan_id                String?
-  date_of_birth           DateTime @db.Date
+  date_of_birth           DateTime             @db.Date
   district                String?
   dw_nominate             Float?
-  facebook_account        String?
   fax                     String?
   fec_candidate_id        String
   first_name              String
@@ -50,16 +55,15 @@ model officials {
   senate_class            String?
   seniority               String
   short_title             String
+  social_media            OfficialsSocialMedia
   state                   String
   state_rank              String?
   suffix                  String?
   title                   String
   total_present           Int?
   total_votes             Int?
-  twitter_account         String?
   url                     String
   votes_against_party_pct Float?
   votes_with_party_pct    Float?
   votesmart_id            String?
-  youtube_account         String?
 }

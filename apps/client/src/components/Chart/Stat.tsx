@@ -33,7 +33,9 @@ const Stat = ({
         p={4}
         border="1px solid"
         borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
+        bg={useColorModeValue("white", "gray.700")}
         h="full"
+        borderRadius="sm"
         {...rest}
       >
         <StatLabel>{label}</StatLabel>

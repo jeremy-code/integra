@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -6,12 +6,15 @@ import {
   BarElement,
   Title,
   Tooltip,
+  Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { Skeleton } from "@chakra-ui/react";
+import { Skeleton, useColorModeValue } from "@chakra-ui/react";
 import type { ChartOptions, ChartData } from "chart.js";
 
 import { backgroundColors, borderColors } from "@/components/Chart";
+
+ChartJS.unregister(Legend);
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
@@ -22,6 +25,8 @@ type BarChartProps = {
 };
 
 const BarChart = ({ title, labels, datasets }: BarChartProps) => {
+  ChartJS.defaults.color = useColorModeValue("#1a202c", "white");
+
   const options: ChartOptions<"bar"> = {
     responsive: true,
     plugins: {
@@ -49,7 +54,7 @@ const BarChart = ({ title, labels, datasets }: BarChartProps) => {
 
   return (
     <Skeleton isLoaded={!!datasets}>
-      <Bar data={data} options={options} />
+      <Bar data={data} options={options} redraw />
     </Skeleton>
   );
 };

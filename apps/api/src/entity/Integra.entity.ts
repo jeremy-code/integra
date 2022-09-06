@@ -8,6 +8,16 @@ import { Field, Float, ID, Int, ObjectType } from "type-graphql";
 import { KnowledgeGraphAPIResponse } from "./KnowledgeGraphAPI.entity";
 
 @ObjectType()
+class OfficialSocialMedia {
+  @Field({ nullable: true })
+  facebook?: string;
+  @Field({ nullable: true })
+  twitter?: string;
+  @Field({ nullable: true })
+  youtube?: string;
+}
+
+@ObjectType()
 export class IntegraOfficial {
   @Field(() => ID)
   id: string;
@@ -122,6 +132,10 @@ export class IntegraOfficial {
   votes_with_party_pct?: number;
   @Field({ nullable: true })
   votesmart_id?: string;
+
+  @Field()
+  social_media: OfficialSocialMedia;
+
   @Field({ nullable: true })
   youtube_account?: string;
 }

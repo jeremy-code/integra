@@ -1,21 +1,89 @@
-import React from "react";
-import {
-  Heading,
-  Skeleton,
-  ListItem,
-  UnorderedList,
-  Box,
-  SimpleGrid,
-  Flex,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import React, { useEffect } from "react";
+import { ListItem, UnorderedList, SimpleGrid, Link } from "@chakra-ui/react";
 import useSWR from "swr";
 
 import { Stat } from "@/components/Chart";
 import { convertToUSD } from "@/utils";
+import { StatCard } from "@/components/Card";
 
 type OverviewProps = {
   id: string;
+};
+
+const SocialMedia = ({ id }: OverviewProps) => {
+  const { data, error } = useSWR(
+    () => `{
+    getIntegraOfficialById(id: "${id}") {
+      id
+      social_media {
+        facebook
+        twitter
+        youtube
+      }
+    }
+  }`
+  );
+
+  const socialMedia = data?.getIntegraOfficialById.social_media;
+
+  React.useEffect(() => {
+    console.log(socialMedia);
+  }, [socialMedia]);
+
+  if (error) return <>&quot;Social Media&quot; failed to load</>;
+
+  return (
+    <StatCard isLoaded={!!data} title="Social Media" w="full">
+      {socialMedia ? (
+        <UnorderedList>
+          <ListItem>
+            Facebook:{" "}
+            {socialMedia.facebook ? (
+              <Link
+                href={`https://facebook.com/${socialMedia.facebook}`}
+                target="_blank"
+                color="blue.500"
+              >
+                {socialMedia.facebook}
+              </Link>
+            ) : (
+              "N/A"
+            )}
+          </ListItem>
+          <ListItem>
+            Twitter:{" "}
+            {socialMedia.twitter ? (
+              <Link
+                href={`https://twitter.com/${socialMedia.twitter}`}
+                target="_blank"
+                color="blue.500"
+              >
+                {socialMedia.twitter}
+              </Link>
+            ) : (
+              "N/A"
+            )}
+          </ListItem>
+          <ListItem>
+            Youtube:{" "}
+            {socialMedia.youtube ? (
+              <Link
+                href={`https://youtube.com/${socialMedia.youtube}`}
+                target="_blank"
+                color="blue.500"
+              >
+                {socialMedia.youtube}
+              </Link>
+            ) : (
+              "N/A"
+            )}
+          </ListItem>
+        </UnorderedList>
+      ) : (
+        "None found"
+      )}
+    </StatCard>
+  );
 };
 
 const Phone = ({ id }: OverviewProps) => {
@@ -32,7 +100,13 @@ const Phone = ({ id }: OverviewProps) => {
 
   if (error) return <>&quot;Phone&quot; failed to load</>;
 
-  return <Stat label="Phone" data={official?.phone} isLoaded={!!official} />;
+  return (
+    <Stat
+      label="Phone"
+      data={official?.phone ?? "Not Found"}
+      isLoaded={!!official}
+    />
+  );
 };
 
 const Office = ({ id }: OverviewProps) => {
@@ -49,7 +123,13 @@ const Office = ({ id }: OverviewProps) => {
 
   if (error) return <>&quot;Office&quot; failed to load</>;
 
-  return <Stat label="Office" data={official?.office} isLoaded={!!official} />;
+  return (
+    <Stat
+      label="Office"
+      data={official?.office ?? "Not Found"}
+      isLoaded={!!official}
+    />
+  );
 };
 
 const Positions = ({ id }: OverviewProps) => {
@@ -72,30 +152,19 @@ const Positions = ({ id }: OverviewProps) => {
   if (error) return <>&quot;Positions&quot; failed to load</>;
 
   return (
-    <Skeleton isLoaded={!!data}>
-      <Box
-        border="1px solid"
-        p={4}
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
-      >
-        <Heading size="md" mb={4}>
-          Leadership Positions
-        </Heading>
-
-        {member_profile?.position ? (
-          <UnorderedList>
-            {member_profile?.position?.map((position, index) => (
-              <ListItem>
-                {position.title} at {position.organization}
-              </ListItem>
-            ))}
-          </UnorderedList>
-        ) : (
-          "None found"
-        )}
-      </Box>
-    </Skeleton>
+    <StatCard isLoaded={!!data} title="Leadership Positions" w="full">
+      {member_profile?.position ? (
+        <UnorderedList>
+          {member_profile?.position?.map((position) => (
+            <ListItem>
+              {position.title} at {position.organization}
+            </ListItem>
+          ))}
+        </UnorderedList>
+      ) : (
+        "None found"
+      )}
+    </StatCard>
   );
 };
 
@@ -143,10 +212,11 @@ const Overview = ({ id }: OverviewProps) => {
     <SimpleGrid columns={[1, null, 2]} gap={8}>
       <NetWorth id={id} />
       <Positions id={id} />
-      <Flex gap={2}>
+      <SimpleGrid columns={[1, null, 2]} gap={2}>
         <Office id={id} />
         <Phone id={id} />
-      </Flex>
+      </SimpleGrid>
+      <SocialMedia id={id} />
     </SimpleGrid>
   );
 };

@@ -3,8 +3,12 @@ import React from "react";
 import { Chart as ChartJS, ArcElement, Title, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import type { ChartOptions, ChartData } from "chart.js";
+import { Skeleton, useColorModeValue } from "@chakra-ui/react";
 
-import { backgroundColors, borderColors } from "@/components/Chart";
+import {
+  greenAndRedBackgroundColors,
+  greenAndRedBorderColors,
+} from "@/components/Chart";
 
 ChartJS.register(ArcElement, Title, Tooltip, Legend);
 
@@ -15,6 +19,8 @@ type PieChartProps = {
 };
 
 const PieChart = ({ title, labels, datasets }: PieChartProps) => {
+  ChartJS.defaults.color = useColorModeValue("#1a202c", "white");
+
   const options: ChartOptions<"pie"> = {
     responsive: true,
     plugins: {
@@ -33,13 +39,17 @@ const PieChart = ({ title, labels, datasets }: PieChartProps) => {
     datasets: [
       {
         data: datasets,
-        backgroundColor: backgroundColors(datasets?.length),
-        borderColor: borderColors(datasets?.length),
+        backgroundColor: greenAndRedBackgroundColors,
+        borderColor: greenAndRedBorderColors,
         borderWidth: 1,
       },
     ],
   };
-  return <Pie data={data} options={options} />;
+  return (
+    <Skeleton isLoaded={!!datasets}>
+      <Pie data={data} options={options} redraw />
+    </Skeleton>
+  );
 };
 
 export default PieChart;
