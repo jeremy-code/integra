@@ -120,16 +120,7 @@ class IntegraResolver {
         return official;
       })
     );
-    const officials = officialsRes.flat().map((official) => {
-      return {
-        ...official,
-        name: "name",
-        age: 0,
-        slug: "slug",
-        google_knowledge_graph: undefined,
-      };
-    });
-    return officials as IntegraOfficial[];
+    return officialsRes.flat() as IntegraOfficial[];
   }
 
   @Query(() => [IntegraOfficial])

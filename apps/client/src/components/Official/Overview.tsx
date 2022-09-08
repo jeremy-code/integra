@@ -1,6 +1,13 @@
-import React from "react";
-import { ListItem, UnorderedList, SimpleGrid, Link } from "@chakra-ui/react";
+import React, { useEffect } from "react";
+import {
+  ListItem,
+  UnorderedList,
+  SimpleGrid,
+  Link,
+  Flex,
+} from "@chakra-ui/react";
 import useSWR from "swr";
+import parsePhoneNumber from "libphonenumber-js";
 
 import { Stat } from "@/components/Chart";
 import { convertToUSD } from "@/utils";
@@ -8,6 +15,28 @@ import { StatCard } from "@/components/Card";
 
 type OverviewProps = {
   id: string;
+};
+
+const CookPVIStat = ({ id }: OverviewProps) => {
+  const { data, error } = useSWR(
+    () => `{
+      getIntegraOfficialById(id: "${id}") {
+      id
+      cook_pvi
+    }
+  }`
+  );
+
+  const official = data?.getIntegraOfficialById;
+
+  return (
+    <Stat
+      data={official?.cook_pvi ?? "Not Found"}
+      label="Cook PVI"
+      isLoaded={!!official}
+      w="full"
+    />
+  );
 };
 
 const Contact = ({ id }: OverviewProps) => {
@@ -25,7 +54,7 @@ const Contact = ({ id }: OverviewProps) => {
   if (error) return <>&quot;Contact&quot; failed to load</>;
 
   return (
-    <StatCard title="Contact" isLoaded={!!official}>
+    <StatCard title="Contact" isLoaded={!!official} w="full">
       {official?.contact_form ? (
         <Link href={official?.contact_form} isExternal color="blue.500">
           Contact Form Link URL
@@ -119,16 +148,29 @@ const Phone = ({ id }: OverviewProps) => {
   }`
   );
 
-  const official = data?.getIntegraOfficialById;
-
   if (error) return <>&quot;Phone&quot; failed to load</>;
 
+  const phone = parsePhoneNumber(
+    data?.getIntegraOfficialById?.phone ?? "",
+    "US"
+  );
+
   return (
-    <Stat
-      label="Phone"
-      data={official?.phone ?? "Not Found"}
-      isLoaded={!!official}
-    />
+    <StatCard isLoaded={!!data} title="Phone" w="full" h="full">
+      {phone ? (
+        <Link
+          color="blue.500"
+          isExternal
+          href={phone.getURI()}
+          fontSize="2xl"
+          fontWeight="bold"
+        >
+          {phone.formatNational()}
+        </Link>
+      ) : (
+        "N/A"
+      )}
+    </StatCard>
   );
 };
 
@@ -240,7 +282,10 @@ const Overview = ({ id }: OverviewProps) => {
         <Phone id={id} />
       </SimpleGrid>
       <SocialMedia id={id} />
-      <Contact id={id} />
+      <Flex w="full" gap={8}>
+        <Contact id={id} />
+        <CookPVIStat id={id} />
+      </Flex>
     </SimpleGrid>
   );
 };

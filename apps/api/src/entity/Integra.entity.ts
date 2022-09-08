@@ -83,6 +83,8 @@ export class IntegraOfficial {
   cspan_id?: string;
   @Field({ nullable: true })
   district?: string;
+  @Field({ nullable: true })
+  congressional_district?: string;
   @Field(() => Float, { nullable: true })
   dw_nominate?: number;
   @Field({ nullable: true })

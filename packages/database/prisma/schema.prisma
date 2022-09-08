@@ -23,9 +23,10 @@ model officials {
   id                      String               @id @default(auto()) @map("_id") @db.ObjectId
   at_large                Boolean?
   bioguide_id             String
+  congressional_district  String?
   contact_form            String?
   cook_pvi                String?
-  crp_id                  String?
+  crp_id                  String
   cspan_id                String?
   date_of_birth           DateTime             @db.Date
   district                String?

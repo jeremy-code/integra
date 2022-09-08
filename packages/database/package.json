@@ -11,8 +11,7 @@
   "scripts": {
     "build": "tsup",
     "clean": "rimraf .turbo node_modules dist",
-    "db:migrate:deploy": "prisma migrate deploy",
-    "db:migrate:dev": "prisma migrate dev",
+    "db:pull": "prisma db pull",
     "db:push": "prisma db push",
     "dev": "tsup",
     "format": "prisma format",
@@ -39,6 +38,6 @@
     "tsconfig": "*",
     "tsup": "^6.2.3",
     "typegraphql-prisma": "^0.21.4",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.3"
   }
 }

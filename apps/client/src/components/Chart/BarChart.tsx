@@ -14,8 +14,6 @@ import type { ChartOptions, ChartData } from "chart.js";
 
 import { backgroundColors, borderColors } from "@/components/Chart";
 
-ChartJS.unregister(Legend);
-
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
 type BarChartProps = {
@@ -44,6 +42,7 @@ const BarChart = ({ title, labels, datasets }: BarChartProps) => {
     labels,
     datasets: [
       {
+        label: "Data",
         data: datasets,
         backgroundColor: backgroundColors(datasets?.length),
         borderColor: borderColors(datasets?.length),

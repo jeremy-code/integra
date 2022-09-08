@@ -12,7 +12,7 @@ type StatCardProps = {
 
 const StatCard = ({ isLoaded, title, children, ...rest }: StatCardProps) => {
   return (
-    <Skeleton isLoaded={isLoaded}>
+    <Skeleton isLoaded={isLoaded} {...rest}>
       <Card {...rest}>
         <Heading size="md" mb={4}>
           {title}

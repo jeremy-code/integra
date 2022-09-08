@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Grid, GridItem, Stack } from "@chakra-ui/react";
 
-import { PieChart, HorizontalBarChart, Table } from "@/components/Chart";
+import { PieChart, HorizontalBarChart, Table, Stat } from "@/components/Chart";
 import { StatCard } from "@/components/Card";
 
 type LegislationProps = {
@@ -47,12 +47,17 @@ const BillsIntroducedTable = ({ id }: LegislationProps) => {
     }),
     columnHelper.accessor("primary_subject", {
       cell: (info) => info.getValue(),
-      header: "Primary Subject",
+      header: "Subject",
     }),
   ];
 
   return (
-    <StatCard title="Bills Introduced" isLoaded={!!recentBills}>
+    <StatCard
+      title="Bills Introduced"
+      isLoaded={!!recentBills}
+      overflowX="scroll"
+      height="max(40rem, 100%)"
+    >
       {recentBills && <Table data={recentBills} columns={columns} />}
     </StatCard>
   );
@@ -118,7 +123,7 @@ const VotedWithPartyChart = ({ id }: LegislationProps) => {
 const Legislation = ({ id }: LegislationProps) => {
   return (
     <Grid templateColumns={["1fr", null, "repeat(3, 1fr)"]} gap={8}>
-      <Stack>
+      <Stack gap={8}>
         <VotedWithPartyChart id={id} />
         <PolarizationChart id={id} />
       </Stack>

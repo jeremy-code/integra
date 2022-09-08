@@ -28,6 +28,11 @@ const Head = ({ title, image, description }: HeadProps) => {
         content={image ?? "https://integra.pages.dev/favicon-32x32.png"}
       />
       <meta name="twitter:card" content="summary" />
+      <meta
+        name="twitter:image"
+        content={image ?? "https://integra.pages.dev/favicon-32x32.png"}
+      />
+      <meta name="twitter:image:alt" content="Integra logo" />
       <meta name="twitter:title" content={title ?? "Integra"} />
       <meta
         name="twitter:description"
