@@ -8,6 +8,7 @@ import {
   KnowledgeGraphAPIResolver,
   OpenSecretsAPIResolver,
   IntegraResolver,
+  ProPublicaAPIResolver,
 } from "./resolvers";
 import dataSources from "./datasources";
 import { startServer, logger } from "./utils";
@@ -20,6 +21,7 @@ const bootstrap = async () => {
       KnowledgeGraphAPIResolver,
       OpenSecretsAPIResolver,
       ...resolvers,
+      ProPublicaAPIResolver,
       IntegraResolver,
     ],
     validate: false,

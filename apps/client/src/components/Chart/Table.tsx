@@ -44,7 +44,7 @@ const Table = <TData extends object>({
   return (
     <ChakraTable>
       <Thead>
-        {table.getHeaderGroups().map((headerGroup) => (
+        {table?.getHeaderGroups().map((headerGroup) => (
           <Tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => {
               const meta: any = header.column.columnDef.meta;
@@ -75,7 +75,7 @@ const Table = <TData extends object>({
         ))}
       </Thead>
       <Tbody>
-        {table.getRowModel().rows.map((row) => (
+        {table?.getRowModel().rows.map((row) => (
           <Tr key={row.id}>
             {row.getVisibleCells().map((cell) => {
               const meta: any = cell.column.columnDef.meta;

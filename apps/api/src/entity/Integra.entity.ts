@@ -6,6 +6,7 @@ import {
 import { Field, Float, ID, Int, ObjectType } from "type-graphql";
 
 import { KnowledgeGraphAPIResponse } from "./KnowledgeGraphAPI.entity";
+import { RecentBills } from "./ProPublicaAPI.entity";
 
 @ObjectType()
 class OfficialSocialMedia {
@@ -65,6 +66,8 @@ export class IntegraOfficial {
   candIndustry?: candIndustry;
   @Field(() => candSummary, { nullable: true })
   candSummary?: candSummary;
+  @Field(() => [RecentBills], { nullable: true })
+  recentBills?: RecentBills[];
 
   @Field()
   bioguide_id: string;

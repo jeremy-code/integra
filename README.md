@@ -24,7 +24,7 @@ yarn dev
 yarn lint
 yarn format
 
-# build
+# Build
 yarn build
 ```
 

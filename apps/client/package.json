@@ -13,7 +13,7 @@
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "@builder.io/partytown": "^0.6.4",
-    "@chakra-ui/icons": "^2.0.8",
+    "@chakra-ui/icons": "^2.0.9",
     "@chakra-ui/react": "^2.3.1",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.2.5",
-    "@types/google.maps": "^3.49.2",
+    "@types/google.maps": "^3.50.0",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
     "eslint": "^8.23.0",

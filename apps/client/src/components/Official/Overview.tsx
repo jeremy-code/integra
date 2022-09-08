@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ListItem, UnorderedList, SimpleGrid, Link } from "@chakra-ui/react";
 import useSWR from "swr";
 
@@ -8,6 +8,33 @@ import { StatCard } from "@/components/Card";
 
 type OverviewProps = {
   id: string;
+};
+
+const Contact = ({ id }: OverviewProps) => {
+  const { data, error } = useSWR(
+    () => `{
+    getIntegraOfficialById(id: "${id}") {
+      id
+      contact_form
+    }
+  }`
+  );
+
+  const official = data?.getIntegraOfficialById;
+
+  if (error) return <>&quot;Contact&quot; failed to load</>;
+
+  return (
+    <StatCard title="Contact" isLoaded={!!official}>
+      {official?.contact_form ? (
+        <Link href={official?.contact_form} isExternal color="blue.500">
+          Contact Form Link URL
+        </Link>
+      ) : (
+        "No contact form available"
+      )}
+    </StatCard>
+  );
 };
 
 const SocialMedia = ({ id }: OverviewProps) => {
@@ -26,10 +53,6 @@ const SocialMedia = ({ id }: OverviewProps) => {
 
   const socialMedia = data?.getIntegraOfficialById.social_media;
 
-  React.useEffect(() => {
-    console.log(socialMedia);
-  }, [socialMedia]);
-
   if (error) return <>&quot;Social Media&quot; failed to load</>;
 
   return (
@@ -41,7 +64,7 @@ const SocialMedia = ({ id }: OverviewProps) => {
             {socialMedia.facebook ? (
               <Link
                 href={`https://facebook.com/${socialMedia.facebook}`}
-                target="_blank"
+                isExternal
                 color="blue.500"
               >
                 {socialMedia.facebook}
@@ -217,6 +240,7 @@ const Overview = ({ id }: OverviewProps) => {
         <Phone id={id} />
       </SimpleGrid>
       <SocialMedia id={id} />
+      <Contact id={id} />
     </SimpleGrid>
   );
 };
