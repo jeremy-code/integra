@@ -14,6 +14,7 @@ import {
 } from "@/components/Official";
 import { apolloClient } from "@/utils";
 import { prisma } from "database";
+import { OfficialIdProvider } from "@/hooks";
 
 type OfficialPageProps = {
   id: string;
@@ -51,15 +52,17 @@ const OfficialPage: NextPage<OfficialPageProps> = ({
       ]}
     >
       <Head title={title} image={photoUrl} description={description} />
-      <OfficialHeader id={officialId} photoUrl={photoUrl} />
-      <OfficialDetails id={officialId} />
-      <Tabs
-        content={[
-          { title: "Overview", body: <Overview id={officialId} /> },
-          { title: "Legislation", body: <Legislation id={officialId} /> },
-          { title: "Fundraising", body: <Fundraising id={officialId} /> },
-        ]}
-      />
+      <OfficialIdProvider id={officialId}>
+        <OfficialHeader photoUrl={photoUrl} />
+        <OfficialDetails />
+        <Tabs
+          content={[
+            { title: "Overview", body: <Overview /> },
+            { title: "Legislation", body: <Legislation /> },
+            { title: "Fundraising", body: <Fundraising /> },
+          ]}
+        />
+      </OfficialIdProvider>
     </Layout>
   );
 };
@@ -78,7 +81,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   // Directly getting the data from DB rather than GraphQL query
   // Still secure as this is only run server-side
   const { bioguide_id, short_title, first_name, last_name, state, title } =
-    await prisma.officials.findFirst({
+    await prisma.official.findFirst({
       where: {
         id: official_id,
       },
@@ -106,16 +109,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const { data } = await apolloClient.query({
     query: gql`
-      query {
-        getAllIntegraOfficials {
+      query getAllOfficials($where: OfficialWhereInput) {
+        officials(where: $where) {
           id
           slug
         }
       }
     `,
+    variables: {
+      where: {
+        in_office: {
+          equals: true,
+        },
+      },
+    },
   });
 
-  const paths = data?.getAllIntegraOfficials.map(({ slug }) => ({
+  const paths = data?.officials.map(({ slug }) => ({
     params: {
       slug,
     },

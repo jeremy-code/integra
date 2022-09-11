@@ -6,6 +6,7 @@ import type {
   candIndustry,
   candSummary,
 } from "../entity/OpenSecretsAPI.entity";
+import { OPEN_SECRETS_API_KEY } from "../config";
 
 class OpenSecretsAPI extends RESTDataSource {
   constructor() {
@@ -14,7 +15,7 @@ class OpenSecretsAPI extends RESTDataSource {
   }
 
   willSendRequest(request: RequestOptions) {
-    request.params.set("apikey", process.env.OPEN_SECRETS_API_KEY!);
+    request.params.set("apikey", OPEN_SECRETS_API_KEY!);
     request.params.set("output", "json");
   }
 

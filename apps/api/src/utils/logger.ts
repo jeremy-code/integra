@@ -24,7 +24,7 @@ class Logger implements ApolloServerPlugin<Context> {
   }
 
   async serverWillStart() {
-    this.logger.info(`🚀  Server is starting up`);
+    this.logger.info(`🚀 Apollo Server is starting up`);
   }
 
   async requestDidStart(

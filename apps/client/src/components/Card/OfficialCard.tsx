@@ -13,10 +13,10 @@ import {
 
 import { Card } from "@/components/Card";
 import { Avatar } from "@/components/Misc";
-import type { IntegraOfficial } from "@/types";
+import type { Official } from "@/types";
 
 type OfficalCardProps = {
-  official: IntegraOfficial;
+  official: Official;
 };
 
 const OfficialCard = ({ official }: OfficalCardProps) => {

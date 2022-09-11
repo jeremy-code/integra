@@ -1,50 +1,53 @@
-import { ApolloServer } from "apollo-server-express";
-import { buildSchema } from "type-graphql";
-import "dotenv/config";
 import "reflect-metadata";
+import "dotenv/config";
 
-import {
-  CivicAPIResolver,
-  KnowledgeGraphAPIResolver,
-  OpenSecretsAPIResolver,
-  IntegraResolver,
-  ProPublicaAPIResolver,
-} from "./resolvers";
-import dataSources from "./datasources";
+import { ApolloServer, ExpressContext } from "apollo-server-express";
+import { EventEmitter } from "events";
+
+import type { Application } from "express";
+
+import { schema } from "./schema";
+import { PORT } from "./config";
+import { prisma } from "database";
 import { startServer, logger } from "./utils";
-import { resolvers, prisma } from "database";
+import dataSources from "./datasources";
+import { mongoDB } from "./services";
 
-const bootstrap = async () => {
-  const schema = await buildSchema({
-    resolvers: [
-      CivicAPIResolver,
-      KnowledgeGraphAPIResolver,
-      OpenSecretsAPIResolver,
-      ...resolvers,
-      ProPublicaAPIResolver,
-      IntegraResolver,
-    ],
-    validate: false,
-  });
+/**
+ * Express application wrapper class to centralize initialization
+ */
+class App extends EventEmitter {
+  public app: Application;
 
-  const apolloServer = new ApolloServer({
-    schema,
-    context: {
-      prisma,
-    },
-    plugins: [logger],
-    dataSources,
-    cache: "bounded",
-  });
-  await apolloServer.start();
-  const app = startServer();
-  apolloServer.applyMiddleware({ app });
+  constructor() {
+    super();
+    this.app = startServer();
+    this.setupApollo();
+  }
 
-  app.listen(8080, () => {
-    logger.info(
-      "Server is listening on port 8080: http://localhost:8080/graphql"
-    );
-  });
-};
+  listen() {
+    this.app.listen(PORT, () => {
+      logger.info(`⚡ Server is listening on port ${PORT}`);
+    });
+  }
 
-bootstrap().catch((err) => logger.error(err));
+  async setupApollo() {
+    const apolloServer = new ApolloServer({
+      schema,
+      dataSources,
+      context: ({ req, res }: ExpressContext) => ({
+        req,
+        res,
+        prisma,
+        mongoDB: new mongoDB("integra", "official"),
+      }),
+      plugins: [logger],
+      csrfPrevention: true,
+      cache: "bounded",
+    });
+    await apolloServer.start();
+    apolloServer.applyMiddleware({ app: this.app, cors: true });
+  }
+}
+
+new App().listen();

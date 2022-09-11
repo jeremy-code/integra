@@ -69,7 +69,7 @@ export class Vote {
 }
 
 @ObjectType()
-export class RecentBills {
+export class RecentBill {
   @Field()
   congress: number;
 

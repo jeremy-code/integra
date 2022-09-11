@@ -1,18 +1,13 @@
 import React from "react";
-import { Heading, SimpleGrid, Skeleton, Text } from "@chakra-ui/react";
-import useSWR from "swr";
+import { SimpleGrid } from "@chakra-ui/react";
 
-import { Card } from "@/components/Card";
 import { Stat } from "@/components/Chart";
+import { useOfficialData } from "@/hooks";
 
-type OfficialDetailsProps = {
-  id: string;
-};
-
-const OfficialDetails = ({ id }: OfficialDetailsProps) => {
-  const { data, error } = useSWR(
-    () => `{
-    getIntegraOfficialById(id: "${id}") {
+const OfficialDetails = () => {
+  const { official, error } = useOfficialData({
+    queryName: "getOfficialDetails",
+    query: `{
       id
       age
       party
@@ -22,10 +17,8 @@ const OfficialDetails = ({ id }: OfficialDetailsProps) => {
       congressional_district
       next_election
     }
-  }`
-  );
-
-  const official = data?.getIntegraOfficialById;
+    `,
+  });
 
   return (
     <SimpleGrid columns={[1, null, 5]} mb={8} gap={4}>

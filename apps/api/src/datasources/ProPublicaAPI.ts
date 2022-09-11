@@ -1,6 +1,7 @@
-import { RecentBills } from "./../entity/ProPublicaAPI.entity";
+import { RecentBill } from "./../entity/ProPublicaAPI.entity";
 import { RESTDataSource, RequestOptions } from "apollo-datasource-rest";
 
+import { PROPUBLICA_API_KEY } from "../config";
 import type { Vote } from "../entity/ProPublicaAPI.entity";
 
 class ProPublicaAPI extends RESTDataSource {
@@ -10,7 +11,7 @@ class ProPublicaAPI extends RESTDataSource {
   }
 
   willSendRequest(request: RequestOptions) {
-    request.headers.set("X-API-Key", process.env.PROPUBLICA_API_KEY!);
+    request.headers.set("X-API-Key", PROPUBLICA_API_KEY!);
   }
 
   // Get a Specific Member’s Vote Positions
@@ -19,7 +20,7 @@ class ProPublicaAPI extends RESTDataSource {
     return res.results[0].votes;
   }
 
-  async getRecentBills(memberId: string): Promise<RecentBills[]> {
+  async getRecentBills(memberId: string): Promise<RecentBill[]> {
     const res = await this.get(`/${memberId}/bills/introduced.json`);
     return res.results[0].bills;
   }

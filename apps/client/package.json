@@ -23,6 +23,7 @@
     "chart.js": "^3.9.1",
     "database": "*",
     "framer-motion": "^7.2.1",
+    "graphql": "^15.3.0",
     "next": "^12.2.5",
     "next-sitemap": "^3.1.21",
     "pino": "^8.5.0",
@@ -39,8 +40,10 @@
     "@types/google.maps": "^3.50.0",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
+    "apollo": "^2.34.0",
     "eslint": "^8.23.0",
     "eslint-config-custom": "*",
+    "graphql-codegen": "^0.4.0",
     "next-export-optimize-images": "^1.7.0",
     "tsconfig": "*",
     "typescript": "^4.8.3"

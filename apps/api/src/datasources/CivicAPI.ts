@@ -1,5 +1,11 @@
-import { RESTDataSource } from "apollo-datasource-rest";
-import { CivicAPIResponse, Official } from "../entity/CivicAPI.entity";
+import { RESTDataSource, RequestOptions } from "apollo-datasource-rest";
+import {
+  CivicAPIResponse,
+  CivicOfficial,
+  Office,
+} from "../entity/CivicAPI.entity";
+
+import { GOOGLE_CIVIC_API_KEY } from "../config";
 
 class CivicAPI extends RESTDataSource {
   constructor() {
@@ -7,16 +13,20 @@ class CivicAPI extends RESTDataSource {
     this.baseURL = "https://www.googleapis.com/civicinfo/v2/";
   }
 
+  willSendRequest(request: RequestOptions) {
+    request.params.set("key", GOOGLE_CIVIC_API_KEY);
+    request.params.set("levels", "country");
+  }
+
   // Given an address, return an array of the congresspeople in that district
-  async getRepresentatives(address: string): Promise<Official[]> {
+  async getRepresentatives(address: string): Promise<CivicOfficial[]> {
     const senate = this.getRepresentative(address, "legislatorUpperBody");
     const house = this.getRepresentative(address, "legislatorLowerBody");
 
-    return Promise.all([senate, house]).then((res) => {
-      const [senate, house] = res;
+    return await Promise.all([senate, house]).then(([senate, house]) => {
       // Returns empty array if it doesn't exist, as some regions don't have senators (e.g. Washington D.C.)
-      const senators = senate.officials ?? [];
-      const representatives = house.officials ?? [];
+      const senators = senate?.officials ?? [];
+      const representatives = house?.officials ?? [];
       return [...senators, ...representatives];
     });
   }
@@ -24,11 +34,14 @@ class CivicAPI extends RESTDataSource {
   // Given an address and a role, return an array of officials
   async getRepresentative(address: string, roles: string) {
     return this.get("representatives", {
-      key: process.env.GOOGLE_CIVIC_API_KEY,
       address,
       roles,
-      levels: ["country"],
     });
+  }
+
+  async getOffices(address: string): Promise<Office[]> {
+    const { offices } = await this.getResponse(address);
+    return offices;
   }
 
   // Get response from Google Civic API
@@ -37,29 +50,20 @@ class CivicAPI extends RESTDataSource {
     params?: { [key: string]: Object | Object[] | undefined }
   ): Promise<CivicAPIResponse> {
     const res = await this.get("representatives", {
-      key: process.env.GOOGLE_CIVIC_API_KEY,
       address,
-      levels: ["country"],
       ...params,
     });
-    if (!res.divisions) {
-      return res;
-    }
 
     // Flattening the division object into an array of objects with the ocdId as the key
-    let divisions = [];
-    divisions = Object.keys(res.divisions).map((key) => {
+    const divisions = Object.keys(res?.divisions).map((key) => {
       return {
         ocdID: key,
         ...res.divisions[key],
       };
     });
     return {
-      kind: res.kind,
-      normalizedInput: res.normalizedInput,
+      ...res,
       divisions: [].concat(...divisions),
-      offices: res.offices,
-      officials: res.officials,
     };
   }
 }

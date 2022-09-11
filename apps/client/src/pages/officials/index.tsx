@@ -8,7 +8,7 @@ import { Layout } from "@/components/Layout";
 import { OfficialCard } from "@/components/Card";
 import { useLocalStorage } from "@/hooks";
 import { Loading, Error, Head } from "@/components/Misc";
-import type { IntegraOfficial } from "@/types";
+import type { Official } from "@/types";
 
 const OfficialsPage: NextPage = () => {
   const { query } = useRouter();
@@ -18,22 +18,23 @@ const OfficialsPage: NextPage = () => {
     query?.location as string
   );
 
-  const { data, error } = useSWR(
-    () => `{
-    getIntegraOfficialsByAddress(address: "${
-      query?.location ?? savedLocation
-    }") {
-      id
-      age
-      name
-      party
-      title
-      seniority
-      slug
-      photo_url
-    }
-  }`
-  );
+  const { data, error } = useSWR([
+    `query findOfficialByLocation($location: String!) {
+      findOfficialByLocation(location: $location) {
+        id
+        age
+        name
+        party
+        title
+        seniority
+        slug
+        photo_url
+      }
+    }`,
+    {
+      location: query?.location ?? savedLocation,
+    },
+  ]);
 
   // Store the location in local storage
   // Ideally, should not change often, and allows users to go back to see their previous search
@@ -66,11 +67,11 @@ const OfficialsPage: NextPage = () => {
     >
       <Head title="Officials" />
       <SimpleGrid
-        columns={[1, null, data?.getIntegraOfficialsByAddress.length]}
+        columns={[1, null, data?.findOfficialByLocation.length]}
         gap={4}
         w="full"
       >
-        {data?.getIntegraOfficialsByAddress.map((official: IntegraOfficial) => (
+        {data?.findOfficialByLocation.map((official: Official) => (
           <ScaleFade in initialScale={0.9} key={official.name}>
             <OfficialCard official={official} />
           </ScaleFade>

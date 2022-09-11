@@ -50,43 +50,30 @@ export class Legislator {
 export class MemberProfile {
   @Field({ nullable: true })
   name?: string;
-
   @Field({ nullable: true })
   member_id?: string;
-
   @Field(() => Int, { nullable: true })
   net_low?: number;
-
   @Field(() => Int, { nullable: true })
   net_high?: number;
-
   @Field(() => Int, { nullable: true })
   positions_held_count?: number;
-
   @Field(() => Int, { nullable: true })
   asset_count?: number;
-
   @Field(() => Int, { nullable: true })
   asset_low?: number;
-
   @Field(() => Int, { nullable: true })
   asset_high?: number;
-
   @Field(() => Int, { nullable: true })
   transaction_count?: number;
-
   @Field(() => Int, { nullable: true })
   tx_low?: number;
-
   @Field(() => Int, { nullable: true })
   tx_high?: number;
-
   @Field()
   source: string;
-
   @Field()
   origin: string;
-
   @Field()
   update_timestamp: string;
 }
@@ -95,19 +82,14 @@ export class MemberProfile {
 class Asset {
   @Field({ nullable: true })
   name?: string;
-
   @Field(() => Int, { nullable: true })
   holdings_low?: number;
-
   @Field(() => Int, { nullable: true })
   holdings_high?: number;
-
   @Field({ nullable: true })
   industry?: string;
-
   @Field({ nullable: true })
   sector?: string;
-
   @Field({ nullable: true })
   subsidiary_of?: string;
 }
@@ -158,22 +140,16 @@ class Position {
 export class candIndustry {
   @Field()
   cand_name: string;
-
   @Field()
   cid: string;
-
   @Field()
   cycle: string;
-
   @Field()
   origin: string;
-
   @Field()
   source: string;
-
   @Field()
   last_updated: string;
-
   @Field(() => [Industry])
   industries: Industry[];
 }
@@ -182,16 +158,12 @@ export class candIndustry {
 class Industry {
   @Field()
   industry_name: string;
-
   @Field()
   industry_code: string;
-
   @Field()
   indivs: number;
-
   @Field()
   pacs: number;
-
   @Field()
   total: number;
 }

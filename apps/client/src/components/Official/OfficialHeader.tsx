@@ -1,5 +1,4 @@
 import React from "react";
-import useSWR from "swr";
 import {
   Grid,
   GridItem,
@@ -10,25 +9,22 @@ import {
 } from "@chakra-ui/react";
 
 import { Avatar } from "@/components/Misc";
+import { useOfficialData } from "@/hooks";
 
 type OfficialHeaderProps = {
-  id: string;
   photoUrl?: string;
 };
 
-const OfficialHeader = ({ id, photoUrl }: OfficialHeaderProps) => {
-  const { data } = useSWR(
-    () => `{
-    getIntegraOfficialById(id: "${id}") {
+const OfficialHeader = ({ photoUrl }: OfficialHeaderProps) => {
+  const { official, error } = useOfficialData({
+    queryName: "getOfficialHeading",
+    query: `{
       id
       name
       party
       title
-    }
-  }`
-  );
-
-  const official = data?.getIntegraOfficialById;
+    }`,
+  });
 
   return (
     <Grid templateRows="repeat(2, 1fr)" templateColumns="11rem 1fr" mb={4}>

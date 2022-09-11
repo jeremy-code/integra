@@ -1,21 +1,5 @@
 import { Field, Int, ObjectType } from "type-graphql";
 
-@ObjectType()
-class NormalizedInput {
-  @Field({ nullable: true })
-  locationName: string;
-  @Field()
-  line1: string;
-  @Field({ nullable: true })
-  line2: string;
-  @Field()
-  city: string;
-  @Field()
-  state: string;
-  @Field()
-  zip: string;
-}
-
 // Return type given by the Google Civic API response
 @ObjectType()
 export class CivicAPIResponse {
@@ -31,13 +15,29 @@ export class CivicAPIResponse {
   @Field(() => [Office], { nullable: true })
   offices: Office[];
 
-  @Field(() => [Official])
-  officials: Official[];
+  @Field(() => [CivicOfficial])
+  officials: CivicOfficial[];
+}
+
+@ObjectType()
+export class NormalizedInput {
+  @Field({ nullable: true })
+  locationName: string;
+  @Field()
+  line1: string;
+  @Field({ nullable: true })
+  line2: string;
+  @Field()
+  city: string;
+  @Field()
+  state: string;
+  @Field()
+  zip: string;
 }
 
 // Return type of an official from the Google Civic API response
 @ObjectType()
-export class Official {
+export class CivicOfficial {
   @Field()
   name: string;
 
@@ -61,7 +61,7 @@ export class Official {
 }
 
 @ObjectType()
-class Division {
+export class Division {
   @Field()
   ocdID: string;
 
@@ -103,7 +103,7 @@ class Channel {
 }
 
 @ObjectType()
-class Office {
+export class Office {
   @Field({ nullable: true })
   name: string;
 

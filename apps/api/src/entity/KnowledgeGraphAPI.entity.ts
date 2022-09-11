@@ -4,10 +4,8 @@ import { Field, Int, ObjectType } from "type-graphql";
 class DetailedDescription {
   @Field()
   url: string;
-
   @Field()
   articleBody: string;
-
   @Field()
   license: string;
 }
@@ -16,10 +14,8 @@ class DetailedDescription {
 class Image {
   @Field({ nullable: true })
   contentUrl?: string;
-
   @Field()
   url: string;
-
   @Field({ nullable: true })
   license?: string;
 }

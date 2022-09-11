@@ -1,5 +1,6 @@
-import { RESTDataSource } from "apollo-datasource-rest";
+import { RequestOptions, RESTDataSource } from "apollo-datasource-rest";
 
+import { GOOGLE_KNOWLEDGE_GRAPH_API_KEY } from "../config";
 import { KnowledgeGraphAPIResponse } from "../entity/KnowledgeGraphAPI.entity";
 
 class KnowledgeGraphAPI extends RESTDataSource {
@@ -8,14 +9,17 @@ class KnowledgeGraphAPI extends RESTDataSource {
     this.baseURL = "https://kgsearch.googleapis.com/v1/entities:search";
   }
 
-  async getResponse(id: string): Promise<KnowledgeGraphAPIResponse> {
-    const res = await this.get("", {
-      key: process.env.GOOGLE_KNOWLEDGE_GRAPH_API_KEY,
-      ids: id,
-      limit: 10,
-      indent: true,
-      languages: "en",
-    });
+  willSendRequest(request: RequestOptions) {
+    request.params.set("key", GOOGLE_KNOWLEDGE_GRAPH_API_KEY);
+    request.params.set("indent", "true");
+    request.params.set("languages", "en");
+  }
+
+  async getResponse(
+    id: string,
+    limit = 10
+  ): Promise<KnowledgeGraphAPIResponse> {
+    const res = await this.get("", { ids: id, limit });
     // Google's API returns JSON where some keys start with @, removed the @
     return JSON.parse(JSON.stringify(res).replace(/@/g, ""));
   }

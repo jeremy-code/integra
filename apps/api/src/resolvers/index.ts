@@ -1,5 +1,17 @@
-export { default as CivicAPIResolver } from "./CivicAPI.resolver";
-export { default as KnowledgeGraphAPIResolver } from "./KnowledgeGraphAPI.resolver";
-export { default as OpenSecretsAPIResolver } from "./OpenSecretsAPI.resolver";
-export { default as ProPublicaAPIResolver } from "./ProPublicaAPI.resolver";
-export { default as IntegraResolver } from "./Integra.resolver";
+import {
+  FindFirstOfficialResolver,
+  FindManyOfficialResolver,
+  FindUniqueOfficialResolver,
+} from "database";
+import type { NonEmptyArray } from "type-graphql";
+
+import { OfficialResolver } from "./IntegraResolver";
+
+const resolvers: NonEmptyArray<Function> | NonEmptyArray<string> = [
+  OfficialResolver,
+  FindFirstOfficialResolver,
+  FindManyOfficialResolver,
+  FindUniqueOfficialResolver,
+];
+
+export default resolvers;

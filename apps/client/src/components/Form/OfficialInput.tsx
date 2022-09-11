@@ -34,8 +34,8 @@ const OfficialInput = ({ onSubmit }: OfficialInputProps) => {
   const getOptions = async (input: string) => {
     const { data, errors } = await client.query({
       query: gql`
-        query {
-          getIntegraOfficialsByName(name: "${input}") {
+        query getOfficials($name: String!) {
+          findOfficialByName(name: $name) {
             id
             first_name
             last_name
@@ -43,9 +43,13 @@ const OfficialInput = ({ onSubmit }: OfficialInputProps) => {
           }
         }
       `,
+      variables: {
+        name: input,
+      },
     });
+
     if (errors) throw new Error(errors[0].message);
-    return data.getIntegraOfficialsByName.map(
+    return data.findOfficialByName.map(
       (official: {
         first_name: string;
         last_name;
