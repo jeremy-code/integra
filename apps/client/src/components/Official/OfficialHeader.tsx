@@ -30,7 +30,7 @@ const OfficialHeader = ({ photoUrl }: OfficialHeaderProps) => {
   return (
     <Grid
       templateRows="repeat(2, 1fr)"
-      templateColumns="11rem 1fr"
+      templateColumns="9rem 1fr"
       pb={4}
       borderWidth="0 1px"
       borderStyle="solid"

@@ -10,7 +10,7 @@ import {
 const Legislation = () => {
   return (
     <Grid templateColumns={["1fr", null, "repeat(3, 1fr)"]} gap={8}>
-      <Stack gap={8}>
+      <Stack gap={8} flexDir={["row", null, "column"]} align="center">
         <VotedWithPartyChart />
         <PolarizationChart />
       </Stack>

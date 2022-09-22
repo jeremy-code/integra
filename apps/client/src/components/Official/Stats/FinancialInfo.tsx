@@ -36,7 +36,7 @@ export const FinancialInfo = () => {
   if (error) return <>&quot;Financial Info&quot; failed to load</>;
 
   return (
-    <Stack p={4}>
+    <Stack>
       <Heading size="md" mb={4}>
         Financial Info
       </Heading>

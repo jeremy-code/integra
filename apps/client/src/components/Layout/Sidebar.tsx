@@ -58,7 +58,12 @@ const Sidebar = ({ children }: SidebarProps) => {
       </Drawer>
       {/* mobilenav */}
       <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }}>{children}</Box>
+      <Box
+        ml={{ base: 0, md: 60 }}
+        bg={useColorModeValue("gray.50", "gray.900")}
+      >
+        {children}
+      </Box>
     </Box>
   );
 };

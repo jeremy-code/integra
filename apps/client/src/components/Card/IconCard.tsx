@@ -1,5 +1,12 @@
 import React from "react";
-import { Flex, Text, Skeleton, Link, Box } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Skeleton,
+  Link,
+  Box,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 import { Card } from "@/components/Card";
 import { Icon } from "@/components/Icon";
@@ -15,12 +22,9 @@ type IconCardProps = {
   }[];
 } & React.ComponentProps<typeof Card>;
 
-const IconCard = ({
-  title,
-  isLoaded = true,
-  items,
-  ...props
-}: IconCardProps) => {
+const IconCard = ({ title, isLoaded, items, ...props }: IconCardProps) => {
+  const iconColor = useColorModeValue("gray.500", "gray.300");
+
   return (
     <Flex flexDir="column">
       <Text fontWeight="bold" mb={2}>
@@ -40,7 +44,7 @@ const IconCard = ({
 
             return (
               <Flex key={index} align="center">
-                <Icon {...icon} mr={4} />
+                <Icon {...icon} mr={4} color={iconColor} />
 
                 {url && text ? (
                   <Link href={url.href} isExternal>
