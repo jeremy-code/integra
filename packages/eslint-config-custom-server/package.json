@@ -7,6 +7,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@typescript-eslint/parser": "^5.37.0"
+    "@typescript-eslint/parser": "^5.38.0"
   }
 }
