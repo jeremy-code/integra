@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 
 import { ToggleDarkMode, Link, Image } from "@/components/Misc";
-import { Icon } from "@/assets";
+import { Logo } from "@/assets";
 
 const Navbar = () => {
   return (
@@ -28,7 +28,7 @@ const Navbar = () => {
         <Box aria-hidden />
         <Flex align="center" gap={2}>
           <Link to="/" display="contents">
-            <Image src={Icon} alt="favicon" width={20} height={20} />
+            <Image src={Logo} alt="favicon" width={20} height={20} />
           </Link>
           <Link to="/" _hover={{ textDecor: "none" }}>
             <Heading size="md">Integra</Heading>

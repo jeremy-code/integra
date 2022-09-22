@@ -9,6 +9,7 @@ import {
   Text,
   Tag,
   useBoolean,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import { Card } from "@/components/Card";
@@ -28,20 +29,25 @@ const OfficialCard = ({ official }: OfficalCardProps) => {
       <Flex gap={4} flexGrow={1}>
         <Avatar name={official.name} src={official.photo_url} size="100" />
         <Box gap={4}>
-          <Heading size="md">{official.name}</Heading>
-          <Text>{official.title}</Text>
+          <Text fontSize="xl">{official.name}</Text>
+          <Text color={useColorModeValue("gray.500", "gray.400")}>
+            {official.title}
+          </Text>
           <Text my={2}>
             Age {official.age} • Served {official.seniority}
             {parseInt(official.seniority) !== 1 ? " years" : " year"}
           </Text>
-
-          {official.party === "D" ? (
-            <Tag>Democratic Party</Tag>
-          ) : official.party === "R" ? (
-            <Tag colorScheme="red">Republican Party</Tag>
-          ) : (
-            <Tag colorScheme="gray">Independent</Tag>
-          )}
+          <Tag
+            colorScheme={
+              official.party === "Democratic Party"
+                ? "primary"
+                : official.party === "Republican Party"
+                ? "red"
+                : "gray"
+            }
+          >
+            {official.party}
+          </Tag>
         </Box>
       </Flex>
       <Divider />
@@ -54,10 +60,10 @@ const OfficialCard = ({ official }: OfficalCardProps) => {
           setIsLoading.on();
           await router.push(
             {
-              pathname: `/officials/${official.slug}`,
+              pathname: `/official/${official.slug}`,
               query: { official_id: official.id },
             },
-            `/officials/${official.slug}`
+            `/official/${official.slug}`
           );
           // not necessarry since it redirects, but just in case
           setIsLoading.off();

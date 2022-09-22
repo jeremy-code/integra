@@ -40,8 +40,9 @@ export class OfficialResolver {
 
   @FieldResolver(() => String)
   slug(@Root() parent: Official): string {
-    const { first_name, last_name, id } = parent;
-    return encodeURI(`${first_name}-${last_name}-${id}`);
+    const { full_name, id } = parent;
+    const slug = `${full_name.split(" ").join("-").toLowerCase()}-${id}`;
+    return encodeURIComponent(slug);
   }
 
   @FieldResolver(() => String)

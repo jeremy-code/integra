@@ -22,12 +22,40 @@ const OfficialHeader = ({ photoUrl }: OfficialHeaderProps) => {
       id
       name
       party
+      short_title
       title
     }`,
   });
 
   return (
-    <Grid templateRows="repeat(2, 1fr)" templateColumns="11rem 1fr" mb={4}>
+    <Grid
+      templateRows="repeat(2, 1fr)"
+      templateColumns="11rem 1fr"
+      pb={4}
+      borderWidth="0 1px"
+      borderStyle="solid"
+      borderColor={useColorModeValue("gray.200", "gray.600")}
+      bg={useColorModeValue("white", "gray.700")}
+    >
+      <GridItem
+        gridArea="1 / 1 / 1 / 3"
+        h="full"
+        w="full"
+        borderWidth="1px 0"
+        borderStyle="solid"
+        borderColor={useColorModeValue("gray.200", "gray.600")}
+        bg={useColorModeValue("gray.50", "gray.800")}
+      />
+      <GridItem gridArea="2 / 2 / 2">
+        <Skeleton isLoaded={!!official}>
+          <Text fontSize="2xl" mt={2}>
+            {official?.name}
+          </Text>
+          <Text color={useColorModeValue("gray.500", "gray.300")}>
+            {official?.title}
+          </Text>
+        </Skeleton>
+      </GridItem>
       <GridItem rowStart={1} rowSpan={2} colStart={1} placeSelf="center">
         <Avatar
           name={official?.name}
@@ -36,26 +64,9 @@ const OfficialHeader = ({ photoUrl }: OfficialHeaderProps) => {
           mt={8}
           borderRadius="full"
           border="3px solid"
-          borderColor={useColorModeValue("white", "gray.800") ?? "white"}
+          borderColor={useColorModeValue("white", "gray.700")}
+          zIndex={8}
         />
-      </GridItem>
-      <GridItem
-        gridArea="1 / 1 / 1 / 3"
-        h="full"
-        w="full"
-        border="1px solid"
-        borderColor={useColorModeValue("gray.200", "gray.700")}
-        bg={useColorModeValue("gray.50", "gray.900")}
-        borderRadius="md"
-        zIndex={-1}
-      />
-      <GridItem gridArea="2 / 2 / 2">
-        <Skeleton isLoaded={!!official}>
-          <Heading size="md" mt={2}>
-            {official?.name}
-          </Heading>
-          <Text>{official?.title}</Text>
-        </Skeleton>
       </GridItem>
     </Grid>
   );

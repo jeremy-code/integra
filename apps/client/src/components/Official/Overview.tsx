@@ -1,31 +1,28 @@
 import React from "react";
-import { SimpleGrid, Flex } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 
 import {
-  NetWorth,
-  Positions,
-  Office,
+  Contact,
   SocialMedia,
-  ContactInfo,
-  CookPVIStat,
-  Phone,
+  About,
+  Description,
 } from "@/components/Official/Stats";
 
 const Overview = () => {
   return (
-    <SimpleGrid columns={[1, null, 2]} gap={8}>
-      <NetWorth />
-      <Positions />
-      <SimpleGrid columns={[1, null, 2]} gap={2}>
-        <Office />
-        <Phone />
-      </SimpleGrid>
+    <Grid
+      templateColumns={["1fr", null, "repeat(2, 1fr)", "repeat(3, 1fr)"]}
+      gap={8}
+    >
+      <Contact />
       <SocialMedia />
-      <Flex w="full" gap={8}>
-        <ContactInfo />
-        <CookPVIStat />
-      </Flex>
-    </SimpleGrid>
+      <GridItem rowSpan={2} colSpan={[1, null, 2, 1]}>
+        <About />
+      </GridItem>
+      <GridItem colSpan={[1, null, 2]}>
+        <Description />
+      </GridItem>
+    </Grid>
   );
 };
 

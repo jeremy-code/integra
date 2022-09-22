@@ -21,8 +21,7 @@ type BreadcrumbsProps = {
 const Breadcrumbs = ({ breadcrumbs }: BreadcrumbsProps) => {
   return (
     <Box
-      py={3}
-      bg={useColorModeValue("gray.50", "gray.900")}
+      py={4}
       borderBottom="1px solid"
       borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
     >

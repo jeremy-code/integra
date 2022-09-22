@@ -7,12 +7,11 @@ import type { NextPage } from "next";
 import { Layout } from "@/components/Layout";
 import { OfficialCard } from "@/components/Card";
 import { useLocalStorage } from "@/hooks";
-import { Loading, Error, Head } from "@/components/Misc";
+import { Loading, Head } from "@/components/Misc";
 import type { Official } from "@/types";
 
 const OfficialsPage: NextPage = () => {
   const { query } = useRouter();
-
   const [savedLocation, setSavedLocation] = useLocalStorage<string | undefined>(
     "officials_location",
     query?.location as string
@@ -43,9 +42,6 @@ const OfficialsPage: NextPage = () => {
     setSavedLocation(query?.location as string);
   }, [query?.location, setSavedLocation]);
 
-  // if there is an error, or nothing in localstorage or location state, show error
-  // if (error || (!savedLocation && !query?.location)) return <Error />;
-
   if (!data)
     return (
       <Loading
@@ -67,9 +63,9 @@ const OfficialsPage: NextPage = () => {
     >
       <Head title="Officials" />
       <SimpleGrid
-        columns={[1, null, data?.findOfficialByLocation.length]}
+        columns={[1, null, null, data?.findOfficialByLocation.length]}
         gap={4}
-        w="full"
+        w={[null, null, null, "full"]}
       >
         {data?.findOfficialByLocation.map((official: Official) => (
           <ScaleFade in initialScale={0.9} key={official.name}>

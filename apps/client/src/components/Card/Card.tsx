@@ -3,7 +3,7 @@ import { Box, useColorModeValue } from "@chakra-ui/react";
 import type { BoxProps } from "@chakra-ui/react";
 
 type CardProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 } & BoxProps;
 
 const Card = ({ children, ...rest }: CardProps) => {

@@ -7,7 +7,6 @@ import { Head } from "@/components/Misc";
 import { Layout, Tabs } from "@/components/Layout";
 import {
   OfficialHeader,
-  OfficialDetails,
   Overview,
   Legislation,
   Fundraising,
@@ -45,16 +44,16 @@ const OfficialPage: NextPage<OfficialPageProps> = ({
 
   return (
     <Layout
+      sidebar
       breadcrumbs={[
         { title: "Home", href: "/" },
         { title: "Officials", href: "/officials" },
-        { title: "Official", href: `/officials/${query?.slug}` },
+        { title: "Official", href: `/official/${query?.slug}` },
       ]}
     >
       <Head title={title} image={photoUrl} description={description} />
       <OfficialIdProvider id={officialId}>
         <OfficialHeader photoUrl={photoUrl} />
-        <OfficialDetails />
         <Tabs
           content={[
             { title: "Overview", body: <Overview /> },

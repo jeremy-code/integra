@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import {
   Box,
@@ -16,10 +16,10 @@ import type { NextPage } from "next";
 
 import { Layout } from "@/components/Layout";
 import { LocationInput, OfficialInput } from "@/components/Form";
-import { Icon, Head } from "@/components/Misc";
+import { Head } from "@/components/Misc";
+import { Icon } from "@/components/Icon";
 
 const IndexPage: NextPage = () => {
-  const [option, setOption] = useState("Location");
   const router = useRouter();
 
   const onLocationSubmit = async (data: { location: { value: string } }) => {
@@ -40,14 +40,14 @@ const IndexPage: NextPage = () => {
         pathname: `/officials/${data.official.value}`,
         query: { official_id: data.official.id },
       },
-      `/officials/${data.official.value}`
+      `/official/${data.official.value}`
     );
   };
 
   return (
     <Layout>
       <Head />
-      <SimpleGrid columns={[1, null, 2]} h="full" alignContent="center">
+      <SimpleGrid columns={[1, null, 2]} h="full" alignContent="center" gap={2}>
         <Box>
           <Heading maxW="md" size="xl" mb={4}>
             Learn more about your politicians

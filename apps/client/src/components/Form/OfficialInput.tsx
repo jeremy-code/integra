@@ -49,6 +49,7 @@ const OfficialInput = ({ onSubmit }: OfficialInputProps) => {
     });
 
     if (errors) throw new Error(errors[0].message);
+
     return data.findOfficialByName.map(
       (official: {
         first_name: string;

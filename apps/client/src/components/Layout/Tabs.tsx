@@ -17,18 +17,22 @@ type TabProps = {
 
 const Tabs = ({ content }: TabProps) => {
   return (
-    <ChakraTabs variant="enclosed-colored" isLazy>
-      <TabList>
+    <ChakraTabs isLazy>
+      <TabList
+        bg={useColorModeValue("white", "gray.700")}
+        borderWidth="0 1px 2px"
+        borderStyle="solid"
+        borderColor={useColorModeValue("gray.200", "gray.600")}
+      >
         {content.map((tab) => (
           <Tab key={`${tab.title} label`}>{tab.title}</Tab>
         ))}
       </TabList>
-      <TabPanels
-        border="1px solid"
-        borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
-      >
+      <TabPanels>
         {content.map((tab) => (
-          <TabPanel key={`${tab.title} body`}>{tab.body}</TabPanel>
+          <TabPanel key={`${tab.title} body`} px={0}>
+            {tab.body}
+          </TabPanel>
         ))}
       </TabPanels>
     </ChakraTabs>

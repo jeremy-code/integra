@@ -263,9 +263,11 @@ export type Official = {
   date_of_birth: Scalars["DateTime"];
   district?: Maybe<Scalars["String"]>;
   dw_nominate?: Maybe<Scalars["Float"]>;
+  emails: Array<Scalars["String"]>;
   fax?: Maybe<Scalars["String"]>;
   fec_candidate_id: Scalars["String"];
   first_name: Scalars["String"];
+  full_name: Scalars["String"];
   gender: Scalars["String"];
   geoid?: Maybe<Scalars["String"]>;
   googleKnowledgeGraph: Array<ItemListElement>;
@@ -309,6 +311,10 @@ export type Official = {
   votesmart_id?: Maybe<Scalars["String"]>;
 };
 
+export type OfficialCandIndustryArgs = {
+  limit?: InputMaybe<Scalars["Float"]>;
+};
+
 export type OfficialOrderByWithRelationInput = {
   at_large?: InputMaybe<SortOrder>;
   bioguide_id?: InputMaybe<SortOrder>;
@@ -320,9 +326,11 @@ export type OfficialOrderByWithRelationInput = {
   date_of_birth?: InputMaybe<SortOrder>;
   district?: InputMaybe<SortOrder>;
   dw_nominate?: InputMaybe<SortOrder>;
+  emails?: InputMaybe<SortOrder>;
   fax?: InputMaybe<SortOrder>;
   fec_candidate_id?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
+  full_name?: InputMaybe<SortOrder>;
   gender?: InputMaybe<SortOrder>;
   geoid?: InputMaybe<SortOrder>;
   google_entity_id?: InputMaybe<SortOrder>;
@@ -370,9 +378,11 @@ export enum OfficialScalarFieldEnum {
   DateOfBirth = "date_of_birth",
   District = "district",
   DwNominate = "dw_nominate",
+  Emails = "emails",
   Fax = "fax",
   FecCandidateId = "fec_candidate_id",
   FirstName = "first_name",
+  FullName = "full_name",
   Gender = "gender",
   Geoid = "geoid",
   GoogleEntityId = "google_entity_id",
@@ -456,9 +466,11 @@ export type OfficialWhereInput = {
   date_of_birth?: InputMaybe<DateTimeFilter>;
   district?: InputMaybe<StringNullableFilter>;
   dw_nominate?: InputMaybe<FloatNullableFilter>;
+  emails?: InputMaybe<StringNullableListFilter>;
   fax?: InputMaybe<StringNullableFilter>;
   fec_candidate_id?: InputMaybe<StringFilter>;
   first_name?: InputMaybe<StringFilter>;
+  full_name?: InputMaybe<StringFilter>;
   gender?: InputMaybe<StringFilter>;
   geoid?: InputMaybe<StringNullableFilter>;
   google_entity_id?: InputMaybe<StringNullableFilter>;
@@ -620,6 +632,14 @@ export type StringNullableFilter = {
   not?: InputMaybe<NestedStringNullableFilter>;
   notIn?: InputMaybe<Array<Scalars["String"]>>;
   startsWith?: InputMaybe<Scalars["String"]>;
+};
+
+export type StringNullableListFilter = {
+  equals?: InputMaybe<Array<Scalars["String"]>>;
+  has?: InputMaybe<Scalars["String"]>;
+  hasEvery?: InputMaybe<Array<Scalars["String"]>>;
+  hasSome?: InputMaybe<Array<Scalars["String"]>>;
+  isEmpty?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type Transaction = {
@@ -838,6 +858,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars["String"]>;
   StringFilter: StringFilter;
   StringNullableFilter: StringNullableFilter;
+  StringNullableListFilter: StringNullableListFilter;
   Transaction: ResolverTypeWrapper<Transaction>;
   Vote: ResolverTypeWrapper<Vote>;
   VoteTotal: ResolverTypeWrapper<VoteTotal>;
@@ -890,6 +911,7 @@ export type ResolversParentTypes = {
   String: Scalars["String"];
   StringFilter: StringFilter;
   StringNullableFilter: StringNullableFilter;
+  StringNullableListFilter: StringNullableListFilter;
   Transaction: Transaction;
   Vote: Vote;
   VoteTotal: VoteTotal;
@@ -1072,7 +1094,8 @@ export type OfficialResolvers<
   candIndustry?: Resolver<
     ResolversTypes["candIndustry"],
     ParentType,
-    ContextType
+    ContextType,
+    Partial<OfficialCandIndustryArgs>
   >;
   candSummary?: Resolver<
     ResolversTypes["candSummary"],
@@ -1099,6 +1122,7 @@ export type OfficialResolvers<
     ParentType,
     ContextType
   >;
+  emails?: Resolver<Array<ResolversTypes["String"]>, ParentType, ContextType>;
   fax?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   fec_candidate_id?: Resolver<
     ResolversTypes["String"],
@@ -1106,6 +1130,7 @@ export type OfficialResolvers<
     ContextType
   >;
   first_name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  full_name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   gender?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   geoid?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   googleKnowledgeGraph?: Resolver<

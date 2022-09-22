@@ -4,10 +4,10 @@ export * from "./IndustryDonationsChart";
 export * from "./VotedWithPartyChart";
 export * from "./PolarizationChart";
 export * from "./BillsIntroducedTable";
-export * from "./ContactInfo";
 
 export * from "./Positions";
-export * from "./Office";
-export * from "./Phone";
+
+export * from "./Contact";
 export * from "./SocialMedia";
-export * from "./CookPVIStat";
+export * from "./About";
+export * from "./Description";
