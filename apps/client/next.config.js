@@ -25,7 +25,7 @@ const securityHeaders = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  swcMinify: false,
   poweredByHeader: false,
   experimental: {
     nextScriptWorkers: true,

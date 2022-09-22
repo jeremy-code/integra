@@ -20,10 +20,6 @@ const NavLink = ({
   const { pathname, query } = useRouter();
   const isActive = exact ? pathname === href : pathname.startsWith(href);
 
-  React.useEffect(() => {
-    console.log(pathname, href, isActive);
-  }, [pathname, href, isActive]);
-
   return (
     <NextLink
       href={{

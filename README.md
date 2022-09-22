@@ -2,9 +2,9 @@
 
 ![GitHub Actions status](https://github.com/jeremynguyencs/integra/actions/workflows/ci.yml/badge.svg)
 
-Integra is a web application for learning about your local politicians. It is built with a [React](https://reactjs.org/) and [Next.js](https://nextjs.org/) front-end, an [Express](https://expressjs.com/) Node.js [GraphQL](https://graphql.org/) backend API, and a [MongoDB](https://mongodb.com/) database with a [Prisma](https://www.prisma.io/).
+Integra is a web application for learning about your local politicians. It is built with a [React](https://reactjs.org) and [Next.js](https://nextjs.org) front end, an [Express](https://expressjs.com) Node.js [GraphQL](https://graphql.org) backend API, and a [MongoDB](https://www.mongodb.com) database with a [Prisma](https://www.prisma.io).
 
-The web application is located at [integra.vote](https://integra.vote/) and hosted with [Cloudflare Pages](https://pages.cloudflare.com/). The GraphQL Express API server is hosted on [api.integra.vote](https://api.integra.vote/graphql) with [fly.io](https://fly.io/).
+The web application is located at [integra.vote](https://integra.vote) and hosted with [Cloudflare Pages](https://pages.cloudflare.com). The GraphQL Express API server is hosted on [api.integra.vote](https://api.integra.vote/graphql) with [fly.io](https://fly.io).
 
 ## Installation
 
@@ -30,4 +30,4 @@ yarn build
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://choosealicense.com/licenses/mit)
