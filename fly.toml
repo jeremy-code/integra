@@ -4,7 +4,6 @@ kill_timeout = 5
 processes = []
 
 [build]
-builder = "heroku/buildpacks:20"
 dockerfile = "./apps/api/Dockerfile"
 
 [env]

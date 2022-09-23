@@ -7,18 +7,6 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  log:
-    name: Log CI/CD to Logflare
-    runs-on: ubuntu-latest
-    steps:
-      - uses: logflare/action@v1
-        with:
-          api_key: "${{ secrets.LOGFLARE_API_KEY }}"
-          source_id: "${{ secrets.LOGFLARE_SOURCE_ID }}"
-          message: "new release: ${{ github.event.release.html_url }}"
-          metadata: |
-            {"version": "${{ github.event.release.tag_name }}" }
-
   build:
     name: Build and Test
     timeout-minutes: 15
