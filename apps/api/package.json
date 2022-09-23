@@ -36,7 +36,7 @@
     "@types/graphql-fields": "^1.3.4",
     "@types/node": "^18.7.18",
     "eslint-config-custom-server": "*",
-    "nodemon": "^2.0.19",
+    "nodemon": "^2.0.20",
     "ts-node": "^10.9.1",
     "tsconfig": "*",
     "@graphql-codegen/typescript-resolvers": "2.7.3",
