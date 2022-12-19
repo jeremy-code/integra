@@ -42,7 +42,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "apollo": "^2.34.0",
-    "eslint": "^8.23.1",
+    "eslint": "^8.30.0",
     "eslint-config-custom": "*",
     "graphql-codegen": "^0.4.0",
     "next-export-optimize-images": "^1.7.0",
