@@ -12,7 +12,7 @@
   "dependencies": {
     "apollo-datasource-rest": "^3.7.0",
     "apollo-server-express": "^3.10.2",
-    "class-validator": "^0.13.2",
+    "class-validator": "^0.14.0",
     "cors": "^2.8.5",
     "database": "*",
     "dotenv": "^16.0.2",
