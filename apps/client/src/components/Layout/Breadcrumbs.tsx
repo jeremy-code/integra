@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 
-import Link from "next/link";
+import { Link } from "@chakra-ui/next-js";
 
 type BreadcrumbsProps = {
   breadcrumbs: {
@@ -35,8 +35,8 @@ const Breadcrumbs = ({ breadcrumbs }: BreadcrumbsProps) => {
               key={`${title} ${href}`}
               isCurrentPage={index === breadcrumbs.length - 1}
             >
-              <Link href={href} passHref>
-                <BreadcrumbLink>{title}</BreadcrumbLink>
+              <Link as={BreadcrumbLink} href={href}>
+                {title}
               </Link>
             </BreadcrumbItem>
           ))}

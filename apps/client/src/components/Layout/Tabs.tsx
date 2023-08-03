@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   Tabs as ChakraTabs,
   TabList,
@@ -11,7 +11,7 @@ import {
 type TabProps = {
   content: {
     title: string;
-    body: React.ReactNode;
+    body: ReactNode;
   }[];
 };
 

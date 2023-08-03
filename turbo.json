@@ -1,23 +1,30 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
-  "globalDependencies": [
-    "$NODE_ENV",
-    "$SKIP_BUILD_STATIC_GENERATION",
-    "$NEXT_PUBLIC_GOOGLE_MAPS_API_KEY",
-    "$NEXT_PUBLIC_GRAPHQL_SERVER_URL",
-    "$NEXT_PUBLIC_GA_TRACKING_ID",
-    "$ANALYZE"
+  "$schema": "https://turbo.build/schema.json",
+  "globalDotEnv": [".env"],
+  "globalEnv": [
+    "NODE_ENV",
+    "SKIP_BUILD_STATIC_GENERATION",
+    "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY",
+    "NEXT_PUBLIC_GRAPHQL_SERVER_URL",
+    "NEXT_PUBLIC_GA_TRACKING_ID",
+    "ANALYZE"
   ],
+  "globalDependencies": ["**/.env.*local"],
   "pipeline": {
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "outputs": [".next/**", "!.next/cache/**"]
     },
-    "lint": {
-      "outputs": []
-    },
+    "lint": {},
     "dev": {
-      "cache": false
+      "cache": false,
+      "persistent": true
     }
   }
 }

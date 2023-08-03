@@ -9,7 +9,7 @@ The web application is located at [integra.vote](https://integra.vote) and hoste
 ## Installation
 
 ```bash
-git clone https://github.com/jeremynguyencs/integra
+git clone https://github.com/jeremy-code/integra
 cd integra
 yarn
 ```

@@ -3,9 +3,9 @@ import {
   withDefaultColorScheme,
   theme as base,
 } from "@chakra-ui/react";
-import type { CustomThemeTypings } from "@chakra-ui/react";
+import { Outfit } from "next/font/google";
 
-const colors: CustomThemeTypings = {
+const colors = {
   primary: {
     50: "#eff6ff",
     100: "#dbeafe",
@@ -20,7 +20,7 @@ const colors: CustomThemeTypings = {
   },
 };
 
-const components: CustomThemeTypings = {
+const components = {
   Container: {
     baseStyle: {
       maxW: "container.xl",
@@ -33,9 +33,11 @@ const components: CustomThemeTypings = {
   },
 };
 
-const fonts: CustomThemeTypings = {
-  heading: `'Work Sans', ${base.fonts.heading}`,
-  body: `'Work Sans', ${base.fonts.body}`,
+const outfit = Outfit({ weight: "variable", subsets: ["latin"] });
+
+const fonts = {
+  heading: `${outfit.style.fontFamily}, ${base.fonts.heading}`,
+  body: `${outfit.style.fontFamily}, ${base.fonts.body}`,
 };
 
 const colorScheme = withDefaultColorScheme({ colorScheme: "primary" });

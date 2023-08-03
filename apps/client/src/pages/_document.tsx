@@ -28,25 +28,6 @@ export default class Document extends NextDocument {
             href="/favicon-16x16.png"
           />
           <link rel="manifest" href="/site.webmanifest" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200..700&display=swap"
-            rel="stylesheet"
-          />
-          {/* Offloading Google Analytics to web worker */}
-          <script
-            type="text/partytown"
-            dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || [];
-            window.gtag = function gtag(){window.dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID}', { 
-                page_path: window.location.pathname,
-            });
-        `,
-            }}
-          />
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -56,6 +37,17 @@ export default class Document extends NextDocument {
             strategy="worker"
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`}
           />
+          {/* Offloading Google Analytics to web worker */}
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID}', {
+            page_path: window.location.pathname,
+          });
+        `}
+          </Script>
         </body>
       </Html>
     );

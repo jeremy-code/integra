@@ -33,7 +33,7 @@ const OfficialPage: NextPage<OfficialPageProps> = ({
   const slug = query?.slug as string;
 
   // get the official id from the location state, otherwise take it from the slug
-  const [officialId, setOfficialId] = useState<string>(
+  const [officialId, setOfficialId] = useState(
     official_id ?? slug?.split("-").pop()
   );
 

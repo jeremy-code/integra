@@ -34,7 +34,7 @@ export const Positions = () => {
       {member_profile?.position ? (
         <UnorderedList>
           {member_profile?.position?.map((position) => (
-            <ListItem>
+            <ListItem key={`${position.title}-${position.organization}`}>
               {position.title} at {position.organization}
             </ListItem>
           ))}

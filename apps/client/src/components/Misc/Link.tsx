@@ -1,9 +1,6 @@
 import React from "react";
-import NextLink from "next/link";
-import {
-  Link as ChakraLink,
-  LinkProps as ChakraLinkProps,
-} from "@chakra-ui/react";
+import { Link as NextLink } from "@chakra-ui/next-js";
+import { LinkProps as ChakraLinkProps } from "@chakra-ui/react";
 
 type LinkProps = {
   children: React.ReactNode;
@@ -12,8 +9,8 @@ type LinkProps = {
 
 const Link = ({ children, to, ...rest }: LinkProps) => {
   return (
-    <NextLink href={to} passHref>
-      <ChakraLink {...rest}>{children}</ChakraLink>
+    <NextLink href={to} {...rest}>
+      {children}
     </NextLink>
   );
 };

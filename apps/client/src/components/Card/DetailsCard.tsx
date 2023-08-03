@@ -51,11 +51,11 @@ const DetailsCard = ({
               <Flex align="center">
                 {icon && (
                   <Icon
-                    {...icon}
-                    w="30"
+                    w="30px"
                     border="1px solid"
                     borderColor={borderColor}
                     mr={1}
+                    {...icon}
                   />
                 )}
                 <Text>{text ?? "N/A"}</Text>

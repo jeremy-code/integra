@@ -9,6 +9,7 @@ import * as socialIcons from "@/components/Icon/SocialMediaIcon";
 import * as stateIcons from "@/assets/state_flags";
 
 import type { IconProps as ChakraIconProps } from "@chakra-ui/react";
+import Image from "next/image";
 
 type IconType =
   | keyof typeof outlineIcons
@@ -32,6 +33,10 @@ const Icon = ({ icon, variant = "outline", ...rest }: IconProps) => {
       : variant === "stateFlag"
       ? stateIcons
       : outlineIcons;
+
+  if (variant === "stateFlag") {
+    return <ChakraIcon as={Image} src={icons[icon]} width="30px" {...rest} />;
+  }
 
   return <ChakraIcon as={icons[icon]} {...rest} />;
 };

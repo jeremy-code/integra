@@ -16,7 +16,7 @@ export const About = () => {
     }`,
   });
 
-  if (error) return <>&quot;About&quot; failed to load</>;
+  if (error) return <div>&quot;About&quot; failed to load</div>;
 
   return (
     <DetailsCard

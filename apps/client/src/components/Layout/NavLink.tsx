@@ -1,7 +1,7 @@
 import React from "react";
-import NextLink from "next/link";
+import { Link as NextLink } from "@chakra-ui/next-js";
 import { useRouter } from "next/router";
-import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
+import { LinkProps } from "@chakra-ui/react";
 
 type NavLinkProps = {
   href: string;
@@ -26,11 +26,10 @@ const NavLink = ({
         pathname: href,
         query: { ...(exact && query) },
       }}
-      passHref
+      {...props}
+      {...(isActive ? activeProps : {})}
     >
-      <ChakraLink {...props} {...(isActive ? activeProps : {})}>
-        {children}
-      </ChakraLink>
+      {children}
     </NextLink>
   );
 };
