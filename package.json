@@ -14,14 +14,14 @@
     "db:generate": "dotenv -- turbo run db:generate"
   },
   "devDependencies": {
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
     "eslint": "^7.32.0",
     "eslint-config-custom": "*",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.5.1"
   },
   "name": "integra",
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "yarn@3.6.1",
   "workspaces": [
     "apps/*",
     "packages/*"
