@@ -4,7 +4,6 @@ generator client {
 
 generator typegraphql {
   provider = "typegraphql-prisma"
-  output   = "../src/generated/type-graphql"
 }
 
 datasource db {

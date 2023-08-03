@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
   "globalDotEnv": [".env"],
   "globalEnv": [
     "NODE_ENV",
@@ -9,16 +10,17 @@
     "NEXT_PUBLIC_GA_TRACKING_ID",
     "ANALYZE"
   ],
-  "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "db:generate": {
       "cache": false
     },
     "build": {
       "dependsOn": ["^db:generate", "^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
-    "lint": {},
+    "lint": {
+      "outputs": []
+    },
     "dev": {
       "dependsOn": ["^db:generate"],
       "cache": false,
