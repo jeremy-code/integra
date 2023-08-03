@@ -7112,8 +7112,6 @@ __metadata:
     dotenv-cli: ^7.2.1
     eslint: ^8.23.1
     eslint-config-custom: "*"
-    graphql-fields: ^2.0.3
-    graphql-scalars: ^1.18.0
     prisma: ^5.0.0
     rimraf: ^3.0.2
     tsconfig: "*"
