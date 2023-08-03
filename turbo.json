@@ -14,15 +14,13 @@
     "db:generate": {
       "cache": false
     },
-    "db:push": {
-      "cache": false
-    },
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^db:generate", "^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {},
     "dev": {
+      "dependsOn": ["^db:generate"],
       "cache": false,
       "persistent": true
     }
