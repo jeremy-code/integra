@@ -6,6 +6,9 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+env:
+  NODE_OPTIONS: --max_old_space_size=4096
+
 jobs:
   build:
     name: Build and Test
@@ -31,8 +34,6 @@ jobs:
         with:
           node-version: 18
           cache: yarn
-        env:
-          NODE_OPTIONS: "--max_old_space_size=4096"
       - name: Install dependencies
         run: yarn
       - name: Build
