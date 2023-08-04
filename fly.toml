@@ -12,7 +12,6 @@ PORT = "8080"
 [experimental]
 allowed_public_ports = []
 auto_rollback = true
-cmd = "cd apps/api && yarn start"
 
 [[services]]
 http_checks = []
