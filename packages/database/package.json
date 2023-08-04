@@ -2,10 +2,11 @@
   "name": "database",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "dist/**"
   ],
   "scripts": {
     "build": "tsup",
@@ -13,9 +14,12 @@
     "db:migrate:dev": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:studio": "prisma studio",
+    "generate": "prisma generate",
     "typecheck": "tsc --noEmit",
     "format": "prisma format",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "prebuild": "npm run generate",
+    "predev": "npm run generate"
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
