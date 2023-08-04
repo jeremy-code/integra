@@ -1,0 +1,14 @@
+export { AggregateOfficialArgs } from "./AggregateOfficialArgs";
+export { CreateManyOfficialArgs } from "./CreateManyOfficialArgs";
+export { CreateOneOfficialArgs } from "./CreateOneOfficialArgs";
+export { DeleteManyOfficialArgs } from "./DeleteManyOfficialArgs";
+export { DeleteOneOfficialArgs } from "./DeleteOneOfficialArgs";
+export { FindFirstOfficialArgs } from "./FindFirstOfficialArgs";
+export { FindFirstOfficialOrThrowArgs } from "./FindFirstOfficialOrThrowArgs";
+export { FindManyOfficialArgs } from "./FindManyOfficialArgs";
+export { FindUniqueOfficialArgs } from "./FindUniqueOfficialArgs";
+export { FindUniqueOfficialOrThrowArgs } from "./FindUniqueOfficialOrThrowArgs";
+export { GroupByOfficialArgs } from "./GroupByOfficialArgs";
+export { UpdateManyOfficialArgs } from "./UpdateManyOfficialArgs";
+export { UpdateOneOfficialArgs } from "./UpdateOneOfficialArgs";
+export { UpsertOneOfficialArgs } from "./UpsertOneOfficialArgs";
