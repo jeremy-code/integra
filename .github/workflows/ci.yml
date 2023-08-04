@@ -54,7 +54,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: yarn
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
 
