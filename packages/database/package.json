@@ -2,6 +2,7 @@
   "name": "database",
   "version": "1.0.0",
   "license": "MIT",
+  "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
