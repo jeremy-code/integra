@@ -26,7 +26,7 @@
     "graphql": "^15.3.0",
     "next": "^12.3.1",
     "next-sitemap": "^3.1.22",
-    "pino": "^8.6.0",
+    "pino": "^8.15.0",
     "pino-pretty": "^9.1.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^4.3.1",
