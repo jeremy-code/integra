@@ -4,4 +4,4 @@ export {
   FindFirstOfficialResolver,
   FindManyOfficialResolver,
   FindUniqueOfficialResolver,
-} from "../prisma/generated/type-graphql";
+} from "@generated/type-graphql";
