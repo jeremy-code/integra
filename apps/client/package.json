@@ -39,7 +39,7 @@
     "@next/bundle-analyzer": "^12.3.1",
     "@svgr/webpack": "^6.3.1",
     "@types/google.maps": "^3.50.1",
-    "@types/react": "^18.0.21",
+    "@types/react": "^18.2.20",
     "@types/react-dom": "^18.0.6",
     "apollo": "^2.34.0",
     "eslint": "^8.23.1",
